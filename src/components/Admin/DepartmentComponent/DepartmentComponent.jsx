@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { baseUrl, apiPrefixV1 } from '../../constants/AppConstants';
+import { baseUrl, apiPrefixV1 } from '../../../constants/AppConstants';
 import './DepartmentComponent.css';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
@@ -24,7 +24,7 @@ function DepartmentComponent() {
                 setUsers(response.data.data);
             } else if (code === 2003) {
                 console.log('token expired!');
-                navigate('/login')
+                navigate('/admin')
             }
         } catch (error) {
             console.error('Error loading users:', error);
@@ -35,68 +35,63 @@ function DepartmentComponent() {
         loadUsers();
     }, []);
 
-    const handleDeleteDepartment = async (userId) => {
+    const handleDeleteDepartment = async (deptToken) => {
         try {
-            const response = await axios.delete(`${baseUrl}/${apiPrefixV1}/department/${userId}`, {
+            const response = await axios.delete(`${baseUrl}/${apiPrefixV1}/department/${deptToken}`, {
                 headers: {
                     Authorization: `Bearer ${userData.accessToken}`,
                 },
             });
             const code = response.data.code;
             if (code === 2000) {
-                // Remove the deleted user from the list
-                setUsers(departments.filter(user => user.userToken !== userId));
+                setUsers(departments.filter(user => user.deptToken !== deptToken));
             } else if (code === 2003) {
                 console.log('token expired!');
             } else {
                 console.log('Failed to delete user');
             }
         } catch (error) {
-            console.error('Error deleting user:', error);
+            console.error('Error deleting user:', error.message);
         }
     };
 
     return (
         <div className="user-component">
             <div className="buttons">
-                <button onClick={()=>{navigate('/dashboard/department/new')}}>New department account</button>
+                <button onClick={()=>{navigate('/admin/dashboard/department/new')}}>New department account</button>
             </div>
-            <h2>User List</h2>
+            <h2>Deparment Accounts</h2>
             <div className="table-container">
                {
                 (departments.length!==0) ? 
                 <table>
                 <thead>
                     <tr>
-                        <th>Username</th>
                         <th>Name</th>
-                        <th>Roles</th>
+                        <th>Username</th>
+                        <th>Objective</th>
                         <th>Delete</th>
                     </tr>
                 </thead>
                 <tbody>
                     {departments.map((department) => (
-                        <tr key={department.userToken}>
+                        <tr key={department.deptToken}>
+                            <td>{department.departmentName}</td>
                             <td>
                                 <Link className="user-link" to={`/dashboard/department/${department.departmentToken}`}>{department.username}</Link>
                             </td>
-                            <td>{department.name}</td>
+                            <td>{department.departmentObjective}</td>
                             <td>
-                                {department.roles.map((role, index) => (
-                                    <span key={index}>
-                                        {role === 'ROLE_DEPARTMENT' ? 'department admin' : 'department admin'}
-                                    </span>
-                                ))}
-                            </td>
-                            <td>
-                                <button className='delete-btn' onClick={() => handleDeleteDepartment(department.userToken)}>Delete</button>
+                                <button className='delete-btn' onClick={() => handleDeleteDepartment(department.deptToken)}>Delete</button>
                             </td>
                         </tr>
                     ))}
                 </tbody>
             </table>
             :
-            <p>No department found</p>
+            <div className="no-data">
+                <p>No department found</p>
+            </div>
                }
             </div>
         </div>

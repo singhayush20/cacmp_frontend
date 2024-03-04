@@ -90,3 +90,16 @@ thead tr:hover {
     text-decoration: underline;
     color: lightblue;
 }
+
+.no-data{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.no-data p{
+    color: black;
+    font-weight: 600;
+    font-size: 20px;
+}

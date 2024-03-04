@@ -9,12 +9,15 @@ import store from './redux/store.js'
 import AuthLayout from './components/AuthLayout.jsx'
 import Home from './pages/Home/Home.jsx'
 import Dashboard from './pages/Dashboard/Dashboard.jsx'
-import CategoryComponent from './components/CategoryComponent/CategoryComponent.jsx'
-import UsersComponent from './components/UsersComponent/UsersComponent.jsx'
-import DashboardHome from './components/DashboardHomeComponent/DashboardHome.jsx'
-import DepartmentComponent from './components/DepartmentComponent/DepartmentComponent.jsx'
-import UserDetails from './components/UserDetailsComponent/UserDetails.jsx'
-import NewUserComponent from './components/NewUserComponent/NewUserComponent.jsx'
+import CategoryComponent from './components/Admin/CategoryComponent/CategoryComponent.jsx'
+import UsersComponent from './components/Admin/UsersComponent/UsersComponent.jsx'
+import DashboardHome from './components/Admin/DashboardHomeComponent/DashboardHome.jsx'
+import DepartmentComponent from './components/Admin/DepartmentComponent/DepartmentComponent.jsx'
+import UserDetails from './components/Admin/UserDetailsComponent/UserDetails.jsx'
+import NewUserComponent from './components/Admin/NewUserComponent/NewUserComponent.jsx'
+import CategoryEdit from './components/Admin/CategoryDetails/CategoryEdit.jsx'
+import UserLogin from './pages/UserLogin/UserLogin.jsx'
+import DepartmentDashboard from './pages/DepartmentDashboard/DepartmentDashboard.jsx'
 const router = createBrowserRouter([
   {
     path: '/',
@@ -25,15 +28,15 @@ const router = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: "login",
+        path: "admin",
         element: (
           <AuthLayout authentication={false}>
             <Login />
           </AuthLayout>
-        )
+        ),
       },
       {
-        path: 'dashboard',
+        path: 'admin/dashboard',
         element: (
           <AuthLayout authentication={true}>
             <Dashboard />
@@ -46,28 +49,42 @@ const router = createBrowserRouter([
           },
           {
             path: 'category',
-            element: <CategoryComponent />
+            element: <CategoryComponent />,
           },
           {
             path: 'users',
             element: <UsersComponent />,
-            children: [
-              {
-                path: ':userId',
-                element: <UserDetails />,
-              },
-              {
-                path: 'new',
-                element: <NewUserComponent />
-              }
-            ]
           },
           {
             path: 'department',
             element: <DepartmentComponent />
           },
+          {
+            path: 'users/:userId',
+            element: <UserDetails />,
+          },
+          {
+            path: 'users/new',
+            element: <NewUserComponent />
+          },
+          {
+            path: 'category/:categoryToken',
+            element: <CategoryEdit />
+          },
         ]
-      }
+      },
+
+      {
+        path: "login",
+        element: <UserLogin />
+      },
+      {
+        path: "/dashboard",
+        element: <AuthLayout authentication={true} isAdmin={false}>
+          <DepartmentDashboard />
+        </AuthLayout>
+      },
+      
     ]
   }
 ])
