@@ -2,7 +2,6 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { baseUrl, apiPrefixV1 } from '../../../constants/AppConstants';
-import './DepartmentComponent.css';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 function DepartmentComponent() {

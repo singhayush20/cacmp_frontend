@@ -70,21 +70,20 @@ function CategoryComponent() {
                                     <th>Name</th>
                                     <th>Description</th>
                                     <th>Delete</th>
-                                    <th>Edit</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {categories.map((category) => (
                                     <tr key={category.categoryToken}>
-                
-                                        <td>{category.categoryName}</td>
+
+                                        <td>
+                                            <Link className="category-link" to={`/admin/dashboard/category/${category.categoryToken}`}>{category.categoryName}</Link>
+                                        </td>
                                         <td>{category.categoryDescription}</td>
                                         <td>
                                             <button className='delete-btn' onClick={() => handleDeleteCategory(category.categoryToken)}>Delete</button>
                                         </td>
-                                        <td>
-                                            <button className='delete-btn' onClick={() => navigate(`/dashboard/category/${category.categoryToken}`)}>Edit</button>
-                                        </td>
+
                                     </tr>
                                 ))}
                             </tbody>
