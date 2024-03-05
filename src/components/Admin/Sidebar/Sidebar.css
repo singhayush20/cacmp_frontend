@@ -6,6 +6,20 @@
     align-items: center;
 
   }
+
+  .left{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+  }
+
+  .nav-link{
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+  }
   
   .menu-bars {
     margin-left: 2rem;

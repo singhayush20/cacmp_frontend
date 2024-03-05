@@ -3,16 +3,17 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import * as FaIcons from 'react-icons/fa';
 import * as AiIcons from 'react-icons/ai';
-import './NewUserComponent.css';
+import './NewDepartmentComponent.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { baseUrl, apiPrefixV1 } from '../../../constants/AppConstants';
 import { logout } from '../../../redux/slices/authSlice'; 
-function NewUserComponent() {
+function NewDepartmentComponent() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [name, setName] = useState('');
   const [role, setRole] = useState('');
+  const [objective, setObjective] = useState('');
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [isConfirmPasswordVisible, setIsConfirmPasswordVisible] = useState(false);
   const [formErrors, setFormErrors] = useState({});
@@ -24,10 +25,11 @@ function NewUserComponent() {
 
     if (validateForm()) {
       try {
-        const response = await axios.post(`${baseUrl}/${apiPrefixV1}/user/register`, {
+        const response = await axios.post(`${baseUrl}/${apiPrefixV1}/department/register`, {
           username: username,
           password: password,
-          name: name,
+          departmentName: name,
+          departmentObjective: objective,
           roles: [role]
         }, {
           headers: {
@@ -38,7 +40,7 @@ function NewUserComponent() {
         console.log(response);
         const code=response.data.code;
         if(code===2000){
-          navigate('/admin/dashboard/users');
+          navigate('/admin/dashboard/department');
         }
         else if(code===2003){
           dispatch(logout())
@@ -55,7 +57,7 @@ function NewUserComponent() {
   };
 
   const handleBack = () => {
-    navigate('/admin/dashboard/users');
+    navigate('/admin/dashboard/department');
   };
 
   const togglePasswordVisibility = () => {
@@ -98,6 +100,11 @@ function NewUserComponent() {
       isValid = false;
     }
 
+    if(!objective.trim()){
+      errors.objective = 'Objective is required';
+      isValid = false;
+    }
+
     setFormErrors(errors);
     return isValid;
   };
@@ -108,7 +115,7 @@ function NewUserComponent() {
         <FaIcons.FaArrowLeft />
       </div>
       <div className="new-user-form">
-        <h2>Create New User</h2>
+        <h2>Create New Department Account</h2>
         <form onSubmit={handleSubmit}>
           <div className="form-group">
             <label htmlFor="username">Username:</label>
@@ -169,6 +176,18 @@ function NewUserComponent() {
           </div>
 
           <div className="form-group">
+            <label htmlFor="name">Objective:</label>
+            <input
+              type="text"
+              id="name"
+              value={objective}
+              onChange={(e) => setObjective(e.target.value)}
+              className={formErrors.objective ? 'invalid' : ''}
+            />
+            {formErrors.objective && <span className="error-message">{formErrors.objective}</span>}
+          </div>
+
+          <div className="form-group">
             <label htmlFor="role">Role:</label>
             <select
               id="role"
@@ -177,17 +196,16 @@ function NewUserComponent() {
               className={formErrors.role ? 'invalid' : ''}
             >
               <option value="">Select Role</option>
-              <option value="ROLE_ROOT_ADMIN">Root Admin</option>
-              <option value="ROLE_SUB_ADMIN">Sub Admin</option>
+              <option value="ROLE_DEPARTMENT">Department Admin</option>
             </select>
             {formErrors.role && <span className="error-message">{formErrors.role}</span>}
           </div>
 
-          <button type="submit" className="submit-button">Create User</button>
+          <button type="submit" className="submit-button">Create Department</button>
         </form>
       </div>
     </div>
   );
 }
 
-export default NewUserComponent;
+export default NewDepartmentComponent;

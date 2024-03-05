@@ -18,6 +18,9 @@ import NewUserComponent from './components/Admin/NewUserComponent/NewUserCompone
 import CategoryEdit from './components/Admin/CategoryDetails/CategoryEdit.jsx'
 import UserLogin from './pages/UserLogin/UserLogin.jsx'
 import DepartmentDashboard from './pages/DepartmentDashboard/DepartmentDashboard.jsx'
+import NewDepartmentComponent from './components/Admin/NewDepartmentComponent/NewDepartmentComponent.jsx'
+import DepartmentDetailsComponent from './components/Admin/DepartmentDetailsComponent/DepartmentDetailsComponent.jsx'
+import NewCategoryComponent from './components/Admin/NewCategoryComponent/NewCategoryComponent.jsx'
 const router = createBrowserRouter([
   {
     path: '/',
@@ -68,8 +71,20 @@ const router = createBrowserRouter([
             element: <NewUserComponent />
           },
           {
+            path: 'department/new',
+            element: <NewDepartmentComponent />
+          },
+          {
+            path: 'category/new',
+            element: <NewCategoryComponent />
+          },
+          {
             path: 'category/:categoryToken',
             element: <CategoryEdit />
+          },
+          {
+            path: 'department/:departmentToken',
+            element: <DepartmentDetailsComponent />
           },
         ]
       },

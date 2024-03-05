@@ -78,7 +78,7 @@ function DepartmentComponent() {
                         <tr key={department.deptToken}>
                             <td>{department.departmentName}</td>
                             <td>
-                                <Link className="user-link" to={`/dashboard/department/${department.departmentToken}`}>{department.username}</Link>
+                                <Link className="user-link" to={`/admin/dashboard/department/${department.deptToken}`}>{department.username}</Link>
                             </td>
                             <td>{department.departmentObjective}</td>
                             <td>

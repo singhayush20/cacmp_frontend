@@ -11,45 +11,52 @@ import * as MdIcons from 'react-icons/md';
 import * as HiIcons from 'react-icons/hi';
 import { baseUrl, apiPrefixV1 } from '../../../constants/AppConstants';
 import { logout } from '../../../redux/slices/authSlice';
+import { deleteDetails } from '../../../redux/slices/adminSlice';
 function Navbar() {
   const [sidebar, setSidebar] = useState(false);
 
   const showSidebar = () => setSidebar(!sidebar);
-  const navigate=useNavigate();
-  const dispatch=useDispatch();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const userData = useSelector((state) => state.auth.userData)
-  const [error,setError]=useState('')
-  const handleLogout=async(event)=>{
-      event.preventDefault()
-      try{
-          const response=await axios.get(`${baseUrl}/${apiPrefixV1}/consumer/logout`,{
-              headers: {
-                  Authorization: `Bearer ${userData['accessToken']}`
-                }
-          })
-          console.log(response)
-          const responseCode=response.data['code']
-          if(responseCode===2000 || responseCode===2003 || responseCode===2004){
-              dispatch(logout())
-              console.log('logging out')
-              navigate('/admin')
-          }
-          else{
-              setError(response.data['message'])
-          }
+  const [error, setError] = useState('')
+  const handleLogout = async (event) => {
+    event.preventDefault()
+    try {
+      const response = await axios.get(`${baseUrl}/${apiPrefixV1}/consumer/logout`, {
+        headers: {
+          Authorization: `Bearer ${userData['accessToken']}`
+        }
+      })
+      console.log(response)
+      const responseCode = response.data['code']
+      if (responseCode === 2000 || responseCode === 2003 || responseCode === 2004) {
+        dispatch(logout())
+        dispatch(deleteDetails())
+        console.log('logging out')
+        navigate('/admin')
       }
-      catch(err){
-          setError(err.message)
-          console.log(err)
+      else {
+        setError(response.data['message'])
       }
+    }
+    catch (err) {
+      setError(err.message)
+      console.log(err)
+    }
   }
+
+
   return (
     <>
       <IconContext.Provider value={{ color: '#fff' }}>
         <div className='navbar'>
-          <Link to='#' className='menu-bars'>
-            <FaIcons.FaBars onClick={showSidebar} />
-          </Link>
+          <div className="left">
+            <Link to='#' className='menu-bars'>
+              <FaIcons.FaBars onClick={showSidebar} />
+            </Link>
+            <Link to={'/admin/dashboard/'} className='nav-link'><h1>Admin Dashboard</h1></Link>
+          </div>
           <Link to='#' className='menu-bars'>
             <button className='logout' onClick={handleLogout}>Logout</button>
           </Link>
@@ -63,25 +70,25 @@ function Navbar() {
             </li>
             <li key={0} className='nav-text'>
               <Link to={'/admin/dashboard/'}>
-                <FaIcons.FaHome/>
+                <FaIcons.FaHome />
                 <span>Home</span>
               </Link>
             </li>
-              <li key={1} className='nav-text'>
+            <li key={1} className='nav-text'>
               <Link to={'/admin/dashboard/category'}>
-                <MdIcons.MdCategory/>
+                <MdIcons.MdCategory />
                 <span>Category</span>
               </Link>
             </li>
             <li key={2} className='nav-text'>
               <Link to={'/admin/dashboard/users'}>
-               <FaIcons.FaUser/>
+                <FaIcons.FaUser />
                 <span>Admins</span>
               </Link>
             </li>
             <li key={3} className='nav-text'>
               <Link to={'/admin/dashboard/department'}>
-               <HiIcons.HiOfficeBuilding/>
+                <HiIcons.HiOfficeBuilding />
                 <span>Department</span>
               </Link>
             </li>

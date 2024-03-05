@@ -13,13 +13,11 @@ const departmentSlice = createSlice({
   reducers: {
    saveDetails: (state, action) => {
 
-    console.log(action.payload)
     state.token = action.payload.deptToken;
     state.name = action.payload.departmentName;
     state.objective = action.payload.departmentObjective;
     state.username = action.payload.username;
 
-    console.log(state.name);
    },
    deleteDetails: (state) => {
     state.token = null;

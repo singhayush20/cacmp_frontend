@@ -52,7 +52,7 @@ function UsersComponent() {
                 console.log('Failed to delete user');
             }
         } catch (error) {
-            console.error('Error deleting user:', error);
+            console.error('Error deleting user:', error.message);
         }
     };
 
@@ -84,7 +84,7 @@ function UsersComponent() {
                                         <td>
                                             {user.roles.map((role, index) => (
                                                 <span key={index}>
-                                                    {role === 'ROLE_ADMIN' ? 'Root admin' : 'admin'}
+                                                    {role === 'ROLE_ROOT_ADMIN' ? 'Root Admin' : 'Sub Admin'}
                                                 </span>
                                             ))}
                                         </td>

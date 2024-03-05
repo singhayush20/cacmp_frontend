@@ -23,8 +23,7 @@ const Login = () => {
     const login = async (event) => {
         event.preventDefault();
 
-        console.log('Email:', username);
-        console.log('Password:', password);
+
 
        try{
         const response=await axios.post(
@@ -34,7 +33,6 @@ const Login = () => {
             }
         )
 
-      console.log(response)
 
         if(response.data['code']===2000){
             const userData=response.data['data'];
