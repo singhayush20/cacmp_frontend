@@ -10,7 +10,7 @@ const Login = () => {
     const dispatch = useDispatch()
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
-    const [error, setError]=useState('')
+    const [error, setError] = useState('')
 
     const handleUsernameChange = (event) => {
         setUsername(event.target.value);
@@ -22,30 +22,27 @@ const Login = () => {
 
     const login = async (event) => {
         event.preventDefault();
-
-
-
-       try{
-        const response=await axios.post(
-            `${baseUrl}/${apiPrefixV1}/user/login`,{
+        try {
+            const response = await axios.post(
+                `${baseUrl}/${apiPrefixV1}/user/login`, {
                 "username": username,
                 "password": password
             }
-        )
+            )
 
 
-        if(response.data['code']===2000){
-            const userData=response.data['data'];
-            if(userData) dispatch(authLogin({userData}));
-            navigate('/admin/dashboard/')
+            if (response.data['code'] === 2000) {
+                const userData = response.data['data'];
+                if (userData) dispatch(authLogin({ userData: userData, loggedInAccountType: 'admin' }));
+                navigate('/admin/dashboard/')
+            }
+            else {
+                setError(response.data['message'])
+            }
         }
-        else{
-            setError(response.data['message'])
-        }
-       }
-       catch(err){
+        catch (err) {
             setError(err.message)
-       }
+        }
     }
 
     return (
@@ -53,7 +50,7 @@ const Login = () => {
             <div className="login-page-heading">
                 <h1>CACMP Admin Login</h1>
             </div>
-            <p className="subheading">Login using your department credentials</p>
+            <p className="subheading">Login using your admin credentials</p>
             <div className="login-form-container">
                 <h1 className="login-heading">Login</h1>
                 <form className="login-form" onSubmit={login}>

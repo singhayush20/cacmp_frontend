@@ -39,7 +39,7 @@ const UserLogin = () => {
 
             if (response.data['code'] === 2000) {
                 const userData = response.data['data'];
-                if (userData) dispatch(authLogin({ userData }));
+                if (userData) dispatch(authLogin({ userData: userData, loggedInAccountType: 'department' }));
                 navigate('/dashboard')
             }
             else {

@@ -1,0 +1,74 @@
+.complaints-container {
+    box-sizing: border-box;
+    padding: 20px 10px;
+}
+
+.complaints-back-button {
+    margin-bottom: 20px;
+    font-size: 24px;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+.heading {
+    font-weight: 900;
+    font-size: 30px;
+    margin-bottom: 20px;
+
+
+}
+
+.filter-section {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.filter-column {
+    flex: 1;
+    margin-right: 20px;
+    margin-left: 20px;
+}
+
+.filter-column label {
+    display: block;
+    margin-bottom: 5px;
+    width: 100px; /* Set a fixed width for the labels */
+}
+
+
+.filter-column input,
+.filter-column select {
+    width: calc(100% - 20px);
+    /* Adjusted width to accommodate gap */
+    padding: 8px;
+    margin-bottom: 10px;
+}
+
+.search-button {
+    padding: 10px 20px;
+    width: calc(100% - 20px);
+    background-color: #1ab31f;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    margin-top: 20px;
+    /* Added margin to separate button from select */
+    align-self: flex-end;
+    /* Align button to bottom */
+}
+
+.search-button:hover {
+    background-color: #138617;
+}
+
+.complaint-link {
+    cursor: pointer;
+    text-decoration: none;
+    color: black;
+}
+
+.complaint-link:hover {
+    text-decoration: underline;
+    color: rgb(53, 53, 53);
+}

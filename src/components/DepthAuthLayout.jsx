@@ -9,15 +9,17 @@ export default function Protected({ children, authentication = true }) {
     const authStatus = useSelector(state => state.auth.status)
     const loggedInAccountType = useSelector(state => state.auth.loggedInAccountType)
     useEffect(() => {
-        //-if logged in account is not of admin type
+        //-if logged in account is not of department type
         //-navigate to the home page
-        if (loggedInAccountType && loggedInAccountType !== 'admin') {
+        if (loggedInAccountType && loggedInAccountType !== 'department') {
             navigate("/")
         }
+
+
         //-if authentication is required and user is not logged in
         //-navigate to the login page
         if (authentication && authStatus !== authentication) {
-            navigate("/admin")
+            navigate("/login")
         }
 
 

@@ -21,6 +21,8 @@ import DepartmentDashboard from './pages/DepartmentDashboard/DepartmentDashboard
 import NewDepartmentComponent from './components/Admin/NewDepartmentComponent/NewDepartmentComponent.jsx'
 import DepartmentDetailsComponent from './components/Admin/DepartmentDetailsComponent/DepartmentDetailsComponent.jsx'
 import NewCategoryComponent from './components/Admin/NewCategoryComponent/NewCategoryComponent.jsx'
+import DeptAuthLayout from './components/DepthAuthLayout.jsx'
+import DeptComplaintsComponent from './components/Department/DeptComplaints/DeptComplaintsComponent.jsx'
 const router = createBrowserRouter([
   {
     path: '/',
@@ -89,18 +91,30 @@ const router = createBrowserRouter([
 
         ]
       },
-
       {
         path: "login",
-        element: <UserLogin />
+        element: <DeptAuthLayout authentication={false}>
+          <UserLogin />
+        </DeptAuthLayout>
       },
       {
-        path: "/dashboard",
-        element: <AuthLayout authentication={true} isAdmin={false}>
+        path: "dashboard",
+        element: <DeptAuthLayout authentication={true}>
           <DepartmentDashboard />
-        </AuthLayout>
+        </DeptAuthLayout>,
       },
-
+      {
+        path: "dashboard/category/:categoryToken",
+        element: <DeptAuthLayout authentication={true}>
+          <DeptComplaintsComponent />
+        </DeptAuthLayout>
+      },
+      {
+        path: "dashboard/complaint/:complaintToken",
+        element: <DeptAuthLayout authentication={true}>
+          <ComplaintDetailsComponent />
+        </DeptAuthLayout>
+      },
     ]
   }
 ])

@@ -1,11 +1,12 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './Header.css'
-import {useSelector} from 'react-redux'
+import { useSelector } from 'react-redux'
 const Header = () => {
     const authStatus = useSelector((state) => state.auth.status)
-    const navigate = useNavigate(); 
-   
+    const loggedInAccountType = useSelector((state) => state.auth.loggedInAccountType)
+    const navigate = useNavigate();
+
     return (
         <header className="header">
             <nav >
@@ -29,7 +30,15 @@ const Header = () => {
                             <Link className="nav-link" to='/notices'>Notices</Link>
                         </div>
                     </div>
-                   {authStatus===true ?  <button className="login-button"  onClick={() => navigate('/dashboard')}>Dashboard</button> : <Link className="nav-link" to='/login'> <button className="login-button">Login</button></Link>  }
+                    {/* {(authStatus === true && loggedInAccountType === 'department') ?
+                        <button className="login-button" onClick={() => navigate('/dashboard')}>Dashboard</button>
+                        : (authStatus === false) ? <Link className="nav-link" to='/login'> <button className="login-button">Login</button></Link> : null} */}
+
+                        {
+                            (!authStatus) ? <Link className="nav-link" to='/login'> <button className="login-button">Login</button></Link>
+                            : (authStatus && loggedInAccountType==='admin') ? <button className="login-button" onClick={() => navigate('/admin/dashboard')}>Dashboard</button>
+                            :  <button className="login-button" onClick={() => navigate('/dashboard')}>Dashboard</button>
+                        }
                 </div>
             </nav>
         </header>

@@ -8,7 +8,7 @@ const initialState = {
 };
 
 const adminSlice = createSlice({
-  name: "department",
+  name: "admin",
   initialState,
   reducers: {
    saveDetails: (state, action) => {

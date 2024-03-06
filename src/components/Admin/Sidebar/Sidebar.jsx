@@ -12,6 +12,7 @@ import * as HiIcons from 'react-icons/hi';
 import { baseUrl, apiPrefixV1 } from '../../../constants/AppConstants';
 import { logout } from '../../../redux/slices/authSlice';
 import { deleteDetails } from '../../../redux/slices/adminSlice';
+
 function Navbar() {
   const [sidebar, setSidebar] = useState(false);
 
@@ -19,6 +20,7 @@ function Navbar() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const userData = useSelector((state) => state.auth.userData)
+  const username=useSelector((state)=>state.admin.username)
   const [error, setError] = useState('')
   const handleLogout = async (event) => {
     event.preventDefault()
@@ -55,11 +57,14 @@ function Navbar() {
             <Link to='#' className='menu-bars'>
               <FaIcons.FaBars onClick={showSidebar} />
             </Link>
-            <Link to={'/admin/dashboard/'} className='nav-link'><h1>Admin Dashboard</h1></Link>
+            <Link to={'/admin/dashboard/'} className='nav-link'><h3>Admin Dashboard</h3></Link>
           </div>
-          <Link to='#' className='menu-bars'>
-            <button className='logout' onClick={handleLogout}>Logout</button>
-          </Link>
+          <div className="right">
+            <h3>{username}</h3>
+            <Link to='#' className='menu-bars'>
+              <button className='logout' onClick={handleLogout}>Logout</button>
+            </Link>
+          </div>
         </div>
         <nav className={sidebar ? 'nav-menu active' : 'nav-menu'}>
           <ul className='nav-menu-items' onClick={showSidebar}>
