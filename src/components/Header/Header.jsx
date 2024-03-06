@@ -2,6 +2,7 @@ import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './Header.css'
 import { useSelector } from 'react-redux'
+import * as RiIcons from 'react-icons/ri';
 const Header = () => {
     const authStatus = useSelector((state) => state.auth.status)
     const loggedInAccountType = useSelector((state) => state.auth.loggedInAccountType)
@@ -22,7 +23,7 @@ const Header = () => {
                 </ul>
                 <div className="button-container">
                     <div className="dropdown">
-                        <button className="dropdown-toggle">...</button>
+                        <button className="dropdown-toggle"><RiIcons.RiMenu4Line /></button>
                         <div className="dropdown-content">
                             <Link className="nav-link" to='/'>Home</Link>
                             <Link className="nav-link" to='/about'>About</Link>
@@ -30,15 +31,11 @@ const Header = () => {
                             <Link className="nav-link" to='/notices'>Notices</Link>
                         </div>
                     </div>
-                    {/* {(authStatus === true && loggedInAccountType === 'department') ?
-                        <button className="login-button" onClick={() => navigate('/dashboard')}>Dashboard</button>
-                        : (authStatus === false) ? <Link className="nav-link" to='/login'> <button className="login-button">Login</button></Link> : null} */}
-
-                        {
-                            (!authStatus) ? <Link className="nav-link" to='/login'> <button className="login-button">Login</button></Link>
-                            : (authStatus && loggedInAccountType==='admin') ? <button className="login-button" onClick={() => navigate('/admin/dashboard')}>Dashboard</button>
-                            :  <button className="login-button" onClick={() => navigate('/dashboard')}>Dashboard</button>
-                        }
+                    {
+                        (!authStatus) ? <Link className="nav-link" to='/login'> <button className="login-button">Login</button></Link>
+                            : (authStatus && loggedInAccountType === 'admin') ? <button className="login-button" onClick={() => navigate('/admin/dashboard')}>Dashboard</button>
+                                : <button className="login-button" onClick={() => navigate('/dashboard')}>Dashboard</button>
+                    }
                 </div>
             </nav>
         </header>

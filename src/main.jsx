@@ -23,6 +23,8 @@ import DepartmentDetailsComponent from './components/Admin/DepartmentDetailsComp
 import NewCategoryComponent from './components/Admin/NewCategoryComponent/NewCategoryComponent.jsx'
 import DeptAuthLayout from './components/DepthAuthLayout.jsx'
 import DeptComplaintsComponent from './components/Department/DeptComplaints/DeptComplaintsComponent.jsx'
+import ComplaintDetailsComponent from './components/Department/ComplaintDetails/ComplaintDetailsComponent.jsx'
+import DeptCategoriesComponent from './components/Department/DeptCategories/DeptCategoriesComponent.jsx'
 const router = createBrowserRouter([
   {
     path: '/',
@@ -102,18 +104,22 @@ const router = createBrowserRouter([
         element: <DeptAuthLayout authentication={true}>
           <DepartmentDashboard />
         </DeptAuthLayout>,
-      },
-      {
-        path: "dashboard/category/:categoryToken",
-        element: <DeptAuthLayout authentication={true}>
-          <DeptComplaintsComponent />
-        </DeptAuthLayout>
-      },
-      {
-        path: "dashboard/complaint/:complaintToken",
-        element: <DeptAuthLayout authentication={true}>
-          <ComplaintDetailsComponent />
-        </DeptAuthLayout>
+        children: [
+          {
+            path: '',
+            element: <DeptCategoriesComponent />
+          },
+          {
+            path: "category/:categoryToken",
+            element: <DeptAuthLayout authentication={true}>
+              <DeptComplaintsComponent />
+            </DeptAuthLayout>
+          },
+          {
+            path: 'complaint/:complaintToken',
+            element: <ComplaintDetailsComponent />
+          },
+        ]
       },
     ]
   }
