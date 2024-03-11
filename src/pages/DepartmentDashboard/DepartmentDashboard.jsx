@@ -35,7 +35,7 @@ function DepartmentDashboard() {
             else if (code === 2003) {
                 dispatch(logout())
                 toast.info("Login again!", { autoClose: true, position: 'top-right', pauseOnHover: false });
-                navigate('/admin')
+                navigate('/login')
             }
             else {
                 toast.error("Failed to load details", { autoClose: true, position: 'top-right', pauseOnHover: false });

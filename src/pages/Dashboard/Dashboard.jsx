@@ -7,6 +7,7 @@ import { saveDetails } from '../../redux/slices/adminSlice';
 import axios from 'axios';
 import { baseUrl, apiPrefixV1 } from '../../constants/AppConstants';
 import {toast} from 'react-toastify'
+import { logout } from '../../redux/slices/authSlice';
 const AdminDashboard = () => {
   const dispatch = useDispatch();
   const userData = useSelector((state) => state.auth.userData);
