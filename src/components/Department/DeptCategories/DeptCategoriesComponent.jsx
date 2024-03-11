@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 import './DeptCategoriesComponent.css'
 import { baseUrl, apiPrefixV1 } from '../../../constants/AppConstants';
 import { logout } from '../../../redux/slices/authSlice';
+import { toast } from "react-toastify"
 function DeptCategoriesComponent() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -32,11 +33,16 @@ function DeptCategoriesComponent() {
             else if (code === 2003) {
                 console.log('token expired!');
                 dispatch(logout())
+                toast.info("Login again!", { autoClose: true, position: 'top-right', pauseOnHover: false });
                 navigate('/login')
+            }
+            else {
+                toast.error("Failed to load data!", { autoClose: true, position: 'top-right', pauseOnHover: false });
             }
         }
         catch (err) {
-            console.log(err.message)
+            toast.error("Some error occurred!", { autoClose: true, position: 'top-right', pauseOnHover: false });
+
         }
     }
     return (

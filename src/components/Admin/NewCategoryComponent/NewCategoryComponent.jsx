@@ -7,6 +7,7 @@ import './NewCategoryComponent.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { baseUrl, apiPrefixV1 } from '../../../constants/AppConstants';
 import { logout } from '../../../redux/slices/authSlice';
+import {toast} from "react-toastify";
 function NewCategoryComponent() {
     const userData = useSelector(state => state.auth.userData);
     const navigate = useNavigate();
@@ -63,21 +64,25 @@ function NewCategoryComponent() {
                     }
                 });
                 // Handle successful response
-                console.log(response);
                 const code = response.data.code;
                 if (code === 2000) {
+                    toast.success("Category created successfully!", { autoClose: true, position: 'top-right', pauseOnHover: false });
                     navigate('/admin/dashboard/category');
                 }
                 else if (code === 2003) {
                     dispatch(logout())
-                    navigate('/admin/login')
+                    toast.info("Login again!", { autoClose: true, position: 'top-right', pauseOnHover: false });
+                    navigate('/admin')
+                }
+                else if (code === 2001) {
+                    toast.error("You do not have permission to create the category!", { autoClose: true, position: 'top-right', pauseOnHover: false });
                 }
                 else {
-                    console.log('some error occurred: ', response.data.message);
+                    toast.error("Failed to create categrory", { autoClose: true, position: 'top-right', pauseOnHover: false });
+
                 }
             } catch (error) {
-                // Handle error
-                console.error(error);
+                toast.error("Some error occurred!", { autoClose: true, position: 'top-right', pauseOnHover: false });
             }
         }
     };
@@ -108,7 +113,7 @@ function NewCategoryComponent() {
             isValid = false;
         }
 
-        if(!selectedDepartment.trim()) {
+        if (!selectedDepartment.trim()) {
             errors.selectedDepartment = 'Department is required';
             isValid = false;
 

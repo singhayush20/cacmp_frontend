@@ -8,6 +8,7 @@ import { useDispatch } from 'react-redux';
 import { logout } from '../../../redux/slices/authSlice';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { toast } from "react-toastify";
 function DeptComplaintsComponent() {
     const { categoryToken } = useParams();
     const navigate = useNavigate();
@@ -43,18 +44,21 @@ function DeptComplaintsComponent() {
 
             });
             console.log('on page load...')
-            console.log(response.data);
             const code = response.data.code;
             if (code === 2000) {
                 setComplaints(response.data.data);
             }
             else if (code === 2003) {
                 console.log('token expired!');
-                navigate('/dashboard');
+                toast.info("Login again!", { autoClose: true, position: 'top-right', pauseOnHover: false });
                 dispatch(logout());
+                navigate('/dashboard');
+            }
+            else{
+                toast.error("Failed to load data!", { autoClose: true, position: 'top-right', pauseOnHover: false });
             }
         } catch (error) {
-            console.error('Error fetching complaints:', error.message);
+            toast.error("Some error occurred!", { autoClose: true, position: 'top-right', pauseOnHover: false });
         }
     }
 

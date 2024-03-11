@@ -5,10 +5,15 @@ import { baseUrl, apiPrefixV1 } from '../../../constants/AppConstants';
 import './CategoryComponent.css';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify'
+import { useDispatch } from 'react-redux';
+import { logout } from '../../../redux/slices/authSlice';
 function CategoryComponent() {
     const [categories, setCategories] = useState([]);
     const userData = useSelector((state) => state.auth.userData);
     const navigate = useNavigate();
+    const dispatch = useDispatch()
+
     const loadCategories = async () => {
         const config = {
             headers: {
@@ -19,15 +24,20 @@ function CategoryComponent() {
         try {
             const response = await axios.get(`${baseUrl}/${apiPrefixV1}/category`, config);
             const code = response.data.code;
-            console.log(response.data);
             if (code === 2000) {
                 setCategories(response.data.data);
             } else if (code === 2003) {
                 console.log('token expired!');
+                toast.info("Login again", { autoClose: true, position: 'top-right', pauseOnHover: false });
+                dispatch(logout())
                 navigate('/admin')
             }
+            else {
+                toast.error("Failed to load data!", { autoClose: true, position: 'top-right', pauseOnHover: false });
+            }
         } catch (error) {
-            console.error('Error loading users:', error.message);
+            toast.error("Some error occurred!", { autoClose: true, position: 'top-right', pauseOnHover: false });
+
         }
     };
 
@@ -46,12 +56,18 @@ function CategoryComponent() {
             if (code === 2000) {
                 setCategories(categories.filter(category => category.categoryToken !== categoryToken));
             } else if (code === 2003) {
-                console.log('token expired!');
-            } else {
-                console.log('Failed to delete category');
+                dispatch(logout())
+                toast.info("Login again!", { autoClose: true, position: 'top-right', pauseOnHover: false });
+                navigate('/admin')
+            }
+            else if (code === 2001) {
+                toast.error("You do not have permission to delete category!", { autoClose: true, position: 'top-right', pauseOnHover: false });
+            }
+            else {
+                toast.error("Failed to delete category", { autoClose: true, position: 'top-right', pauseOnHover: false });
             }
         } catch (error) {
-            console.error('Error deleting category:', error.message);
+            toast.error("Some error occurred!", { autoClose: true, position: 'top-right', pauseOnHover: false });
         }
     };
 

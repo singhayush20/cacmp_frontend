@@ -6,6 +6,7 @@ import { useDispatch,useSelector } from 'react-redux';
 import { saveDetails } from '../../redux/slices/adminSlice';
 import axios from 'axios';
 import { baseUrl, apiPrefixV1 } from '../../constants/AppConstants';
+import {toast} from 'react-toastify'
 const AdminDashboard = () => {
   const dispatch = useDispatch();
   const userData = useSelector((state) => state.auth.userData);
@@ -16,6 +17,7 @@ const AdminDashboard = () => {
 
 
   const loadUserData = async () => {
+
     try {
       const config = {
         headers: {
@@ -30,9 +32,12 @@ const AdminDashboard = () => {
       else if(code===2003){
         dispatch(logout())
         navigate('/login')
+        toast.info("Login again", { autoClose:true, position:'top-right', pauseOnHover:false});
+
       }
       else{
-        console.log('some error occurred: ', response.data.message);
+      toast.error("Error occurred while loading data!", { autoClose:true, position:'top-right', pauseOnHover:false});
+
       }
     }
     catch(err){

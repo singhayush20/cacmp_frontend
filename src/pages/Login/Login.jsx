@@ -5,6 +5,7 @@ import { apiPrefixV1, baseUrl } from '../../constants/AppConstants';
 import { login as authLogin } from '../../redux/slices/authSlice';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 const Login = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
@@ -20,6 +21,7 @@ const Login = () => {
         setPassword(event.target.value);
     };
 
+  
     const login = async (event) => {
         event.preventDefault();
         try {
@@ -34,14 +36,17 @@ const Login = () => {
             if (response.data['code'] === 2000) {
                 const userData = response.data['data'];
                 if (userData) dispatch(authLogin({ userData: userData, loggedInAccountType: 'admin' }));
+                toast.success("Logged in!", { autoClose:true, position:'top-right', pauseOnHover:false});
                 navigate('/admin/dashboard/')
             }
             else {
                 setError(response.data['message'])
+                toast.error("Failed to login", { autoClose:true, position:'top-right', pauseOnHover:false});
             }
         }
         catch (err) {
             setError(err.message)
+            toast.error("Some error occurred!", { autoClose:true, position:'top-right', pauseOnHover:false});
         }
     }
 

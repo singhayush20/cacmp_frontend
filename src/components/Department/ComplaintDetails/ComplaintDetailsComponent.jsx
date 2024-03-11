@@ -45,12 +45,15 @@ function ComplaintDetailsComponent() {
                     console.log('Token expired!');
                     navigate('/dashboard');
                     dispatch(logout());
+                    toast.info("Login again!", { autoClose: true, position: 'top-right', pauseOnHover: false });
                 } else {
                     setError('Failed to fetch complaint details');
+                    toast.error("Failed to load data!", { autoClose: true, position: 'top-right', pauseOnHover: false });
+
                 }
             } catch (error) {
-                console.error('Error fetching complaint details:', error.message);
                 setError('Failed to fetch complaint details');
+                toast.error("Some error occurred!", { autoClose: true, position: 'top-right', pauseOnHover: false });
             } finally {
                 setLoading(false);
             }

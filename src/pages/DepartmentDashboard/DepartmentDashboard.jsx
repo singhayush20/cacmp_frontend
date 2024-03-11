@@ -6,6 +6,7 @@ import { baseUrl, apiPrefixV1 } from '../../constants/AppConstants';
 import { useNavigate, Outlet } from 'react-router-dom';
 import { saveDetails, deleteDetails } from '../../redux/slices/departmentSlice';
 import { logout } from '../../redux/slices/authSlice';
+import { toast } from "react-toastify";
 function DepartmentDashboard() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -32,13 +33,15 @@ function DepartmentDashboard() {
                 dispatch(saveDetails(response.data['data']));
             }
             else if (code === 2003) {
-                console.log('token expired!');
                 dispatch(logout())
-                navigate('/login')
+                toast.info("Login again!", { autoClose: true, position: 'top-right', pauseOnHover: false });
+                navigate('/admin')
             }
-        }
-        catch (err) {
-            console.log(err.message)
+            else {
+                toast.error("Failed to load details", { autoClose: true, position: 'top-right', pauseOnHover: false });
+            }
+        } catch (error) {
+            toast.error("Some error occurred!", { autoClose: true, position: 'top-right', pauseOnHover: false });
         }
     }
 
@@ -55,12 +58,16 @@ function DepartmentDashboard() {
             if (code === 2000 || code === 2003 || code === 2004) {
                 dispatch(deleteDetails())
                 dispatch(logout())
+                toast.success("Logged out successfully!", { autoClose: true, position: 'top-right', pauseOnHover: false });
                 navigate('/')
+            }
+            else {
+                toast.error("Failed to logout!", { autoClose: true, position: 'top-right', pauseOnHover: false });
             }
 
         }
         catch (err) {
-            console.log(err.message)
+            toast.error("Failed to logout!", { autoClose: true, position: 'top-right', pauseOnHover: false });
         }
     }
 

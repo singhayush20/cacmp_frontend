@@ -6,7 +6,8 @@ import * as AiIcons from 'react-icons/ai';
 import './NewUserComponent.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { baseUrl, apiPrefixV1 } from '../../../constants/AppConstants';
-import { logout } from '../../../redux/slices/authSlice'; 
+import { logout } from '../../../redux/slices/authSlice';
+import {toast} from "react-toastify";
 function NewUserComponent() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -18,7 +19,7 @@ function NewUserComponent() {
   const [formErrors, setFormErrors] = useState({});
   const navigate = useNavigate();
   const userData = useSelector(state => state.auth.userData);
-  const dispatch=useDispatch();
+  const dispatch = useDispatch();
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -35,21 +36,25 @@ function NewUserComponent() {
           }
         });
         // Handle successful response
-        console.log(response);
-        const code=response.data.code;
-        if(code===2000){
+        const code = response.data.code;
+        if (code === 2000) {
+          toast.success("User created successfully!", { autoClose: true, position: 'top-right', pauseOnHover: false });
           navigate('/admin/dashboard/users');
         }
-        else if(code===2003){
+        else if (code === 2003) {
           dispatch(logout())
-          navigate('/admin/login')
+          toast.info("Login again!", { autoClose: true, position: 'top-right', pauseOnHover: false });
+          navigate('/admin')
         }
-        else{
-          console.log('some error occurred: ', response.data.message);
+        else if (code === 2001) {
+          toast.error("You do not have permission to create the user!", { autoClose: true, position: 'top-right', pauseOnHover: false });
+        }
+        else {
+          toast.error("Failed to load data", { autoClose: true, position: 'top-right', pauseOnHover: false });
+
         }
       } catch (error) {
-        // Handle error
-        console.error(error);
+        toast.error("Some error occurred!", { autoClose: true, position: 'top-right', pauseOnHover: false });
       }
     }
   };

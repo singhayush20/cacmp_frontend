@@ -5,6 +5,7 @@ import * as FaIcons from 'react-icons/fa';
 import { useSelector, useDispatch } from 'react-redux';
 import { baseUrl, apiPrefixV1 } from '../../../constants/AppConstants';
 import { logout } from '../../../redux/slices/authSlice';
+import { toast } from "react-toastify";
 function CategoryDetailsComponent() {
     const userData = useSelector(state => state.auth.userData);
     const navigate = useNavigate();
@@ -17,14 +18,14 @@ function CategoryDetailsComponent() {
     const [departments, setDepartments] = useState([]);
     const [selectedDepartment, setSelectedDepartment] = useState('');
 
-    const {categoryToken}=useParams()
+    const { categoryToken } = useParams()
     const loadDepartments = async () => {
         try {
             const config = {
                 headers: {
-                  Authorization: `Bearer ${userData.accessToken}`
+                    Authorization: `Bearer ${userData.accessToken}`
                 }
-              };
+            };
             const response = await axios.get(`${baseUrl}/${apiPrefixV1}/department/names`, config);
             const code = response.data.code;
             if (code === 2000) {
@@ -33,45 +34,45 @@ function CategoryDetailsComponent() {
             }
             else if (code === 2003) {
                 dispatch(logout())
-                navigate('/admin/login')
+                toast.info("Login again!", { autoClose: true, position: 'top-right', pauseOnHover: false });
+                navigate('/admin')
             }
             else {
-                console.log('some error occurred: ', response.data.message);
+                toast.error("Failed to load details", { autoClose: true, position: 'top-right', pauseOnHover: false });
             }
-        }
-        catch (err) {
-            console.log(err.message);
+        } catch (error) {
+            toast.error("Some error occurred!", { autoClose: true, position: 'top-right', pauseOnHover: false });
         }
     }
 
-    const loadCategoryData=async()=>{
-       try{
-        const config = {
-            headers: {
-              Authorization: `Bearer ${userData.accessToken}`
+    const loadCategoryData = async () => {
+        try {
+            const config = {
+                headers: {
+                    Authorization: `Bearer ${userData.accessToken}`
+                }
+            };
+
+            const response = await axios.get(`${baseUrl}/${apiPrefixV1}/category/${categoryToken}`, config)
+
+            const code = response.data['code']
+            if (code === 2000) {
+                const data = response.data['data']
+                setCategoryName(data['categoryName'])
+                setCategoryDescription(data['categoryDescription'])
+                setSelectedDepartment(data['departmentToken'])
             }
-          };
-
-        const response=await axios.get(`${baseUrl}/${apiPrefixV1}/category/${categoryToken}`,config)
-
-        const code=response.data['code']
-        if(code===2000){
-            const data=response.data['data']
-            setCategoryName(data['categoryName'])
-            setCategoryDescription(data['categoryDescription'])
-            setSelectedDepartment(data['departmentToken'])
+            else if (code === 2003) {
+                dispatch(logout())
+                toast.info("Login again!", { autoClose: true, position: 'top-right', pauseOnHover: false });
+                navigate('/admin')
+            }
+            else {
+                toast.error("Failed to load details", { autoClose: true, position: 'top-right', pauseOnHover: false });
+            }
+        } catch (error) {
+            toast.error("Some error occurred!", { autoClose: true, position: 'top-right', pauseOnHover: false });
         }
-        else if(code===2003){
-            dispatch(logout())
-            navigate('/admin/login')
-        }
-        else{
-            console.log('some error occurred: ', response.data.message);
-        }
-       }
-       catch(err){
-           console.log(err.message)
-       }
     }
 
     useEffect(() => {
@@ -94,21 +95,25 @@ function CategoryDetailsComponent() {
                     }
                 });
                 // Handle successful response
-                console.log(response);
                 const code = response.data.code;
                 if (code === 2000) {
+                    toast.success("Category updated successfully!", { autoClose: true, position: 'top-right', pauseOnHover: false });
                     navigate('/admin/dashboard/category');
                 }
                 else if (code === 2003) {
                     dispatch(logout())
-                    navigate('/admin/login')
+                    toast.info("Login again!", { autoClose: true, position: 'top-right', pauseOnHover: false });
+                    navigate('/admin')
+                }
+                else if (code === 2001) {
+                    toast.error("You do not have update category details!", { autoClose: true, position: 'top-right', pauseOnHover: false });
                 }
                 else {
-                    console.log('some error occurred: ', response.data.message);
+                    toast.error("Failed to update details", { autoClose: true, position: 'top-right', pauseOnHover: false });
+
                 }
             } catch (error) {
-                // Handle error
-                console.error(error.message);
+                toast.error("Some error occurred!", { autoClose: true, position: 'top-right', pauseOnHover: false });
             }
         }
     };
@@ -139,7 +144,7 @@ function CategoryDetailsComponent() {
             isValid = false;
         }
 
-        if(!selectedDepartment.trim()) {
+        if (!selectedDepartment.trim()) {
             errors.selectedDepartment = 'Department is required';
             isValid = false;
 

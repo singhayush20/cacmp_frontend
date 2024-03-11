@@ -12,7 +12,7 @@ import * as HiIcons from 'react-icons/hi';
 import { baseUrl, apiPrefixV1 } from '../../../constants/AppConstants';
 import { logout } from '../../../redux/slices/authSlice';
 import { deleteDetails } from '../../../redux/slices/adminSlice';
-
+import { toast } from 'react-toastify';
 function Navbar() {
   const [sidebar, setSidebar] = useState(false);
 
@@ -20,32 +20,36 @@ function Navbar() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const userData = useSelector((state) => state.auth.userData)
-  const username=useSelector((state)=>state.admin.username)
+  const username = useSelector((state) => state.admin.username)
   const [error, setError] = useState('')
   const handleLogout = async (event) => {
     event.preventDefault()
     try {
-      const response = await axios.get(`${baseUrl}/${apiPrefixV1}/consumer/logout`, {
+      const response = await axios.get(`${baseUrl}/${apiPrefixV1}/user/logout`, {
         headers: {
           Authorization: `Bearer ${userData['accessToken']}`
         }
       })
-      console.log(response)
       const responseCode = response.data['code']
       if (responseCode === 2000 || responseCode === 2003 || responseCode === 2004) {
         dispatch(logout())
         dispatch(deleteDetails())
-        console.log('logging out')
+        toast.success("Logged out successfully!", { autoClose: true, position: 'top-right', pauseOnHover: false });
         navigate('/admin')
+
       }
       else {
         setError(response.data['message'])
+        toast.error("Failed to logout!", { autoClose: true, position: 'top-right', pauseOnHover: false });
+
       }
     }
     catch (err) {
       setError(err.message)
-      console.log(err)
+      toast.error("Some error occurred!", { autoClose: true, position: 'top-right', pauseOnHover: false });
+
     }
+
   }
 
 
@@ -53,14 +57,14 @@ function Navbar() {
     <>
       <IconContext.Provider value={{ color: '#fff' }}>
         <div className='navbar'>
-          <div className="left">
+          <div className="nav-left">
             <Link to='#' className='menu-bars'>
               <FaIcons.FaBars onClick={showSidebar} />
             </Link>
-            <Link to={'/admin/dashboard/'} className='nav-link'><h3>Admin Dashboard</h3></Link>
+            <Link to={'/admin/dashboard/'} className='left-nav-link'><h3>Admin Dashboard</h3></Link>
           </div>
-          <div className="right">
-            <h3>{username}</h3>
+          <div className="nav-right">
+            <h3>{username ? username : ''}</h3>
             <Link to='#' className='menu-bars'>
               <button className='logout' onClick={handleLogout}>Logout</button>
             </Link>

@@ -6,7 +6,7 @@ import { baseUrl } from '../../../constants/AppConstants';
 import { logout } from '../../../redux/slices/authSlice';
 import * as FaIcons from 'react-icons/fa';
 import './DepartmentDetailsComponent.css';
-
+import { toast } from 'react-toastify';
 function DepartmentDetailsComponent() {
     const userData = useSelector(state => state.auth.userData);
     const { departmentToken } = useParams();
@@ -33,15 +33,15 @@ function DepartmentDetailsComponent() {
                 const { departmentName, departmentObjective, username } = response.data.data;
                 setDepartmentInfo({ departmentName, departmentObjective, username });
             } else if (code === 2003) {
-                dispatch(logout());
-                navigate('/admin');
-            } else {
-                console.log('Some error occurred: ', response.data.message);
+                dispatch(logout())
+                toast.info("Login again!", { autoClose: true, position: 'top-right', pauseOnHover: false });
+                navigate('/admin')
             }
-            setLoading(false);
-        } catch (err) {
-            console.error(err.message);
-            setLoading(false);
+            else {
+                toast.error("Failed to load details", { autoClose: true, position: 'top-right', pauseOnHover: false });
+            }
+        } catch (error) {
+            toast.error("Some error occurred!", { autoClose: true, position: 'top-right', pauseOnHover: false });
         }
     };
 
@@ -69,16 +69,19 @@ function DepartmentDetailsComponent() {
                 if (code === 2000) {
                     navigate('/admin/dashboard/department')
                 }
-                else if (code === 20003) {
+                else if (code === 2003) {
                     dispatch(logout())
-                    navigate('/admin/login')
+                    toast.info("Login again!", { autoClose: true, position: 'top-right', pauseOnHover: false });
+                    navigate('/admin')
+                }
+                else if (code === 2001) {
+                    toast.error("You do not have permission to update department details!", { autoClose: true, position: 'top-right', pauseOnHover: false });
                 }
                 else {
-                    console.log('some error occurred: ', response.data.message);
+                    toast.error("Failed to update details", { autoClose: true, position: 'top-right', pauseOnHover: false });
                 }
-            }
-            catch (err) {
-                console.log(err.message)
+            } catch (error) {
+                toast.error("Some error occurred!", { autoClose: true, position: 'top-right', pauseOnHover: false });
             }
         }
     };

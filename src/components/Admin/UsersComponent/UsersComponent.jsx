@@ -5,10 +5,14 @@ import { baseUrl, apiPrefixV1 } from '../../../constants/AppConstants';
 import './UserComponent.css';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import { useDispatch } from 'react-redux';
+import { logout } from '../../../redux/slices/authSlice';
 function UsersComponent() {
     const [users, setUsers] = useState([]);
     const userData = useSelector((state) => state.auth.userData);
     const navigate = useNavigate();
+    const dispatch = useDispatch()
     const loadUsers = async () => {
         const config = {
             headers: {
@@ -19,15 +23,20 @@ function UsersComponent() {
         try {
             const response = await axios.get(`${baseUrl}/${apiPrefixV1}/user/all`, config);
             const code = response.data.code;
-            console.log(response.data);
             if (code === 2000) {
                 setUsers(response.data.data);
             } else if (code === 2003) {
                 console.log('token expired!');
+                dispatch(logout())
+                toast.info("Login again!", { autoClose: true, position: 'top-right', pauseOnHover: false });
                 navigate('/admin')
             }
+            else {
+                toast.error("Failed to load data!", { autoClose: true, position: 'top-right', pauseOnHover: false });
+            }
         } catch (error) {
-            console.error('Error loading users:', error);
+            toast.error("Some error occurred!", { autoClose: true, position: 'top-right', pauseOnHover: false });
+
         }
     };
 
@@ -47,12 +56,19 @@ function UsersComponent() {
                 // Remove the deleted user from the list
                 setUsers(users.filter(user => user.userToken !== userId));
             } else if (code === 2003) {
-                console.log('token expired!');
-            } else {
-                console.log('Failed to delete user');
+                dispatch(logout())
+                toast.info("Login again!", { autoClose: true, position: 'top-right', pauseOnHover: false });
+                navigate('/admin')
+            }
+            else if (code === 2001) {
+                toast.error("You do not have permission to delete the user!", { autoClose: true, position: 'top-right', pauseOnHover: false });
+            }
+            else {
+                toast.error("Failed to load data", { autoClose: true, position: 'top-right', pauseOnHover: false });
+
             }
         } catch (error) {
-            console.error('Error deleting user:', error.message);
+            toast.error("Some error occurred!", { autoClose: true, position: 'top-right', pauseOnHover: false });
         }
     };
 

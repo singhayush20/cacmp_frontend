@@ -6,7 +6,7 @@ import { baseUrl, apiPrefixV1 } from '../../../constants/AppConstants';
 import { logout } from '../../../redux/slices/authSlice';
 import * as FaIcons from 'react-icons/fa';
 import './UserDetails.css';
-
+import { toast } from "react-toastify";
 function UserDetails() {
   const userData = useSelector(state => state.auth.userData);
   const { userId } = useParams();
@@ -33,15 +33,18 @@ function UserDetails() {
         const { name, roles, username } = response.data.data;
         setUserInfo({ departmentName: name, roles, username });
       } else if (code === 2003) {
-        dispatch(logout());
-        navigate('/admin');
-      } else {
-        console.log('Some error occurred: ', response.data.message);
+        dispatch(logout())
+        toast.info("Login again!", { autoClose: true, position: 'top-right', pauseOnHover: false });
+        navigate('/admin')
       }
-      setLoading(false);
-    } catch (err) {
-      console.error(err.message);
-      setLoading(false);
+      else {
+        toast.error("Failed to load details", { autoClose: true, position: 'top-right', pauseOnHover: false });
+      }
+    } catch (error) {
+      toast.error("Some error occurred!", { autoClose: true, position: 'top-right', pauseOnHover: false });
+    }
+    finally {
+      setLoading(false)
     }
   };
 
@@ -61,7 +64,7 @@ function UserDetails() {
           name: userInfo.name,
           roles: userInfo.roles,
         }
-        const response = await axios.put(`${baseUrl}/${apiPrefixV1}/user`, data,{
+        const response = await axios.put(`${baseUrl}/${apiPrefixV1}/user`, data, {
           headers: {
             Authorization: `Bearer ${userData.accessToken}`
           }
@@ -70,16 +73,19 @@ function UserDetails() {
         if (code === 2000) {
           navigate('/admin/dashboard/users')
         }
-        else if (code === 20003) {
+        else if (code === 2003) {
           dispatch(logout())
-          navigate('/admin/login')
+          toast.info("Login again!", { autoClose: true, position: 'top-right', pauseOnHover: false });
+          navigate('/admin')
+        }
+        else if (code === 2001) {
+          toast.error("You do not have permission to update user details!", { autoClose: true, position: 'top-right', pauseOnHover: false });
         }
         else {
-          console.log('some error occurred: ', response.data.message);
+          toast.error("Failed to update user", { autoClose: true, position: 'top-right', pauseOnHover: false });
         }
-      }
-      catch (err) {
-        console.log(err.message)
+      } catch (error) {
+        toast.error("Some error occurred!", { autoClose: true, position: 'top-right', pauseOnHover: false });
       }
     }
   };
