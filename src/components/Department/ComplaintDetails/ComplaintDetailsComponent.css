@@ -18,6 +18,13 @@
     cursor: pointer;
 }
 
+.btns{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
 .heading-btn button:hover{
     cursor: pointer;
     background-color: #3e8e41;

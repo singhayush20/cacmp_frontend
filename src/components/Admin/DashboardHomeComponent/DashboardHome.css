@@ -1,0 +1,223 @@
+.dashboard{
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.metrics{
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 10px;
+  gap:50px;
+}
+
+.count-container{
+  flex-wrap: wrap;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  gap: 50px 20px;
+  justify-content: center;
+  align-items: center;
+}
+
+.count-container div{
+  background-color:rgb(206, 228, 247);
+  margin-top: 10px;
+  margin-bottom: 10px;
+
+  padding: 50px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 5px;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.count-container div h3{
+  font-size: 25px;
+  font-weight: 800;
+  color: rgb(22, 155, 121);
+}
+
+.count-container div p{
+  font-size: 20px;
+  font-weight: 600;
+  color: rgb(10, 7, 2);
+}
+
+.tables{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.row1, .row2, .row3{
+  box-sizing: border-box;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+  align-items: first baseline;
+  gap: 20px;
+  padding: 0px 20px;
+}
+
+.row1 .complaint-count-table{
+  width: 300px;
+}
+
+.row2 .complaint-count-table{
+  width: 600px;
+}
+.row3 .complaint-count-table{
+  width: 600px;
+}
+
+.analytics-table {
+  width:100%;
+  border-collapse: collapse;
+  border: 2px solid black;
+}
+
+.analytics-table thead {
+  background-color: #4c63af;
+  color: white;
+}
+
+.analytics-table th, td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.analytics-table th:first-child,
+.analytics-table td:first-child {
+  padding-left: 20px;
+}
+
+.analytics-table th:last-child,
+.analytics-table td:last-child {
+  padding-right: 20px;
+}
+
+
+
+/* Alternating row colors */
+.analytics-table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+
+/* Remove hover effect on table head */
+.analytics-table thead tr:hover {
+  background-color: transparent;
+}
+
+
+@media (max-width: 640px){
+  .row1 .complaint-count-table{
+    width: 350px;
+  }
+  .row2 .complaint-count-table{
+    width: 350px;
+  }
+
+  .row3 .complaint-count-table{
+    width: 350px;
+  }
+
+  .count-container{
+    flex-wrap: wrap;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    gap: 4px 8px;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .count-container div{
+    background-color:rgb(206, 228, 247);
+    margin-top: 10px;
+    margin-bottom: 5px;
+  
+    padding: 30px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 5px;
+    border-radius: 20px;
+    cursor: pointer;
+  }
+  
+  .count-container div h3{
+    font-size: 20px;
+    font-weight: 800;
+    color: rgb(22, 155, 121);
+  }
+  
+  .count-container div p{
+    font-size: 18px;
+    font-weight: 600;
+    color: rgb(10, 7, 2);
+  }
+}
+
+@media (max-width: 460px){
+  .row2 .complaint-count-table{
+    width: 300px;
+  }
+
+  .row1 .complaint-count-table{
+    width: 300px;
+  }
+
+  .row3 .complaint-count-table{
+    width: 300px;
+  }
+
+  .count-container{
+    flex-wrap: wrap;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    gap: 4px 8px;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .count-container div{
+    background-color:rgb(206, 228, 247);
+    margin-top: 10px;
+    margin-bottom: 5px;
+  
+    padding: 25px 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 5px;
+    border-radius: 20px;
+    cursor: pointer;
+  }
+  
+  .count-container div h3{
+    font-size: 18px;
+    font-weight: 800;
+    color: rgb(22, 155, 121);
+  }
+  
+  .count-container div p{
+    font-size: 15px;
+    font-weight: 600;
+    color: rgb(10, 7, 2);
+  }
+}

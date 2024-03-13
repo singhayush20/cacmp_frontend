@@ -5,6 +5,7 @@ import { apiPrefixV1, baseUrl } from '../../constants/AppConstants';
 import { login as authLogin } from '../../redux/slices/authSlice';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 const Login = () => {
     const navigate = useNavigate()
@@ -50,28 +51,34 @@ const Login = () => {
     }
 
     return (
-        <div className="login">
-            <div className="login-page-heading">
-                <h1>CACMP Admin Login</h1>
-            </div>
-            <p className="subheading">Login using your admin credentials</p>
-            <div className="login-form-container">
-                <h1 className="login-heading">Login</h1>
-                <form className="login-form" onSubmit={login}>
-                    <input
-                        type="text"
-                        placeholder="Username"
-                        value={username}
-                        onChange={handleUsernameChange}
-                    />
-                    <input
-                        type="password"
-                        placeholder="Password"
-                        value={password}
-                        onChange={handlePasswordChange}
-                    />
-                    <button type='submit' >Login</button>
-                </form>
+        <div className="container">
+            <nav className="navbar">
+                <Link to='/' className='nav-link'><h1>CACMP E-Seva</h1></Link>
+            </nav>
+            <div className="login">
+
+                <div className="login-page-heading">
+                    <h1>CACMP Admin Login</h1>
+                </div>
+                <p className="subheading">Login using your admin credentials</p>
+                <div className="login-form-container">
+                    <h1 className="login-heading">Login</h1>
+                    <form className="login-form" onSubmit={login}>
+                        <input
+                            type="text"
+                            placeholder="Username"
+                            value={username}
+                            onChange={handleUsernameChange}
+                        />
+                        <input
+                            type="password"
+                            placeholder="Password"
+                            value={password}
+                            onChange={handlePasswordChange}
+                        />
+                        <button type='submit' >Login</button>
+                    </form>
+                </div>
             </div>
         </div>
     )

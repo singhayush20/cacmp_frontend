@@ -111,9 +111,8 @@ const router = createBrowserRouter([
           },
           {
             path: "category/:categoryToken",
-            element: <DeptAuthLayout authentication={true}>
-              <DeptComplaintsComponent />
-            </DeptAuthLayout>
+            element: <DeptComplaintsComponent />
+
           },
           {
             path: 'complaint/:complaintToken',
