@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import './DashboardHome.css'; // Import CSS file for dashboard styling
+import './DashboardHome.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { baseUrl, apiPrefixV1 } from '../../../constants/AppConstants';
@@ -26,7 +26,7 @@ const DashboardHome = () => {
       }
       else if (analyticsResponse.data.code === 2003) {
         console.log('Token expired!');
-        navigate('/dashboard');
+        navigate('/admin');
         dispatch(logout());
         toast.info('Login again!', { autoClose: true, position: 'top-right', pauseOnHover: false });
       } else {

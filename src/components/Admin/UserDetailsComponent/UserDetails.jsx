@@ -13,7 +13,7 @@ function UserDetails() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [userInfo, setUserInfo] = useState({
-    departmentName: '',
+    name: '',
     roles: [],
     username: ''
   });
@@ -31,7 +31,7 @@ function UserDetails() {
       const code = response.data.code;
       if (code === 2000) {
         const { name, roles, username } = response.data.data;
-        setUserInfo({ departmentName: name, roles, username });
+        setUserInfo({name: name, roles, username });
       } else if (code === 2003) {
         dispatch(logout())
         toast.info("Login again!", { autoClose: true, position: 'top-right', pauseOnHover: false });
@@ -121,6 +121,7 @@ function UserDetails() {
     return <div>Loading...</div>;
   }
 
+
   return (
     <div className="user-details-container">
       <div className="back-button" onClick={handleBack}>
@@ -136,7 +137,7 @@ function UserDetails() {
               id="name"
               value={userInfo.name}
               className={formErrors.username ? 'invalid' : ''}
-              onChange={(e) => setUserInfo({ ...userInfo, departmentName: e.target.value })}
+              onChange={(e) => setUserInfo({ ...userInfo, name: e.target.value })}
             />
             {formErrors.name && <span className="error-message">{formErrors.name}</span>}
           </div>

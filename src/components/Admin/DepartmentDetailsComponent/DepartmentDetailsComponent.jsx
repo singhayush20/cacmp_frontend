@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
-import { baseUrl } from '../../../constants/AppConstants';
+import { baseUrl, apiPrefixV1 } from '../../../constants/AppConstants';
 import { logout } from '../../../redux/slices/authSlice';
 import * as FaIcons from 'react-icons/fa';
 import './DepartmentDetailsComponent.css';
@@ -29,7 +29,10 @@ function DepartmentDetailsComponent() {
             };
             const response = await axios.get(`${baseUrl}/${apiPrefixV1}/department/${departmentToken}`, config);
             const code = response.data.code;
+            console.log('response: ');
+            console.log(response.data)
             if (code === 2000) {
+                setLoading(false)
                 const { departmentName, departmentObjective, username } = response.data.data;
                 setDepartmentInfo({ departmentName, departmentObjective, username });
             } else if (code === 2003) {
@@ -41,6 +44,7 @@ function DepartmentDetailsComponent() {
                 toast.error("Failed to load details", { autoClose: true, position: 'top-right', pauseOnHover: false });
             }
         } catch (error) {
+            console.log(error.message)
             toast.error("Some error occurred!", { autoClose: true, position: 'top-right', pauseOnHover: false });
         }
     };

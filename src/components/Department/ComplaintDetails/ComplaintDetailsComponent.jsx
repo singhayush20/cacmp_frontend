@@ -127,7 +127,7 @@ function ComplaintDetailsComponent() {
                 navigate('/login');
                 dispatch(logout());
             }
-           
+
         } catch (error) {
             console.error('Failed to fetch feedback:', error);
             toast.error('Failed to fetch feedback', { autoClose: true, position: 'top-right', pauseOnHover: false });
@@ -146,16 +146,20 @@ function ComplaintDetailsComponent() {
             <div className="complaint-details">
                 <div className="heading-btn">
                     <div className="heading">Complaint Details</div>
-                  <div className="btns">
-                  <button className="status-btn" onClick={handleStatus}>
-                        Update Status
-                    </button>
-                    {complaintDetails?.complaintStatus === 'CLOSED' && ( // Show "Show Feedback" button if status is CLOSED
-                        <button className="feedback-btn" onClick={() => setShowFeedbackDialog(true)}>
-                            Show Feedback
-                        </button>
-                    )}
-                  </div>
+                    <div className="btns">
+                        {
+                            complaintDetails?.complaintStatus !== 'CLOSED' && (
+                                <button className="status-btn" onClick={handleStatus}>
+                                    Update Status
+                                </button>
+                            )
+                        }
+                        {complaintDetails?.complaintStatus === 'CLOSED' && ( // Show "Show Feedback" button if status is CLOSED
+                            <button className="feedback-btn" onClick={() => setShowFeedbackDialog(true)}>
+                                Show Feedback
+                            </button>
+                        )}
+                    </div>
                 </div>
                 {complaintDetails && (
                     <div className="details">
@@ -243,9 +247,9 @@ function ComplaintDetailsComponent() {
                     </div>
                 )}
             </div>
-            
-                {showDialog && <StatusDialog currentStatus={complaintDetails.complaintStatus} onUpdate={(handleUpdateStatus)} onCancel={handleCancelDialog} />}
-                {showFeedbackDialog && <FeedbackDialog onClose={() => setShowFeedbackDialog(false)} feedbackData={feedbackData} />}
+
+            {showDialog && <StatusDialog currentStatus={complaintDetails.complaintStatus} onUpdate={(handleUpdateStatus)} onCancel={handleCancelDialog} />}
+            {showFeedbackDialog && <FeedbackDialog onClose={() => setShowFeedbackDialog(false)} feedbackData={feedbackData} />}
         </div>
     );
 }
