@@ -1,3 +1,13 @@
+.nav-bar {
+    background-color: #3d3d3f;
+    height: 80px;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  
+  }
+
 .nav-bar h1 {
     cursor: pointer;
 }

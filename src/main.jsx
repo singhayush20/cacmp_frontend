@@ -25,6 +25,10 @@ import DeptAuthLayout from './components/DepthAuthLayout.jsx'
 import DeptComplaintsComponent from './components/Department/DeptComplaints/DeptComplaintsComponent.jsx'
 import ComplaintDetailsComponent from './components/Department/ComplaintDetails/ComplaintDetailsComponent.jsx'
 import DeptCategoriesComponent from './components/Department/DeptCategories/DeptCategoriesComponent.jsx'
+import DeptArticleComponent from './components/Department/DeptArticle/DeptArticleComponent.jsx'
+import DeptPollComponent from './components/Department/DeptPoll/DeptPollComponent.jsx'
+import DeptPollDetailsComponent from './components/Department/DeptPollDetailsComponent/DeptPollDetailsComponent.jsx'
+import NewPollComponent from './components/Department/DeptNewPoll.jsx/NewPollComponent.jsx'
 const router = createBrowserRouter([
   {
     path: '/',
@@ -90,7 +94,7 @@ const router = createBrowserRouter([
             path: 'category/:categoryToken',
             element: <CategoryDetailsComponent />
           },
-
+      
         ]
       },
       {
@@ -118,6 +122,22 @@ const router = createBrowserRouter([
             path: 'complaint/:complaintToken',
             element: <ComplaintDetailsComponent />
           },
+          {
+            path: "article",
+            element: <DeptArticleComponent />
+          },
+          {
+            path: "poll",
+            element: <DeptPollComponent />
+          },
+          {
+            path: "poll/:pollToken",
+            element: <DeptPollDetailsComponent />
+          },
+          {
+            path: "poll/new",
+            element: <NewPollComponent />
+          }
         ]
       },
     ]

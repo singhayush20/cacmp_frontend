@@ -6,13 +6,14 @@ import { login as authLogin } from '../../redux/slices/authSlice';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import LoadingIndicator1 from '../../components/LoadingIndicator1/LoadingIndicator1';
 const UserLogin = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const [error, setError] = useState('')
-
+    const [isLoading, setIsLoading] = useState(false)
     const handleUsernameChange = (event) => {
         setUsername(event.target.value);
     };
@@ -24,7 +25,7 @@ const UserLogin = () => {
     const login = async (event) => {
         event.preventDefault();
 
-
+        setIsLoading(true)
 
         try {
             const response = await axios.post(
@@ -38,6 +39,7 @@ const UserLogin = () => {
             if (response.data['code'] === 2000) {
                 const userData = response.data['data'];
                 if (userData) dispatch(authLogin({ userData: userData, loggedInAccountType: 'department' }));
+                setIsLoading(false)
                 navigate('/dashboard')
             }
             else {
@@ -51,8 +53,8 @@ const UserLogin = () => {
 
     return (
         <>
-            <nav className="navbar">
-               <Link to='/' className='nav-link'><h1>CACMP E-Seva</h1></Link>
+            <nav className="nav-bar">
+                <Link to='/' className='nav-link'><h1>CACMP E-Seva</h1></Link>
             </nav>
             <div className="login">
                 <div className="login-page-heading">
@@ -74,12 +76,12 @@ const UserLogin = () => {
                             value={password}
                             onChange={handlePasswordChange}
                         />
-                        <button type='submit' >Login</button>
+                        {isLoading ? <LoadingIndicator1 color="#36c2d6" size={40} /> : <button type='submit' >Login</button>}
                     </form>
                 </div>
             </div>
         </>
-    )
+    );
 
 }
 

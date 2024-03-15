@@ -9,22 +9,24 @@ import * as FaIcons from 'react-icons/fa';
 import StatusDialog from '../StatusModal/StatusUpdateModal';
 import { toast } from 'react-toastify';
 import FeedbackDialog from '../FeedbackModal/FeedbackModal';
+import LoadingIndicator2 from '../../LoadingIndicator1/LoadingIndicator1';
 function ComplaintDetailsComponent() {
     const { complaintToken } = useParams();
     const navigate = useNavigate();
     const userData = useSelector(state => state.auth.userData);
     const [complaintDetails, setComplaintDetails] = useState(null);
     const [complaintImages, setComplaintImages] = useState([]);
-    const [loading, setLoading] = useState(true);
+    const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
     const [showDialog, setShowDialog] = useState(false);
     const [showFeedbackDialog, setShowFeedbackDialog] = useState(false);
     const [feedbackData, setFeedbackData] = useState(null);
     const handleBack = () => {
-        navigate('/dashboard');
+        navigate(-1);
     };
 
     const fetchComplaintDetails = async () => {
+        setIsLoading(true);
         try {
             const detailsResponse = await axios.get(`${baseUrl}/${apiPrefixV1}/complaints/details`, {
                 params: {
@@ -44,10 +46,11 @@ function ComplaintDetailsComponent() {
             });
 
             if (detailsResponse.data.code === 2000 && imagesResponse.data.code === 2000) {
-                setComplaintDetails(detailsResponse.data.data);
-                setComplaintImages(imagesResponse.data.data);
-                loadFeedback();
-            } else if (detailsResponse.data.code === 2003 || imagesResponse.data.code === 2003) {
+                await setComplaintDetails(detailsResponse.data.data);
+                await setComplaintImages(imagesResponse.data.data);
+                await loadFeedback();
+                setIsLoading(false)
+            } else if (detailsResponse.data.code === 2003) {
                 console.log('Token expired!');
                 navigate('/dashboard');
                 dispatch(logout());
@@ -59,9 +62,7 @@ function ComplaintDetailsComponent() {
         } catch (error) {
             setError('Failed to fetch complaint details');
             toast.error('Some error occurred!', { autoClose: true, position: 'top-right', pauseOnHover: false });
-        } finally {
-            setLoading(false);
-        }
+        } 
     };
 
     useEffect(() => {
@@ -101,9 +102,7 @@ function ComplaintDetailsComponent() {
         } catch (err) {
             setError(`Error occurred!: ${err.message}`);
             toast.error('Some error occurred!', { autoClose: true, position: 'top-right', pauseOnHover: false });
-        } finally {
-            setLoading(false);
-        }
+        } 
     };
 
     const handleCancelDialog = () => {
@@ -134,8 +133,8 @@ function ComplaintDetailsComponent() {
         }
     };
 
-    if (loading) {
-        return <div>Loading...</div>;
+    if (isLoading) {
+        return <div className="loading"><LoadingIndicator2 color="#36d7b7" size={50} /></div>
     }
 
     return (

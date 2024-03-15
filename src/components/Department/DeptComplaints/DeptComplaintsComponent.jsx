@@ -9,11 +9,13 @@ import { logout } from '../../../redux/slices/authSlice';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { toast } from "react-toastify";
+import LoadingIndicator2 from '../../LoadingIndicator2/LoadingIndicator2';
 function DeptComplaintsComponent() {
     const { categoryToken } = useParams();
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const userData = useSelector(state => state.auth.userData);
+    const [isLoading, setIsLoading] = useState(false);
     const handleBack = () => {
         navigate('/dashboard');
     };
@@ -33,6 +35,7 @@ function DeptComplaintsComponent() {
     }, [])
 
     const loadComplaintsOnPageLoad = async () => {
+        setIsLoading(true);
         try {
             const response = await axios.get(`${baseUrl}/${apiPrefixV1}/complaints/filter`, {
                 params: {
@@ -43,10 +46,10 @@ function DeptComplaintsComponent() {
                 },
 
             });
-            console.log('on page load...')
             const code = response.data.code;
             if (code === 2000) {
                 setComplaints(response.data.data);
+                setIsLoading(false);
             }
             else if (code === 2003) {
                 console.log('token expired!');
@@ -54,7 +57,7 @@ function DeptComplaintsComponent() {
                 dispatch(logout());
                 navigate('/dashboard');
             }
-            else{
+            else {
                 toast.error("Failed to load data!", { autoClose: true, position: 'top-right', pauseOnHover: false });
             }
         } catch (error) {
@@ -71,7 +74,6 @@ function DeptComplaintsComponent() {
     };
 
     const handleSearch = async () => {
-        console.log('searching with filter: ', filter);
 
         const parameters = {
             categoryToken: categoryToken,
@@ -103,8 +105,7 @@ function DeptComplaintsComponent() {
                 }
 
             });
-            console.log('filtered...')
-            console.log(response.data);
+
             const code = response.data.code;
             if (code === 2000) {
                 setComplaints(response.data.data);
@@ -145,7 +146,6 @@ function DeptComplaintsComponent() {
                             }
                         }}
                     />
-
                     <label>Ward No:</label>
                     <input
                         type="text"
@@ -195,8 +195,10 @@ function DeptComplaintsComponent() {
             <div className="complaints">
                 <div className='heading'>Complaints</div>
             </div>
-            {
-                (complaints.length !== 0) ?
+            {isLoading ? (
+                <div className="loading"><LoadingIndicator2 color="#36d7b7" size={50} /></div>
+            ) : (
+                (complaints.length !== 0) ? (
                     <div className="table-container">
                         <table>
                             <thead>
@@ -210,7 +212,6 @@ function DeptComplaintsComponent() {
                             <tbody>
                                 {complaints.map((complaint) => (
                                     <tr key={complaint.complaintToken}>
-
                                         <td>
                                             <Link className="complaint-link" to={`/dashboard/complaint/${complaint.complaintToken}`}>{complaint.complaintSubject}</Link>
                                         </td>
@@ -222,13 +223,15 @@ function DeptComplaintsComponent() {
                             </tbody>
                         </table>
                     </div>
-                    :
+                ) : (
                     <div className="no-data">
                         <p>No complaints</p>
                     </div>
-            }
+                )
+            )}
         </div>
     );
+    
 }
 
 export default DeptComplaintsComponent;

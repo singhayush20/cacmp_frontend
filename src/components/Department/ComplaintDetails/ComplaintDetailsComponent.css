@@ -1,6 +1,7 @@
 .complaint-details-container {
     box-sizing: border-box;
     padding: 20px;
+    height: 100%;
 }
 
 .heading-btn{
@@ -142,3 +143,11 @@ tr:nth-child(even) {
         margin-right: 0;
     }
 }
+
+
+.loading{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 90%;
+  }

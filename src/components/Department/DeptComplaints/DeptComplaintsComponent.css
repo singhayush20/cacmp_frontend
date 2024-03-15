@@ -1,6 +1,7 @@
 .complaints-container {
     box-sizing: border-box;
     padding: 20px 10px;
+    height: 100%;
 }
 
 .complaints-back-button {
@@ -48,7 +49,7 @@
 .search-button {
     padding: 10px 20px;
     width: calc(100% - 20px);
-    background-color: #1ab31f;
+    background-color: #1782A2;
     color: #fff;
     border: none;
     cursor: pointer;
@@ -59,7 +60,7 @@
 }
 
 .search-button:hover {
-    background-color: #138617;
+    background-color: #166d87;
 }
 
 .complaint-link {
@@ -71,4 +72,10 @@
 .complaint-link:hover {
     text-decoration: underline;
     color: rgb(53, 53, 53);
+}
+
+.loading{
+    display: flex;
+    align-items: start;
+    justify-content: center;
 }

@@ -1,0 +1,84 @@
+.dept-poll-details-container {
+    padding: 20px;
+}
+
+.back-button {
+    font-size: 24px;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+.poll-details {
+    margin-bottom: 30px;
+}
+
+.poll-details h2 {
+    font-size: 25px;
+    margin-bottom: 20px;
+}
+
+.details-table {
+    overflow-x: auto;
+    box-sizing: border-box;
+    max-width: 100%;
+}
+
+.poll-details-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.poll-details-table thead {
+    background-color: #1782A2;
+    color: white;
+}
+
+.poll-details-table th, td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.poll-details-table th:first-child,.poll-details-table td:first-child {
+    padding-left: 20px;
+}
+
+.poll-details-table th:last-child,.poll-details-table td:last-child {
+    padding-right: 20px;
+}
+
+.poll-details-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.buttons{
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    justify-content: start;
+    align-items: center;
+    margin-top: 5px;
+    margin-left: 10px;
+    box-sizing: border-box;
+}
+
+.buttons button {
+    background-color: #1782A2;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.buttons button:hover {
+    background-color: #126983;
+}
+
+
+.loading{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}

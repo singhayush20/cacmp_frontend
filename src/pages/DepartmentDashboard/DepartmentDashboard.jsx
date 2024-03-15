@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import './DepartmentDashboard.css'
 import { useSelector, useDispatch } from 'react-redux'
 import axios from 'axios';
@@ -7,11 +7,14 @@ import { useNavigate, Outlet } from 'react-router-dom';
 import { saveDetails, deleteDetails } from '../../redux/slices/departmentSlice';
 import { logout } from '../../redux/slices/authSlice';
 import { toast } from "react-toastify";
+import Navbar from '../../components/Department/Sidebar/Sidebar';
+import LoadingIndicator2 from '../../components/LoadingIndicator2/LoadingIndicator2';
 function DepartmentDashboard() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const userData = useSelector(state => state.auth.userData);
     const departmentName = useSelector(state => state.department.name)
+    const [isLoading, setIsLoading] = useState(false)
     useEffect(() => {
         loadDepartmentData();
     }, [])
@@ -19,7 +22,7 @@ function DepartmentDashboard() {
 
 
     const loadDepartmentData = async () => {
-
+        setIsLoading(true)
         try {
             const config = {
                 headers: {
@@ -31,6 +34,7 @@ function DepartmentDashboard() {
             const code = response.data['code']
             if (code === 2000) {
                 dispatch(saveDetails(response.data['data']));
+                setIsLoading(false)
             }
             else if (code === 2003) {
                 dispatch(logout())
@@ -72,21 +76,20 @@ function DepartmentDashboard() {
     }
 
     return (
-        <div className="dashboard">
-            <nav className="navbar">
-                <div className="left">
-                    <div className='heading'>{departmentName ? departmentName : 'E-Seva Dashboard'}</div>
-                </div>
-                <div className="right">
-                    <div className="btns">
-                        <button onClick={handleLogout}>Logout</button>
-                    </div>
-                </div>
-            </nav>
+        <div className="department-dashboard">
+        {isLoading ? (
+          <div className="loading"><LoadingIndicator2 color="#36d7b7" size={50} /></div>
+        ) : (
+          <>
+            <Navbar departmentName={departmentName} handleLogout={handleLogout}/>
             <Outlet />
-
-        </div>
+          </>
+        )}
+      </div>
+      
+      
     )
 }
 
 export default DepartmentDashboard
+

@@ -29,8 +29,6 @@ function DepartmentDetailsComponent() {
             };
             const response = await axios.get(`${baseUrl}/${apiPrefixV1}/department/${departmentToken}`, config);
             const code = response.data.code;
-            console.log('response: ');
-            console.log(response.data)
             if (code === 2000) {
                 setLoading(false)
                 const { departmentName, departmentObjective, username } = response.data.data;
