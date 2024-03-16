@@ -8,16 +8,19 @@ import { logout } from '../../../redux/slices/authSlice';
 import { toast } from 'react-toastify';
 import LoadingIndicator2 from '../../LoadingIndicator2/LoadingIndicator2';
 import { baseUrl, apiPrefixV1 } from '../../../constants/AppConstants';
+import { Chart } from 'chart.js/auto';
 
 function DeptPollDetailsComponent() {
   const navigate = useNavigate();
-  const { pollToken } = useParams()
+  const { pollToken } = useParams();
   const dispatch = useDispatch();
   const [pollDetails, setPollDetails] = useState(null);
-  const userData = useSelector(state => state.auth.userData)
-  const [isLoading, setIsLoading] = useState(false)
+  const userData = useSelector(state => state.auth.userData);
+  const [isLoading, setIsLoading] = useState(false);
+  const [showDialog, setShowDialog] = useState(false);
+
   const fetchPollDetails = async () => {
-    setIsLoading(true)
+    setIsLoading(true);
     try {
       const response = await axios.get(`${baseUrl}/${apiPrefixV1}/poll/details`, {
         headers: {
@@ -29,7 +32,8 @@ function DeptPollDetailsComponent() {
       });
       if (response.data.code === 2000) {
         setPollDetails(response.data.data);
-        setIsLoading(false)
+        setIsLoading(false);
+        console.log(response.data.data);
       } else if (response.data.code === 2003) {
         console.log('Token expired!');
         dispatch(logout());
@@ -39,7 +43,7 @@ function DeptPollDetailsComponent() {
         toast.error('Failed to load data!', { autoClose: true, position: 'top-right', pauseOnHover: false });
       }
     } catch (error) {
-      console.log(error.message)
+      console.log(error.message);
       toast.error('Some error occurred!', { autoClose: true, position: 'top-right', pauseOnHover: false });
     }
   };
@@ -49,9 +53,6 @@ function DeptPollDetailsComponent() {
   }, []);
 
   const changeStatus = async (status) => {
-    console.log(status)
-    console.log(`Bearer ${userData.accessToken}`)
-
     try {
       const response = await axios.put(
         `${baseUrl}/${apiPrefixV1}/poll/status`,
@@ -65,7 +66,7 @@ function DeptPollDetailsComponent() {
           },
         }
       );
-      console.log(response.data)
+      console.log(response.data);
       const code = response.data.code;
       if (code === 2000) {
         toast.success("Status changed successfully!", { autoClose: true, position: 'top-right', pauseOnHover: false });
@@ -80,7 +81,7 @@ function DeptPollDetailsComponent() {
         toast.error('Failed to update status!', { autoClose: true, position: 'top-right', pauseOnHover: false });
       }
     } catch (error) {
-      console.log(error.message)
+      console.log(error.message);
       toast.error('Some error occurred!', { autoClose: true, position: 'top-right', pauseOnHover: false });
     }
   }
@@ -89,8 +90,42 @@ function DeptPollDetailsComponent() {
     navigate(-1);
   };
 
+  const toggleDialog = () => {
+    setShowDialog(!showDialog);
+  };
+
   const handleShowCount = () => {
-    // Implement logic to show count in a dialog box
+    toggleDialog();
+  };
+
+  useEffect(() => {
+    if (showDialog && pollDetails) {
+      drawPieChart();
+    }
+  }, [showDialog, pollDetails]);
+
+  const drawPieChart = () => {
+    const ctx = document.getElementById('pollPieChart');
+    new Chart(ctx, {
+      type: 'pie',
+      data: {
+        labels: pollDetails.pollChoiceDetails.map(choice => choice.choiceName),
+        datasets: [{
+          label: 'Vote Count',
+          data: pollDetails.pollChoiceDetails.map(choice => choice.voteCount),
+          borderWidth: 1
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          title: {
+            display: true,
+            text: 'Vote Count Distribution'
+          }
+        }
+      }
+    });
   };
 
   if (isLoading) {
@@ -148,7 +183,14 @@ function DeptPollDetailsComponent() {
               <button onClick={handleShowCount}>Show Count</button>
               <button onClick={() => changeStatus(!pollDetails.isLive)}>{pollDetails.isLive ? 'Close Poll' : 'Open Poll'}</button>
             </div>
-
+            {showDialog && (
+              <div className="modal" onClick={toggleDialog}>
+                <div className="modal-content" onClick={e => e.stopPropagation()}>
+                  <canvas id="pollPieChart"></canvas>
+                  <button className="dialog-close-btn" onClick={toggleDialog}>Close</button>
+                </div>
+              </div>
+            )}
           </>
         )}
       </div>
