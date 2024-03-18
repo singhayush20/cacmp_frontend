@@ -5,7 +5,7 @@ import { IconContext } from 'react-icons';
 import * as FaIcons from 'react-icons/fa';
 import * as AiIcons from 'react-icons/ai';
 import * as MdIcons from 'react-icons/md';
-
+import * as Io5Icons from 'react-icons/io5'
 function Navbar({departmentName, handleLogout}) {
   const [sidebar, setSidebar] = useState(false);
   const showSidebar = () => setSidebar(!sidebar);
@@ -46,16 +46,17 @@ function Navbar({departmentName, handleLogout}) {
             </li>
             <li key={1} className='nav-text'>
               <Link to={'/dashboard/poll'}>
-                <MdIcons.MdCategory />
+                <FaIcons.FaPoll/>
                 <span>Poll</span>
               </Link>
             </li>
             <li key={2} className='nav-text'>
-              <Link to={'/dashboard/article'}>
-                <FaIcons.FaUser />
-                <span>Article</span>
+              <Link to={'/dashboard/notice'}>
+                <Io5Icons.IoDocument />
+                <span>Notice</span>
               </Link>
             </li>
+          
           </ul>
         </nav>
       </IconContext.Provider>

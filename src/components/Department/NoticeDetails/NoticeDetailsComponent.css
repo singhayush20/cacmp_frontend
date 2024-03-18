@@ -1,0 +1,113 @@
+.details-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    align-items: flex-start;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.left {
+    width: 50%;
+}
+
+.back-button {
+    margin-left: 10px;
+    margin-top: 10px;
+}
+
+.details-table-container {
+    width: 100%;
+    overflow-x: auto;
+    margin-top: 20px;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+}
+
+.details-table-container table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.details-table-container table thead {
+    background-color: #1a8fb3;
+    color: white;
+}
+
+.details-table-container table th,
+.details-table-container table td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.images-container {
+    display: flex;
+    width: 50%;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.image-item {
+    width: 80%;
+    margin: 10px 20px;
+    height: auto;
+    margin-right: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.pdf-container {
+    width: 50%;
+    height: 80vh;
+    margin: 10px 20px;
+    box-sizing: border-box;
+    overflow-y: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid black;
+}
+
+.pdf-container embed {
+    width: 100%;
+    margin: auto;
+    height: 100%;
+    overflow-y: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+}
+
+.alert-details-loading {
+    height: 100vh;
+    width: 100vw;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+@media (max-width: 768px) {
+    .details-container {
+        flex-direction: column;
+    }
+
+    .left {
+        width: 100%;
+    }
+    .images-container {
+        display: flex;
+        width: 100%;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        margin-top: 20px;
+    }
+    
+}

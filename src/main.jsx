@@ -25,10 +25,12 @@ import DeptAuthLayout from './components/DepthAuthLayout.jsx'
 import DeptComplaintsComponent from './components/Department/DeptComplaints/DeptComplaintsComponent.jsx'
 import ComplaintDetailsComponent from './components/Department/ComplaintDetails/ComplaintDetailsComponent.jsx'
 import DeptCategoriesComponent from './components/Department/DeptCategories/DeptCategoriesComponent.jsx'
-import DeptArticleComponent from './components/Department/DeptArticle/DeptArticleComponent.jsx'
 import DeptPollComponent from './components/Department/DeptPoll/DeptPollComponent.jsx'
 import DeptPollDetailsComponent from './components/Department/DeptPollDetailsComponent/DeptPollDetailsComponent.jsx'
 import NewPollComponent from './components/Department/DeptNewPoll.jsx/NewPollComponent.jsx'
+import DeptNoticeComponent from './components/Department/DeptNotice/DeptNoticeComponent.jsx'
+import NoticeDetailsComponent from './components/Department/NoticeDetails/NoticeDetailsComponent.jsx'
+import NewNoticeComponent from './components/Department/NewNotice/NewNoticeComponent.jsx'
 const router = createBrowserRouter([
   {
     path: '/',
@@ -123,8 +125,16 @@ const router = createBrowserRouter([
             element: <ComplaintDetailsComponent />
           },
           {
-            path: "article",
-            element: <DeptArticleComponent />
+            path: "notice",
+            element: <DeptNoticeComponent/>
+          },
+          {
+            path: "notice/new",
+            element: <NewNoticeComponent/>
+          },
+          {
+            path: "notice/:alertToken",
+            element: <NoticeDetailsComponent/>
           },
           {
             path: "poll",
