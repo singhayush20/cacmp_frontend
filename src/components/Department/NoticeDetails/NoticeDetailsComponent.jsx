@@ -86,7 +86,7 @@ function NoticeDetailsComponent() {
                 </tr>
                 <tr>
                   <td>Published On</td>
-                  <td>{(noticeData['publishedOn']) ? noticeData['publishedOn'] : 'N/A'}</td>
+                  <td>{(noticeData['publishedOn']) ? new Date(noticeData['publishedOn']).toLocaleString() : 'N/A'}</td>
                 </tr>
               </tbody>
             </table>

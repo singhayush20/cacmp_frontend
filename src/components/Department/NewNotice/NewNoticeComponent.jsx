@@ -5,6 +5,7 @@ import { baseUrl, apiPrefixV1 } from '../../../constants/AppConstants';
 import { logout } from '../../../redux/slices/authSlice';
 import { useNavigate } from 'react-router-dom';
 import './NewNoticeComponent.css';
+import {toast} from "react-toastify";
 import * as FaIcons from 'react-icons/fa';
 function NewNoticeComponent() {
     const dispatch = useDispatch();
@@ -48,35 +49,60 @@ function NewNoticeComponent() {
             try {
                 let token = null;
 
-                // Create alert
-                const createAlertResponse = await axios.post(`${baseUrl}${apiPrefixV1}/alert/new`, {
-                    departmentToken: userData.departmentToken,
+                //- Create alert
+                const createAlertResponse = await axios.post(`${baseUrl}/${apiPrefixV1}/alert/new`, {
+                    departmentToken: userData.token,
                     subject,
                     message: alertInputType === 'TEXT' ? message : null,
                     alertInputType
-                });
+                },
+                    {
+                        headers: {
+                            Authorization: `Bearer ${userData.accessToken}`
+                        }
+                    }
+                );
+                console.log('text save response...')
+                console.log(createAlertResponse.data)
                 if (createAlertResponse.data.code === 2000) {
                     token = createAlertResponse.data.data;
 
-                    // Upload images or document based on alertInputType
-                    if (alertInputType === 'TEXT') {
+                    //- Upload images or document based on alertInputType
+                    if (alertInputType === 'TEXT' && images.length > 0) {
                         const formData = new FormData();
                         for (let i = 0; i < images.length; i++) {
                             formData.append('images', images[i]);
                         }
-                        await axios.post(`${baseUrl}${apiPrefixV1}/alert/upload/image?token=${token}`, formData);
+                        await axios.post(`${baseUrl}/${apiPrefixV1}/alert/upload/image?token=${token}`, formData, {
+                            headers: {
+                                Authorization: `Bearer ${userData.accessToken}`
+                            }
+                        });
                     } else {
                         const formData = new FormData();
                         formData.append('file', document);
-                        await axios.post(`${baseUrl}${apiPrefixV1}/alert/upload/file?token=${token}`, formData);
+                        await axios.post(`${baseUrl}/${apiPrefixV1}/alert/upload/file?token=${token}`, formData, {
+                            headers: {
+                                Authorization: `Bearer ${userData.accessToken}`
+                            }
+                        });
                     }
 
-                    // Redirect to desired page after success
-                    navigate('/desired-page');
+                    navigate(-1);
+                    toast.success("Notice uploaded!", { autoClose: true, position: 'top-right', pauseOnHover: false });
+
+                }
+                else if (code === 2003) {
+                    dispatch(logout());
+                    toast.info("Login again!", { autoClose: true, position: 'top-right', pauseOnHover: false });
+                    navigate('/login');
+                }
+                else {
+                    toast.error("Failed to create notice.", { autoClose: true, position: 'top-right', pauseOnHover: false });
                 }
             } catch (error) {
-                // Handle errors
-                console.error('Error:', error);
+                console.log(error.message)
+                toast.error("An error occurred while creating the notice.", { autoClose: true, position: 'top-right', pauseOnHover: false });
             }
         }
     };
