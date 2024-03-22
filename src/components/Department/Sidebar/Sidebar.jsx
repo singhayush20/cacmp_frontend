@@ -4,8 +4,8 @@ import './Sidebar.css';
 import { IconContext } from 'react-icons';
 import * as FaIcons from 'react-icons/fa';
 import * as AiIcons from 'react-icons/ai';
-import * as MdIcons from 'react-icons/md';
 import * as Io5Icons from 'react-icons/io5'
+import * as GrIcons from 'react-icons/gr'
 function Navbar({departmentName, handleLogout}) {
   const [sidebar, setSidebar] = useState(false);
   const showSidebar = () => setSidebar(!sidebar);
@@ -54,6 +54,12 @@ function Navbar({departmentName, handleLogout}) {
               <Link to={'/dashboard/notice'}>
                 <Io5Icons.IoDocument />
                 <span>Notice</span>
+              </Link>
+            </li>
+            <li key={3} className='nav-text'>
+              <Link to={'/dashboard/article'}>
+                <GrIcons.GrArticle />
+                <span>Articles</span>
               </Link>
             </li>
           

@@ -91,14 +91,6 @@ function NewCategoryComponent() {
         navigate('/admin/dashboard/category');
     };
 
-    const togglePasswordVisibility = () => {
-        setIsPasswordVisible(!isPasswordVisible);
-    };
-
-    const toggleConfirmPasswordVisibility = () => {
-        setIsConfirmPasswordVisible(!isConfirmPasswordVisible);
-    };
-
     const validateForm = () => {
         let errors = {};
         let isValid = true;

@@ -8,7 +8,7 @@ import { Provider } from 'react-redux'
 import store from './redux/store.js'
 import AuthLayout from './components/AuthLayout.jsx'
 import Home from './pages/Home/Home.jsx'
-import Dashboard from './pages/Dashboard/Dashboard.jsx'
+import Dashboard from './pages/AdminDashboard/Dashboard.jsx'
 import CategoryDetailsComponent from './components/Admin/CategoryDetailsComponent/CategoryDetailsComponent.jsx'
 import CategoryComponent from './components/Admin/CategoryComponent/CategoryComponent.jsx'
 import UsersComponent from './components/Admin/UsersComponent/UsersComponent.jsx'
@@ -31,6 +31,8 @@ import NewPollComponent from './components/Department/DeptNewPoll.jsx/NewPollCom
 import DeptNoticeComponent from './components/Department/DeptNotice/DeptNoticeComponent.jsx'
 import NoticeDetailsComponent from './components/Department/NoticeDetails/NoticeDetailsComponent.jsx'
 import NewNoticeComponent from './components/Department/NewNotice/NewNoticeComponent.jsx'
+import ArticleListComponent from './components/Admin/ArticleList/ArticleListComponent.jsx'
+import NewArticleComponent from './components/Admin/NewArticle/NewArticleComponent.jsx'
 const router = createBrowserRouter([
   {
     path: '/',
@@ -147,7 +149,16 @@ const router = createBrowserRouter([
           {
             path: "poll/new",
             element: <NewPollComponent />
-          }
+          },
+          {
+            path: "article",
+            element: <ArticleListComponent />
+          },
+          {
+            path: "article/new",
+            element: <NewArticleComponent />
+          },
+          
         ]
       },
     ]
