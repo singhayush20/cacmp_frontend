@@ -1,0 +1,128 @@
+.article-container {
+    box-sizing: border-box;
+    padding: 20px 10px;
+    height: 100%;
+}
+
+.articles h2 {
+    font-weight: 900;
+    font-size: 30px;
+    margin-bottom: 20px;
+}
+
+.articles-filter-section {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.article-filter-column {
+    flex: 1;
+    margin-right: 20px;
+    margin-left: 20px;
+}
+
+.article-filter-column label {
+    display: block;
+    margin-bottom: 5px;
+    width: 100px;
+}
+
+.article-filter-column input,
+.article-filter-column select {
+    width: calc(100% - 20px);
+    padding: 8px;
+    margin-bottom: 10px;
+}
+
+.article-search-button {
+    padding: 10px 20px;
+    background-color: #1a8fb3;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+
+}
+
+
+.article-search-button:hover {
+    background-color: #156a84;
+}
+
+.articles {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.article-new-button,
+.article-delete-button {
+    padding: 5px 12px;
+    background-color: #1a8fb3;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    display: block;
+    text-decoration: none;
+}
+
+
+.article-new-button:hover,
+.article-delete-button:hover {
+    background-color: #156a84;
+}
+
+
+
+.article-table-container {
+    overflow-x: auto;
+    margin-top: 20px;
+}
+
+.article-table-container table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.article-table-container table thead {
+    background-color: #1a8fb3;
+}
+
+.article-details-link {
+    text-decoration: none;
+    color: black;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.article-details-link:hover {
+    color: #383737;
+    text-decoration: underline;
+}
+
+.article-table-container table thead th,
+.article-table-container table tbody td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.article-table-container table tbody td {
+    max-width: 300px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+}
+
+.article-no-data {
+    margin-top: 20px;
+    text-align: center;
+    font-style: italic;
+}

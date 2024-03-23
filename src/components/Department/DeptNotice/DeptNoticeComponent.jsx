@@ -77,7 +77,7 @@ function DeptNoticeComponent() {
         });
       const code = response.data.code;
       if (code === 2000) {
-        setNotices(response.data.data);
+        // setNotices(response.data.data);
         setIsLoading(false);
         loadNotices();
       } else if (code === 2003) {
@@ -170,7 +170,7 @@ function DeptNoticeComponent() {
                   <th>Created On</th>
                   <th>Published On</th>
                   <th>Type</th>
-                  {/* <th>Delete</th> */}
+                  <th>Delete</th>
                   <th>Publish</th>
                 </tr>
               </thead>
@@ -181,7 +181,7 @@ function DeptNoticeComponent() {
                     <td>{new Date(notice.createdAt).toLocaleString()}</td>
                     <td>{notice.publishedOn ? new Date(notice.publishedOn).toLocaleString() : '------------------'}</td>
                     <td>{notice.alertInputType}</td>
-                    {/* <td><button className='poll-delete-button' onClick={handleDelete}>Delete</button></td> TODO: Delete button*/ } 
+                    <td><button className='poll-delete-button' onClick={handleDelete}>Delete</button></td> 
                     <td><button className='poll-delete-button' onClick={() => handlePublish(index)}>{notice.publishStatus === 'DRAFT' ? 'Publish' : 'Un-publish'}</button></td>
                   </tr>
                 ))}

@@ -31,8 +31,9 @@ import NewPollComponent from './components/Department/DeptNewPoll.jsx/NewPollCom
 import DeptNoticeComponent from './components/Department/DeptNotice/DeptNoticeComponent.jsx'
 import NoticeDetailsComponent from './components/Department/NoticeDetails/NoticeDetailsComponent.jsx'
 import NewNoticeComponent from './components/Department/NewNotice/NewNoticeComponent.jsx'
-import ArticleListComponent from './components/Admin/ArticleList/ArticleListComponent.jsx'
-import NewArticleComponent from './components/Admin/NewArticle/NewArticleComponent.jsx'
+import ArticleListComponent from './components/Department/ArticleList/ArticleListComponent.jsx'
+import NewArticleComponent from './components/Department/NewArticle/NewArticleComponent.jsx'
+import ArticleDetailsComponent from './components/Department/ArticleDetails/ArticleDetailsComponent.jsx'
 const router = createBrowserRouter([
   {
     path: '/',
@@ -98,7 +99,7 @@ const router = createBrowserRouter([
             path: 'category/:categoryToken',
             element: <CategoryDetailsComponent />
           },
-      
+
         ]
       },
       {
@@ -128,15 +129,15 @@ const router = createBrowserRouter([
           },
           {
             path: "notice",
-            element: <DeptNoticeComponent/>
+            element: <DeptNoticeComponent />
           },
           {
             path: "notice/new",
-            element: <NewNoticeComponent/>
+            element: <NewNoticeComponent />
           },
           {
             path: "notice/:alertToken",
-            element: <NoticeDetailsComponent/>
+            element: <NoticeDetailsComponent />
           },
           {
             path: "poll",
@@ -158,7 +159,11 @@ const router = createBrowserRouter([
             path: "article/new",
             element: <NewArticleComponent />
           },
-          
+          {
+            path: "article/:articleToken",
+            element: <ArticleDetailsComponent />
+          },
+         
         ]
       },
     ]

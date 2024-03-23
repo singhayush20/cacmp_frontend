@@ -30,7 +30,6 @@ function DepartmentDashboard() {
                 },
             };
             const response = await axios.get(`${baseUrl}/${apiPrefixV1}/department/${userData['token']}`, config);
-            console.log(response.data.data);
             const code = response.data['code']
             if (code === 2000) {
                 dispatch(saveDetails(response.data['data']));

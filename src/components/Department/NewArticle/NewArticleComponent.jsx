@@ -3,11 +3,11 @@ import './NewArticleComponent.css';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { logout } from '../../../redux/slices/authSlice';
-import { baseUrl, apiPrefixV1 } from '../../../constants/AppConstants';
+import { logout } from '../../../redux/slices/authSlice.js';
+import { baseUrl, apiPrefixV1 } from '../../../constants/AppConstants.js';
 import { useNavigate } from 'react-router-dom';
 import * as FaIcons from 'react-icons/fa';
-import LoadingIndicator2 from '../../LoadingIndicator2/LoadingIndicator2';
+import LoadingIndicator2 from '../../LoadingIndicator2/LoadingIndicator2.jsx';
 import { toast } from 'react-toastify';
 import axios from 'axios';
 function NewArticleComponent() {
@@ -39,20 +39,54 @@ function NewArticleComponent() {
   const [placeholderType, setPlaceholderType] = useState('image'); // Default to image
   const userData = useSelector(state => state.auth.userData)
   const [images, setImages] = useState([])
-  const [video, setVideo] = useState(null)
+  const [videos, setVideos] = useState([])
+
+
+  const MAX_TOTAL_UPLOAD_SIZE = 100 * 1024 * 1024; // 100MB in bytes
+  const MAX_FILE_SIZE = 70 * 1024 * 1024; // 10MB in bytes
+
   const handleImageChange = (e) => {
-    setImages([...images, ...Array.from(e.target.files)]);
-  };
-  const handleRemoveFile = (type, index) => {
-    if (type === 'image') {
-      setImages(images.filter((_, i) => i !== index));
+    const files = Array.from(e.target.files);
+    const totalSize = images.reduce((acc, file) => acc + file.size, 0) + files.reduce((acc, file) => acc + file.size, 0);
+    if (totalSize <= MAX_TOTAL_UPLOAD_SIZE) {
+      const validFiles = files.filter(file => file.size <= MAX_FILE_SIZE);
+      if (validFiles.length === files.length) {
+        setImages([...images, ...validFiles]);
+      } else {
+        // Handle error: Some files exceed the maximum file size limit
+        toast.error("Some files exceed the maximum file size limit (10MB).", { autoClose: true, position: 'top-right', pauseOnHover: false });
+      }
     } else {
-      setVideo(null);
+      // Handle error: Total upload size exceeds the maximum limit
+      toast.error("Total upload size exceeds the maximum limit (100MB).", { autoClose: true, position: 'top-right', pauseOnHover: false });
     }
   };
 
   const handleVideoChange = (e) => {
-    setVideo(e.target.files[0]);
+    const files = Array.from(e.target.files);
+    const totalSize = videos.reduce((acc, file) => acc + file.size, 0) + files.reduce((acc, file) => acc + file.size, 0);
+    console.log(`total size: ${totalSize} current file size: ${files[0].size}`);
+
+    if (totalSize <= MAX_TOTAL_UPLOAD_SIZE) {
+      const validFiles = files.filter(file => file.size <= MAX_FILE_SIZE);
+      if (validFiles.length === files.length) {
+        setVideos([...videos, ...validFiles]);
+      } else {
+        // Handle error: Some files exceed the maximum file size limit
+        toast.error("Some files exceed the maximum file size limit (10MB).", { autoClose: true, position: 'top-right', pauseOnHover: false });
+      }
+    } else {
+      // Handle error: Total upload size exceeds the maximum limit
+      toast.error("Total upload size exceeds the maximum limit (100MB).", { autoClose: true, position: 'top-right', pauseOnHover: false });
+    }
+  };
+
+  const handleRemoveFile = (type, index) => {
+    if (type === 'image') {
+      setImages(images.filter((_, i) => i !== index));
+    } else {
+      setVideos(videos.filter((_, i) => i !== index));
+    }
   };
 
   const handleFileClick = (fileUrl) => {
@@ -76,16 +110,15 @@ function NewArticleComponent() {
         });
         console.log('article response... ');
         console.log(response.data);
-        const code = response.data.code;
+        let code = response.data.code;
         if (code === 2000) {
-          toast.success("Poll created successfully!", { autoClose: true, position: 'top-right', pauseOnHover: false });
           const articleToken = response.data.data;
 
           if (images.length > 0) {
             code = await uploadImages(articleToken)
           }
-          else if (video) {
-            code = await uploadVideo(articleToken)
+          else if (videos) {
+            code = await uploadVideos(articleToken)
           }
           toast.success("Article uploaded successfully!", { autoClose: true, position: 'top-right', pauseOnHover: false });
 
@@ -109,10 +142,12 @@ function NewArticleComponent() {
     }
   };
 
-  const uploadVideo = async (articleToken) => {
+  const uploadVideos = async (articleToken) => {
     try {
       const formData = new FormData();
-      formData.append('videos', video);
+      for (let i = 0; i < videos.length; i++) {
+        formData.append('videos', videos[i]);
+      }
       const response = await axios.post(`${baseUrl}/${apiPrefixV1}/article/upload/videos?token=${articleToken}`, formData, {
         headers: {
           Authorization: `Bearer ${userData.accessToken}`
@@ -134,7 +169,7 @@ function NewArticleComponent() {
       for (let i = 0; i < images.length; i++) {
         formData.append('images', images[i]);
       }
-      const response = await axios.post(`${baseUrl}/${apiPrefixV1}/article/upload/image?token=${articleToken}`, formData, {
+      const response = await axios.post(`${baseUrl}/${apiPrefixV1}/article/upload/images?token=${articleToken}`, formData, {
         headers: {
           Authorization: `Bearer ${userData.accessToken}`
         }
@@ -238,12 +273,14 @@ function NewArticleComponent() {
                     ))}
                   </div>
                 )}
-                {placeholderType === 'video' && video && (
+                {placeholderType === 'video' && videos.length > 0 && (
                   <div className="article-uploaded-files">
-                    <div className="article-file-item">
-                      <span onClick={() => handleFileClick(URL.createObjectURL(video))}>{video.name}</span>
-                      <button type="button" onClick={() => handleRemoveFile('video')}>X</button>
-                    </div>
+                    {videos.map((video, index) => (
+                      <div key={index} className="article-file-item">
+                        <span onClick={() => handleFileClick(URL.createObjectURL(video))}>{video.name}</span>
+                        <button type="button" onClick={() => handleRemoveFile('video', index)}>X</button>
+                      </div>
+                    ))}
                   </div>
                 )}
               </div>
