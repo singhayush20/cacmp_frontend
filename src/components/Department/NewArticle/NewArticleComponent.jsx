@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './NewArticleComponent.css';
-import ReactQuill from 'react-quill';
+
 import 'react-quill/dist/quill.snow.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../../../redux/slices/authSlice.js';
@@ -10,26 +10,11 @@ import * as FaIcons from 'react-icons/fa';
 import LoadingIndicator2 from '../../LoadingIndicator2/LoadingIndicator2.jsx';
 import { toast } from 'react-toastify';
 import axios from 'axios';
+import ArticleForm from '../ArticleForm/ArticleForm.jsx';
 function NewArticleComponent() {
   const navigate = useNavigate()
-  const [value, setValue] = useState('');
   const dispatch = useDispatch();
-  const modules = {
-    toolbar: [
-      [{ header: [1, 2, 3, 4, 5, 6, false] }],
-      [{ font: [] }],
-      [{ size: [] }],
-      ["bold", "italic", "underline", "strike"],
-      ["align", "blockquote", "code-block"],
-      [
-        { list: "ordered" },
-        { list: "bullet" },
-        { indent: "-1" },
-        { indent: "+1" },
-      ],
-      ["link", "image", "video"],
-    ],
-  };
+  const [content, setContent] = useState('');
 
 
   const [title, setTitle] = useState('');
@@ -89,9 +74,7 @@ function NewArticleComponent() {
     }
   };
 
-  const handleFileClick = (fileUrl) => {
-    window.open(fileUrl, '_blank');
-  };
+
 
   const handleSubmit = async () => {
     if (validateForm()) {
@@ -102,7 +85,7 @@ function NewArticleComponent() {
           departmentToken: userData.token,
           title: title,
           slug: slug,
-          content: value
+          content: content
         }, {
           headers: {
             Authorization: `Bearer ${userData.accessToken}`
@@ -216,6 +199,8 @@ function NewArticleComponent() {
 
   const handlePlaceholderTypeChange = (e) => {
     setPlaceholderType(e.target.value);
+    setVideos([]);
+    setImages([]);
   };
 
   return (
@@ -230,7 +215,7 @@ function NewArticleComponent() {
           <LoadingIndicator2 color={'#1f8ba1'} size={40} />
         )}
       </div>
-      <div className="row">
+      {/* <div className="row">
         <div className="left">
           <div className="fields">
             <form onSubmit={handleSubmit}>
@@ -325,7 +310,25 @@ function NewArticleComponent() {
         <div className="preview">
           <div dangerouslySetInnerHTML={{ __html: value }}></div>
         </div>
-      </div>
+      </div> */}
+      <ArticleForm
+        title={title}
+        slug={slug}
+        placeholderType={placeholderType}
+        formErrors={formErrors}
+        handlePlaceholderTypeChange={handlePlaceholderTypeChange}
+        handleChangeTitle={handleChangeTitle}
+        handleChangeSlug={handleChangeSlug}
+        handleRemoveFile={handleRemoveFile}
+        handleImageChange={handleImageChange}
+        handleVideoChange={handleVideoChange}
+        handleSubmit={handleSubmit}
+        images={images}
+        videos={videos}
+        value={content}
+        setValue={setContent}
+        uploadMessage="Only one media type is allowed-image or video"
+      />
     </div>
   );
 }

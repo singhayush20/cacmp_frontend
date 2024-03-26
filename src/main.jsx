@@ -34,6 +34,7 @@ import NewNoticeComponent from './components/Department/NewNotice/NewNoticeCompo
 import ArticleListComponent from './components/Department/ArticleList/ArticleListComponent.jsx'
 import NewArticleComponent from './components/Department/NewArticle/NewArticleComponent.jsx'
 import ArticleDetailsComponent from './components/Department/ArticleDetails/ArticleDetailsComponent.jsx'
+import ArticleUpdateComponent from './components/Department/ArticleUpdate/ArticleUpdateComponent.jsx'
 const router = createBrowserRouter([
   {
     path: '/',
@@ -163,7 +164,10 @@ const router = createBrowserRouter([
             path: "article/:articleToken",
             element: <ArticleDetailsComponent />
           },
-         
+          {
+            path: "article/update/:articleToken",
+            element: <ArticleUpdateComponent />
+          }
         ]
       },
     ]

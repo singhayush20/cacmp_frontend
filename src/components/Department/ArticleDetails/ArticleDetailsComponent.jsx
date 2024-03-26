@@ -33,7 +33,6 @@ function ArticleDetailsComponent() {
                 }
             );
             const code = response.data.code;
-            console.log(response.data.data);
             if (code === 2000) {
                 setArticleData(response.data.data);
             } else if (code === 2003) {
