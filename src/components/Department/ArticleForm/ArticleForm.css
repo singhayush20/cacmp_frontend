@@ -131,3 +131,17 @@
     height: 100%;
     width: 100%;
 }
+
+
+@media (max-width: 900px){
+    .row {
+        flex-direction: column;
+    }
+
+    .left{
+        width: 100%;
+    }
+    .preview{
+        width: 100%;
+    }
+}

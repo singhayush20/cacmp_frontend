@@ -6,6 +6,7 @@
     align-items: start;
     justify-content: start;
     box-sizing: border-box;
+    padding: 5px 10px;
 }
 
 .new-article-btn {

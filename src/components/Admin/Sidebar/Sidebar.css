@@ -61,9 +61,9 @@
 
 
 .nav-menu {
-  background-color: #152aa0;
+  background-color: #1a8fb3;
   width: 250px;
-  height: 100vh;
+  height: 100vh; /* Set the initial height to 100vh */
   display: flex;
   justify-content: start;
   align-items: start;
@@ -71,6 +71,15 @@
   top: 0;
   left: -100%;
   transition: 850ms;
+  overflow-y: auto; /* Add this line to enable scrolling */
+}
+
+.nav-menu.active {
+  left: 0;
+  transition: 350ms;
+  position: fixed; /* Change from absolute to fixed */
+  z-index: 10;
+  height: 100%; /* Set the height to 100% */
 }
 
 .nav-menu-items {
@@ -82,12 +91,6 @@
 
 
 
-.nav-menu.active {
-  left: 0;
-  transition: 350ms;
-  position: absolute;
-  z-index: 10;
-}
 
 .nav-text {
   display: flex;

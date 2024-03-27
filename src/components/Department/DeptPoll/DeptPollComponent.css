@@ -75,7 +75,30 @@
     background-color: #156a84;
 }
 
+.poll-delete-button {
+    background-color: #1a8fb3;
+    padding: 10px 10px;
+    color: white;
+    border: none;
+  }
+  
+  .poll-delete-button:hover {
+    cursor: pointer;
+    text-decoration: none;
+    background-color: #177c9b;
+  }
+  
 
+  .poll-details-link {
+    text-decoration: none;
+    color: black;
+  }
+  
+  .poll-details-link:hover {
+    color: rgb(36, 36, 36);
+    cursor: pointer;
+    text-decoration: underline;
+  }
 
 .polls-table-container {
     overflow-x: auto;

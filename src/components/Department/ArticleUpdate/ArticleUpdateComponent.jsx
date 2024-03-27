@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../../../redux/slices/authSlice.js';

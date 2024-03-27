@@ -4,7 +4,6 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-
 }
 
 .nav-left {
@@ -23,7 +22,6 @@
   gap: 20px;
 }
 
-
 .left-nav-link {
   cursor: pointer;
   text-decoration: none;
@@ -33,7 +31,6 @@
 .left-nav-link h3 {
   font-size: 25px;
 }
-
 
 .menu-bars {
   margin-left: 2rem;
@@ -47,22 +44,18 @@
   border: none;
   background-color: #fff;
   color: #007bff;
-  /* Button text color */
   font-size: 16px;
   cursor: pointer;
 }
 
 .logout:hover {
   background-color: #f0f0f0;
-  /* Button background color on hover */
 }
-
-
 
 .nav-menu {
   background-color: #1a8fb3;
   width: 250px;
-  height: 100vh;
+  height: 100vh; /* Set the initial height to 100vh */
   display: flex;
   justify-content: start;
   align-items: start;
@@ -70,6 +63,15 @@
   top: 0;
   left: -100%;
   transition: 850ms;
+  overflow-y: auto; /* Add this line to enable scrolling */
+}
+
+.nav-menu.active {
+  left: 0;
+  transition: 350ms;
+  position: fixed; /* Change from absolute to fixed */
+  z-index: 10;
+  height: 100%; /* Set the height to 100% */
 }
 
 .nav-menu-items {
@@ -80,18 +82,9 @@
 }
 
 
-
-.nav-menu.active {
-  left: 0;
-  transition: 350ms;
-  position: absolute;
-  z-index: 10;
-}
-
 .nav-text {
   display: flex;
   justify-content: start;
-  /* align-items: center; */
   padding: 8px 0px 8px 40px;
   list-style: none;
   height: 60px;
@@ -113,22 +106,6 @@
   background-color: #1a8fb3;
 }
 
-.poll-delete-button {
-  background-color: #1a8fb3;
-  padding: 10px 10px;
-  color: white;
-}
-
-.poll-delete-button:hover {
-  cursor: pointer;
-  text-decoration: none;
-  background-color: #177c9b;
-}
-
-.nav-menu-items {
-  width: 100%;
-}
-
 .navbar-toggle {
   background-color: #1a8fb3;
   width: 100%;
@@ -136,21 +113,6 @@
   display: flex;
   justify-content: start;
   align-items: center;
-}
-
-.poll-details-link {
-  text-decoration: none;
-  color: black;
-}
-
-.poll-details-link:hover {
-  color: rgb(36, 36, 36);
-  cursor: pointer;
-  text-decoration: underline;
-}
-
-span {
-  margin-left: 16px;
 }
 
 @media (max-width: 600px) {
@@ -176,15 +138,12 @@ span {
     background: none;
   }
 
-
   .logout {
     margin-right: 2rem;
     padding: 8px 10px;
     border: none;
     background-color: #fff;
-    /* Button background color */
     color: #1a8fb3;
-    /* Button text color */
     font-size: 12px;
     cursor: pointer;
   }
