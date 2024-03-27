@@ -1,5 +1,5 @@
 .nav-bar {
-    background-color: #3d3d3f;
+    background-color: var(--department-nav-bar-color);
     height: 80px;
     color: white;
     display: flex;
@@ -39,12 +39,12 @@
 }
 
 .login-form-container {
-    background-color: #fff;
     border-radius: 8px;
-    background-color: #f0f0f0;
+    background-color: #a9c0e1;
     /* Background color */
     padding: 20px 50px;
     width: 400px;
+    color: rgb(40, 40, 40);
 }
 
 .login-heading {
@@ -74,7 +74,7 @@
 .login-form button {
     width: 250px;
     padding: 10px;
-    background-color: #007bff;
+    background-color: var(--department-login-button-color);
     color: #fff;
     border: none;
     border-radius: 5px;
@@ -82,7 +82,7 @@
 }
 
 .login-form button:hover {
-    background-color: #0056b3;
+    background-color: var(--department-login-button-hover-color);
 }
 
 

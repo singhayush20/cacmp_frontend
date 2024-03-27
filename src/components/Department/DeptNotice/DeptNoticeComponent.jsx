@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import './DeptNoticeComponent.css';
 import axios from 'axios';
 import { baseUrl, apiPrefixV1 } from '../../../constants/AppConstants';
 import { useDispatch, useSelector } from 'react-redux';
@@ -128,7 +127,7 @@ function DeptNoticeComponent() {
     <div className="polls-container">
       <div className="polls">
         <h2>Notices</h2>
-        <button className='poll-new-button' onClick={() => navigate("/dashboard/notice/new")}>Add Notice </button>
+        <button className='department-new-button' onClick={() => navigate("/dashboard/notice/new")}>Add Notice </button>
       </div>
       <div className="polls-filter-section">
         <div className="filter-column">
@@ -156,7 +155,7 @@ function DeptNoticeComponent() {
           </select>
         </div>
       </div>
-      <button className="polls-search-button" onClick={loadNotices}>Search</button>
+      <button className="department-search-button" onClick={loadNotices}>Search</button>
 
       {isLoading ? (
         <div className="loading"><LoadingIndicator2 color="#36d7b7" size={50} /></div>
@@ -181,8 +180,8 @@ function DeptNoticeComponent() {
                     <td>{new Date(notice.createdAt).toLocaleString()}</td>
                     <td>{notice.publishedOn ? new Date(notice.publishedOn).toLocaleString() : '------------------'}</td>
                     <td>{notice.alertInputType}</td>
-                    <td><button className='poll-delete-button' onClick={handleDelete}>Delete</button></td> 
-                    <td><button className='poll-delete-button' onClick={() => handlePublish(index)}>{notice.publishStatus === 'DRAFT' ? 'Publish' : 'Un-publish'}</button></td>
+                    <td><button className='department-delete-button' onClick={handleDelete}>Delete</button></td> 
+                    <td><button className='department-delete-button' onClick={() => handlePublish(index)}>{notice.publishStatus === 'DRAFT' ? 'Publish' : 'Un-publish'}</button></td>
                   </tr>
                 ))}
               </tbody>

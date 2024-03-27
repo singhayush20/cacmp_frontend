@@ -188,7 +188,7 @@ function NewUserComponent() {
             {formErrors.role && <span className="error-message">{formErrors.role}</span>}
           </div>
 
-          <button type="submit" className="submit-button">Create User</button>
+          <button type="submit" className="admin-submit-button">Create User</button>
         </form>
       </div>
     </div>

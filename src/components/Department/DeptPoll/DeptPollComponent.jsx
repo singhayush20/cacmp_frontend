@@ -70,7 +70,7 @@ function DeptPollComponent() {
     <div className="polls-container">
       <div className="polls">
         <h2>Polls</h2>
-        <button className='poll-new-button' onClick={() => navigate("/dashboard/poll/new")}>Add Poll </button>
+        <button className='department-new-button' onClick={() => navigate("/dashboard/poll/new")}>Add Poll </button>
       </div>
       <div className="polls-filter-section">
         <div className="filter-column">
@@ -98,7 +98,7 @@ function DeptPollComponent() {
           </select>
         </div>
       </div>
-      <button className="polls-search-button" onClick={loadPolls}>Search</button>
+      <button className="department-search-button" onClick={loadPolls}>Search</button>
 
 
       {isLoading ? (
@@ -123,7 +123,7 @@ function DeptPollComponent() {
                     <td>{poll.description}</td>
                     <td>{new Date(poll.createdOn).toLocaleString()}</td>
                     <td>{poll.isLive ? 'Yes' : 'No'}</td>
-                    <td><button className='poll-delete-button'>Delete</button></td>
+                    <td><button className='department-delete-button'>Delete</button></td>
                   </tr>
                 ))}
               </tbody>

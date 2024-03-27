@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import './ArticleListComponent.css';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
@@ -107,13 +106,13 @@ function ArticleListComponent() {
     }
 
     return (
-        <div className="articles-container">
-            <div className="articles">
+        <div className="polls-container">
+            <div className="polls">
                 <h2>Articles</h2>
-                <button className='article-new-button' onClick={() => navigate("/dashboard/article/new")}>Create new</button>
+                <button className='department-new-button' onClick={() => navigate("/dashboard/article/new")}>Create new</button>
             </div>
-            <div className="articles-filter-section">
-                <div className="article-filter-column">
+            <div className="polls-filter-section">
+                <div className="polls-filter-column">
                     <label>Publish Status:</label>
                     <select
                         name="publishStatus"
@@ -125,7 +124,7 @@ function ArticleListComponent() {
                         <option value="PUBLISHED">Published</option>
                     </select>
                 </div>
-                <div className="article-filter-column">
+                <div className="polls-filter-column">
                     <label>Sort By:</label>
                     <select
                         name="sortBy"
@@ -137,12 +136,12 @@ function ArticleListComponent() {
                     </select>
                 </div>
             </div>
-            <button className="article-search-button" onClick={loadArticles}>Search</button>
+            <button className="department-search-button" onClick={loadArticles}>Search</button>
             {isLoading ? (
                 <div className="loading"><LoadingIndicator2 color="#36d7b7" size={50} /></div>
             ) : (
                 articles.length > 0 ? (
-                    <div className="article-table-container">
+                    <div className="polls-table-container">
                         <table>
                             <thead>
                                 <tr>
@@ -156,11 +155,11 @@ function ArticleListComponent() {
                             <tbody>
                                 {articles.map((article, index) => (
                                     <tr key={article.articleToken}>
-                                        <td><Link to={`/dashboard/article/${article.articleToken}`} className='article-details-link'>{article.title}</Link></td>
+                                        <td><Link to={`/dashboard/article/${article.articleToken}`} className='poll-details-link'>{article.title}</Link></td>
                                         <td>{article.createdOn ? new Date(article.createdOn).toLocaleString() : '------------------'}</td>
                                         <td>{article.publishedOn ? new Date(article.publishedOn).toLocaleString() : '------------------'}</td>
-                                        <td><button className='article-delete-button' onClick={handleDelete}>Delete</button></td>
-                                        <td><button className='article-delete-button' onClick={() => handleStatusUpdate(index)}>{article.publishStatus === 'DRAFT' ? 'Publish' : 'Un-publish'}</button></td>
+                                        <td><button className='department-delete-button' onClick={handleDelete}>Delete</button></td>
+                                        <td><button className='department-delete-button' onClick={() => handleStatusUpdate(index)}>{article.publishStatus === 'DRAFT' ? 'Publish' : 'Un-publish'}</button></td>
                                     </tr>
                                 ))}
                             </tbody>

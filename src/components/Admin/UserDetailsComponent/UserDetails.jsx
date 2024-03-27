@@ -169,7 +169,7 @@ function UserDetails() {
             {formErrors.roles && <span className="error-message">{formErrors.roles}</span>}
           </div>
 
-          <button type="submit" className='submit-button'>Save</button>
+          <button type="submit" className='admin-submit-button'>Save</button>
         </form>
       </div>
     </div>

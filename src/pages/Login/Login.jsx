@@ -52,18 +52,18 @@ const Login = () => {
 
     return (
         <div className="container">
-            <nav className="navbar">
+            <nav className="admin-login-navbar">
                 <Link to='/' className='nav-link'><h1>CACMP E-Seva</h1></Link>
             </nav>
-            <div className="login">
+            <div className="admin-login">
 
-                <div className="login-page-heading">
+                <div className="admin-login-page-heading">
                     <h1>CACMP Admin Login</h1>
                 </div>
-                <p className="subheading">Login using your admin credentials</p>
-                <div className="login-form-container">
-                    <h1 className="login-heading">Login</h1>
-                    <form className="login-form" onSubmit={login}>
+                <p className="admin-login-subheading">Login using your admin credentials</p>
+                <div className="admin-login-form-container">
+                    <h1 className="admin-login-heading">Login</h1>
+                    <form className="admin-login-form" onSubmit={login}>
                         <input
                             type="text"
                             placeholder="Username"
@@ -76,7 +76,7 @@ const Login = () => {
                             value={password}
                             onChange={handlePasswordChange}
                         />
-                        <button type='submit' >Login</button>
+                        <button type='submit'className='admin-login-button' >Login</button>
                     </form>
                 </div>
             </div>

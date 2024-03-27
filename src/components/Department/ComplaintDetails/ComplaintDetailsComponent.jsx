@@ -161,8 +161,8 @@ function ComplaintDetailsComponent() {
                     </div>
                 </div>
                 {complaintDetails && (
-                    <div className="details">
-                        <table>
+                    <div className="polls-table-container">
+                        <table >
                             <thead>
                                 <tr>
                                     <th>Name</th>

@@ -1,13 +1,14 @@
-.navbar {
-  background-color: #a8b3f0;
+.admin-navbar {
+  background-color: var(--admin-nav-bar-color);
   height: 80px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  
 
 }
 
-.nav-left {
+.admin-nav-left {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -15,7 +16,7 @@
   gap: 20px;
 }
 
-.nav-right {
+.admin-nav-right {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -24,14 +25,15 @@
 }
 
 
-.left-nav-link {
+.left-admin-nav-link {
   cursor: pointer;
   text-decoration: none;
   color: inherit;
 }
 
-.left-nav-link h3 {
+.left-admin-nav-link h3 {
   font-size: 25px;
+  color: var(--admin-nav-bar-text-color)
 }
 
 
@@ -41,27 +43,28 @@
   background: none;
 }
 
-.logout {
+.admin-nav-logout {
   margin-right: 2rem;
   padding: 10px 20px;
-  border: none;
+  border: 2px solid var(--admin-nav-bar-color);
+  border-radius: 20px;
   background-color: #fff;
   /* Button background color */
-  color: #007bff;
+  color:var(--admin-button-color-primary);
   /* Button text color */
   font-size: 16px;
   cursor: pointer;
 }
 
-.logout:hover {
-  background-color: #f0f0f0;
+.admin-nav-logout:hover {
+  background-color: var(--admin-nav-bar-button-color-hover);
   /* Button background color on hover */
 }
 
 
 
-.nav-menu {
-  background-color: #1a8fb3;
+.admin-nav-menu {
+  background-color: var(--admin-side-bar-color);
   width: 250px;
   height: 100vh; /* Set the initial height to 100vh */
   display: flex;
@@ -74,7 +77,7 @@
   overflow-y: auto; /* Add this line to enable scrolling */
 }
 
-.nav-menu.active {
+.admin-nav-menu.active {
   left: 0;
   transition: 350ms;
   position: fixed; /* Change from absolute to fixed */
@@ -82,7 +85,7 @@
   height: 100%; /* Set the height to 100% */
 }
 
-.nav-menu-items {
+.admin-nav-menu-items {
   display: flex;
   flex-direction: column;
   align-items: start;
@@ -92,7 +95,8 @@
 
 
 
-.nav-text {
+
+.admin-nav-text {
   display: flex;
   justify-content: start;
   /* align-items: center; */
@@ -101,9 +105,9 @@
   height: 60px;
 }
 
-.nav-text a {
+.admin-nav-text a {
   text-decoration: none;
-  color: #f5f5f5;
+  color: var(--admin-nav-bar-text-color);
   font-size: 18px;
   width: 95%;
   height: 100%;
@@ -113,16 +117,16 @@
   border-radius: 4px;
 }
 
-.nav-text a:hover {
-  background-color: #1a83ff;
+.admin-nav-text a:hover {
+  background-color:var(--admin-button-color-primary);
 }
 
-.nav-menu-items {
+.admin-nav-menu-items {
   width: 100%;
 }
 
-.navbar-toggle {
-  background-color: #152aa0;
+.admin-nav-toggle {
+  background-color:var(--admin-side-bar-color);
   width: 100%;
   height: 80px;
   display: flex;
@@ -130,41 +134,45 @@
   align-items: center;
 }
 
+.admin-nav-right h3{
+  color: var(--admin-nav-bar-text-color);
+}
+
 span {
   margin-left: 16px;
 }
 
 @media (max-width: 600px) {
-  .left-nav-link {
+  .left-admin-nav-link {
     display: none;
   }
 
-  .left-nav-link h3 {
+  .left-admin-nav-link h3 {
     font-size: 20px;
   }
 
-  .nav-right {
+  .admin-nav-right {
     gap: 5px;
   }
 
-  .nav-right h3 {
+  .admin-nav-right h3 {
     font-size: 15px;
   }
 
-  .menu-bars {
+  .admin-menu-bars {
     margin-left: 1.5rem;
     font-size: 1.5rem;
     background: none;
   }
 
 
-  .logout {
+  .admin-nav-logout {
     margin-right: 2rem;
     padding: 8px 10px;
     border: none;
-    background-color: #fff;
+    background-color: var(--admin-nav-bar-button-color);
     /* Button background color */
-    color: #007bff;
+    color: var(--admin-button-color-primary);
     /* Button text color */
     font-size: 12px;
     cursor: pointer;

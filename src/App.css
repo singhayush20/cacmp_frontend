@@ -1,7 +1,50 @@
-:root{
-    --department-nav-bar-color: #1a8fb3;
-    --department-side-bar-color: #1a8fb3;
-    --department-button-color-primary: #1a8fb3;
-    --department-button-color-secondary: #1a8fb3;
-    --department-button-color-hover: #177c9b;
+:root {
+    /* Admin------------------------------------------------------- */
+    --department-nav-bar-color: #162943;
+    --department-nav-bar-button-color: #eceaea;
+    --department-nav-bar-text-color: #eceaea;
+    --department-nav-bar-button-color-hover: #dbd9d9;
+
+    --department-side-bar-color: #162943;
+
+    --department-button-color-primary: #10223C;
+    --department-button-color-secondary: #162943;
+    --department-button-color-hover: #1d3c68;
+    --department-button-text-color: white;
+
+    --department-table-head-color: #10223C;
+    --department-table-head-text-color: white;
+    --department-table-alt-row-color: #f9f9f9;
+
+    --department-field-error-text-color: #ff3333;
+
+    --department-login-button-color: #10223C;
+    --department-login-button-text-color: white;
+    --department-login-button-hover-color: #1d3c68;
+    /* Department------------------------------------------------------- */
+
+
+    /* Admin------------------------------------------------------- */
+    --admin-nav-bar-color: #269767;
+    --admin-nav-bar-button-color: #eceaea;
+    --admin-nav-bar-text-color: #eceaea;
+    --admin-nav-bar-button-color-hover: #dbd9d9;
+
+    --admin-side-bar-color: #22895e;
+
+    --admin-button-color-primary: #38a278;
+    --admin-button-color-secondary: #39ad7e;
+    --admin-button-color-hover: #269767;
+    --admin-button-text-color: white;
+
+    --admin-table-head-color: #39ad7e;
+    --admin-table-head-text-color: white;
+    --admin-table-alt-row-color: #f9f9f9;
+
+    --admin-field-error-text-color: #ff3333;
+
+    --admin-login-button-color: #38a278;
+    --admin-login-button-text-color: white;
+    --admin-login-button-color-hover: #269767;
+    /* Admin----------------------------------------------------------- */
 }

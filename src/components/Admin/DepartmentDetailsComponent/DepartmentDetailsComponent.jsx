@@ -5,7 +5,6 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { baseUrl, apiPrefixV1 } from '../../../constants/AppConstants';
 import { logout } from '../../../redux/slices/authSlice';
 import * as FaIcons from 'react-icons/fa';
-import './DepartmentDetailsComponent.css';
 import { toast } from 'react-toastify';
 function DepartmentDetailsComponent() {
     const userData = useSelector(state => state.auth.userData);
@@ -163,7 +162,7 @@ function DepartmentDetailsComponent() {
                         {formErrors.departmentObjective && <span className="error-message">{formErrors.departmentObjective}</span>}
                     </div>
 
-                    <button type="submit" className='submit-button'>Save</button>
+                    <button type="submit" className='admin-submit-button'>Save</button>
                 </form>
             </div>
         </div>

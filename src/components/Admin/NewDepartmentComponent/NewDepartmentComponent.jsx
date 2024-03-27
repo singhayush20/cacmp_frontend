@@ -3,7 +3,6 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import * as FaIcons from 'react-icons/fa';
 import * as AiIcons from 'react-icons/ai';
-import './NewDepartmentComponent.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { baseUrl, apiPrefixV1 } from '../../../constants/AppConstants';
 import { logout } from '../../../redux/slices/authSlice';
@@ -204,7 +203,7 @@ function NewDepartmentComponent() {
             {formErrors.role && <span className="error-message">{formErrors.role}</span>}
           </div>
 
-          <button type="submit" className="submit-button">Create Department</button>
+          <button type="submit" className="admin-submit-button">Create Department</button>
         </form>
       </div>
     </div>

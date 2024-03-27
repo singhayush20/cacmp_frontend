@@ -56,46 +56,44 @@ function Navbar() {
   return (
     <>
       <IconContext.Provider value={{ color: '#fff' }}>
-        <div className='navbar'>
-          <div className="nav-left">
+        <div className='admin-navbar'>
+          <div className="admin-nav-left">
             <Link to='#' className='menu-bars'>
               <FaIcons.FaBars onClick={showSidebar} />
             </Link>
-            <Link to={'/admin/dashboard/'} className='left-nav-link'><h3>Admin Dashboard</h3></Link>
+            <Link to={'/admin/dashboard/'} className='left-admin-nav-link'><h3>Admin Dashboard</h3></Link>
           </div>
-          <div className="nav-right">
+          <div className="admin-nav-right">
             <h3>{username ? username : ''}</h3>
-            <Link to='#' className='menu-bars'>
-              <button className='logout' onClick={handleLogout}>Logout</button>
-            </Link>
+              <button className='admin-nav-logout' onClick={handleLogout}>Logout</button>
           </div>
         </div>
-        <nav className={sidebar ? 'nav-menu active' : 'nav-menu'}>
-          <ul className='nav-menu-items' onClick={showSidebar}>
-            <li className='navbar-toggle'>
+        <nav className={sidebar ? 'admin-nav-menu active' : 'admin-nav-menu'}>
+          <ul className='admin-nav-menu-items' onClick={showSidebar}>
+            <li className='admin-nav-toggle'>
               <Link to='#' className='menu-bars'>
                 <AiIcons.AiOutlineClose />
               </Link>
             </li>
-            <li key={0} className='nav-text'>
+            <li key={0} className='admin-nav-text'>
               <Link to={'/admin/dashboard/'}>
                 <FaIcons.FaHome />
                 <span>Home</span>
               </Link>
             </li>
-            <li key={1} className='nav-text'>
+            <li key={1} className='admin-nav-text'>
               <Link to={'/admin/dashboard/category'}>
                 <MdIcons.MdCategory />
                 <span>Category</span>
               </Link>
             </li>
-            <li key={2} className='nav-text'>
+            <li key={2} className='admin-nav-text'>
               <Link to={'/admin/dashboard/users'}>
                 <FaIcons.FaUser />
                 <span>Admins</span>
               </Link>
             </li>
-            <li key={3} className='nav-text'>
+            <li key={3} className='admin-nav-text'>
               <Link to={'/admin/dashboard/department'}>
                 <HiIcons.HiOfficeBuilding />
                 <span>Department</span>

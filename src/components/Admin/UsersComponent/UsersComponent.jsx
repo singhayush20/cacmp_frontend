@@ -74,8 +74,10 @@ function UsersComponent() {
 
     return (
         <div className="user-component">
-            <div className="buttons">
-                <button onClick={() => { navigate('/admin/dashboard/users/new') }}>Add a new user</button>
+
+            <div className="admin-add-btn">
+                <button onClick={() => { navigate('/admin/dashboard/users/new') }} >Add a new user</button>
+
             </div>
             <h2>Admin List</h2>
             {
@@ -105,7 +107,7 @@ function UsersComponent() {
                                             ))}
                                         </td>
                                         <td>
-                                            <button className='delete-btn' onClick={() => handleDeleteUser(user.userToken)}>Delete</button>
+                                            <button className='admin-delete-btn' onClick={() => handleDeleteUser(user.userToken)}>Delete</button>
                                         </td>
                                     </tr>
                                 ))}

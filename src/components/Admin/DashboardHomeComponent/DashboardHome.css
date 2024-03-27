@@ -1,19 +1,19 @@
-.dashboard{
+.dashboard {
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
   height: 100vh;
 }
 
-.metrics{
+.metrics {
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
   padding-bottom: 10px;
-  gap:50px;
+  gap: 50px;
 }
 
-.count-container{
+.count-container {
   flex-wrap: wrap;
   box-sizing: border-box;
   display: flex;
@@ -23,8 +23,8 @@
   align-items: center;
 }
 
-.count-container div{
-  background-color:rgb(206, 228, 247);
+.count-container div {
+  background-color: rgb(202, 235, 223);
   margin-top: 10px;
   margin-bottom: 10px;
 
@@ -38,19 +38,19 @@
   cursor: pointer;
 }
 
-.count-container div h3{
+.count-container div h3 {
   font-size: 25px;
   font-weight: 800;
-  color: rgb(22, 155, 121);
+  color: rgb(16, 114, 90);
 }
 
-.count-container div p{
+.count-container div p {
   font-size: 20px;
   font-weight: 600;
   color: rgb(10, 7, 2);
 }
 
-.tables{
+.tables {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -58,7 +58,9 @@
   gap: 20px;
 }
 
-.row1, .row2, .row3{
+.row1,
+.row2,
+.row3 {
   box-sizing: border-box;
   display: flex;
   flex-wrap: wrap;
@@ -69,29 +71,31 @@
   padding: 0px 20px;
 }
 
-.row1 .complaint-count-table{
+.row1 .complaint-count-table {
   width: 300px;
 }
 
-.row2 .complaint-count-table{
+.row2 .complaint-count-table {
   width: 600px;
 }
-.row3 .complaint-count-table{
+
+.row3 .complaint-count-table {
   width: 600px;
 }
 
 .analytics-table {
-  width:100%;
+  width: 100%;
   border-collapse: collapse;
   border: 2px solid black;
 }
 
 .analytics-table thead {
-  background-color: #4c63af;
-  color: white;
+  background-color: var(--admin-table-head-color);
+  color: var(--admin-table-head-text-color);
 }
 
-.analytics-table th, td {
+.analytics-table th,
+td {
   padding: 12px 15px;
   text-align: left;
   border-bottom: 1px solid #ddd;
@@ -111,7 +115,7 @@
 
 /* Alternating row colors */
 .analytics-table tr:nth-child(even) {
-  background-color: #f9f9f9;
+  background-color: var(--admin-table-alt-row-color);
 }
 
 
@@ -121,19 +125,20 @@
 }
 
 
-@media (max-width: 640px){
-  .row1 .complaint-count-table{
-    width: 350px;
-  }
-  .row2 .complaint-count-table{
+@media (max-width: 640px) {
+  .row1 .complaint-count-table {
     width: 350px;
   }
 
-  .row3 .complaint-count-table{
+  .row2 .complaint-count-table {
     width: 350px;
   }
 
-  .count-container{
+  .row3 .complaint-count-table {
+    width: 350px;
+  }
+
+  .count-container {
     flex-wrap: wrap;
     box-sizing: border-box;
     display: flex;
@@ -142,12 +147,12 @@
     justify-content: center;
     align-items: center;
   }
-  
-  .count-container div{
-    background-color:rgb(206, 228, 247);
+
+  .count-container div {
+    background-color: rgb(206, 228, 247);
     margin-top: 10px;
     margin-bottom: 5px;
-  
+
     padding: 30px 20px;
     display: flex;
     align-items: center;
@@ -157,34 +162,34 @@
     border-radius: 20px;
     cursor: pointer;
   }
-  
-  .count-container div h3{
+
+  .count-container div h3 {
     font-size: 20px;
     font-weight: 800;
     color: rgb(22, 155, 121);
   }
-  
-  .count-container div p{
+
+  .count-container div p {
     font-size: 18px;
     font-weight: 600;
     color: rgb(10, 7, 2);
   }
 }
 
-@media (max-width: 460px){
-  .row2 .complaint-count-table{
+@media (max-width: 460px) {
+  .row2 .complaint-count-table {
     width: 300px;
   }
 
-  .row1 .complaint-count-table{
+  .row1 .complaint-count-table {
     width: 300px;
   }
 
-  .row3 .complaint-count-table{
+  .row3 .complaint-count-table {
     width: 300px;
   }
 
-  .count-container{
+  .count-container {
     flex-wrap: wrap;
     box-sizing: border-box;
     display: flex;
@@ -193,12 +198,12 @@
     justify-content: center;
     align-items: center;
   }
-  
-  .count-container div{
-    background-color:rgb(206, 228, 247);
+
+  .count-container div {
+    background-color: rgb(206, 228, 247);
     margin-top: 10px;
     margin-bottom: 5px;
-  
+
     padding: 25px 15px;
     display: flex;
     align-items: center;
@@ -208,14 +213,14 @@
     border-radius: 20px;
     cursor: pointer;
   }
-  
-  .count-container div h3{
+
+  .count-container div h3 {
     font-size: 18px;
     font-weight: 800;
     color: rgb(22, 155, 121);
   }
-  
-  .count-container div p{
+
+  .count-container div p {
     font-size: 15px;
     font-weight: 600;
     color: rgb(10, 7, 2);

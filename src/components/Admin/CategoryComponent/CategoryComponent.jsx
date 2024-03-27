@@ -73,7 +73,7 @@ function CategoryComponent() {
 
     return (
         <div className="user-component">
-            <div className="buttons">
+            <div className="admin-add-btn">
                 <button onClick={() => { navigate('/admin/dashboard/category/new') }}>Add a new category</button>
             </div>
             <h2>Category List</h2>
@@ -93,11 +93,11 @@ function CategoryComponent() {
                                     <tr key={category.categoryToken}>
 
                                         <td>
-                                            <Link className="category-link" to={`/admin/dashboard/category/${category.categoryToken}`}>{category.categoryName}</Link>
+                                            <Link className="user-link" to={`/admin/dashboard/category/${category.categoryToken}`}>{category.categoryName}</Link>
                                         </td>
                                         <td>{category.categoryDescription}</td>
                                         <td>
-                                            <button className='delete-btn' onClick={() => handleDeleteCategory(category.categoryToken)}>Delete</button>
+                                            <button className='admin-delete-btn' onClick={() => handleDeleteCategory(category.categoryToken)}>Delete</button>
                                         </td>
 
                                     </tr>

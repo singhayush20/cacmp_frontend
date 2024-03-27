@@ -16,11 +16,12 @@ table {
 }
 
 thead {
-    background-color: #4CAF50;
+    background-color: var(--admin-table-head-color);
     color: white;
 }
 
-th, td {
+th,
+td {
     padding: 12px 15px;
     text-align: left;
     border-bottom: 1px solid #ddd;
@@ -48,13 +49,13 @@ thead tr:hover {
     background-color: transparent;
 }
 
-.buttons {
+.admin-add-btn {
     margin-bottom: 20px;
 }
 
-.buttons button {
-    background-color: #4CAF50;
-    color: white;
+.admin-add-btn button {
+    background-color: var(--admin-button-color-primary);
+    color: var(--admin-button-text-color);
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
@@ -62,14 +63,14 @@ thead tr:hover {
     transition: background-color 0.3s ease;
 }
 
-.buttons button:hover {
-    background-color: #45a049;
+.admin-add-btn button:hover {
+    background-color: var(--admin-button-color-hover);
 }
 
 
-.delete-btn{
-    background-color: #af5c4c;
-    color: white;
+.admin-delete-btn {
+    background-color: var(--admin-button-color-secondary);
+    color: var(--admin-button-text-color);
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
@@ -77,8 +78,8 @@ thead tr:hover {
     transition: background-color 0.3s ease;
 }
 
-.delete-btn:hover {
-    background-color: #b02e14;
+.admin-delete-btn:hover {
+    background-color: var(--admin-button-color-primary);
 }
 
 .user-link {
@@ -86,20 +87,20 @@ thead tr:hover {
     text-decoration: none;
 }
 
-.user-link:hover{
+.user-link:hover {
     text-decoration: underline;
     color: lightblue;
 }
 
 
-.no-data{
+.no-data {
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 20px;
 }
 
-.no-data p{
+.no-data p {
     color: black;
     font-weight: 600;
     font-size: 20px;

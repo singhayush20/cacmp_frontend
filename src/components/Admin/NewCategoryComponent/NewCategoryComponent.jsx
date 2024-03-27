@@ -165,7 +165,7 @@ function NewCategoryComponent() {
                         {formErrors.selectedDepartment && <span className="error-message">{formErrors.selectedDepartment}</span>}
                     </div>
 
-                    <button type="submit" className="submit-button">Create Department</button>
+                    <button type="submit" className="admin-submit-button">Create Department</button>
                 </form>
             </div>
         </div>

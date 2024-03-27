@@ -70,7 +70,7 @@ function DepartmentComponent() {
 
     return (
         <div className="user-component">
-            <div className="buttons">
+            <div className="admin-add-btn">
                 <button onClick={() => { navigate('/admin/dashboard/department/new') }}>New department account</button>
             </div>
             <h2>Deparment Accounts</h2>
@@ -95,7 +95,7 @@ function DepartmentComponent() {
                                         </td>
                                         <td>{department.departmentObjective}</td>
                                         <td>
-                                            <button className='delete-btn' onClick={() => handleDeleteDepartment(department.deptToken)}>Delete</button>
+                                            <button className='admin-delete-btn' onClick={() => handleDeleteDepartment(department.deptToken)}>Delete</button>
                                         </td>
                                     </tr>
                                 ))}

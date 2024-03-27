@@ -158,11 +158,11 @@ function NewPollComponent() {
                                 <button type="button" onClick={() => handleRemoveChoice(index)}>-</button>
                             </div>
                         ))}
-                        <button type="button" className="add-choice-button" onClick={handleAddChoice}>Add Choice</button>
+                        <button type="button" className="department-add-button" onClick={handleAddChoice}>Add Choice</button>
                         {formErrors.choices && <span className="error-message">{formErrors.choices}</span>}
                     </div>
 
-                    {!isLoading ? <button type="submit" className="submit-button">Create Poll</button> : <LoadingIndicator2 color={'#1f8ba1'} size={40} />}
+                    {!isLoading ? <button type="submit" className="department-save-button">Create Poll</button> : <LoadingIndicator2 color={'#1f8ba1'} size={40} />}
                 </form>
             </div>
         </div>

@@ -20,7 +20,7 @@
   }
   
   .btns button {
-    background-color: #007bff;
+    background-color: var(--department-button-color-secondary);
     color: #fff; 
     border: none; 
     padding: 8px 16px; 

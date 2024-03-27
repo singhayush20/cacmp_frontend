@@ -56,11 +56,11 @@ function DeptCategoriesComponent() {
                         {departmentObjective ? <h3 >Aim of the department</h3> : null}
                         {departmentObjective ? <div>{departmentObjective}</div> : null}
                     </div>
-                    <div className="category-component">
+                    <div className="polls-component">
                         <h2>Category List</h2>
                         {
                             (categories.length !== 0) ?
-                                <div className="table-container">
+                                <div className="polls-table-container">
                                     <table>
                                         <thead>
                                             <tr>
@@ -72,7 +72,7 @@ function DeptCategoriesComponent() {
                                             {categories.map((category) => (
                                                 <tr key={category.categoryToken}>
                                                     <td>
-                                                        <Link className="category-link" to={`/dashboard/category/${category.categoryToken}`}>{category.categoryName}</Link>
+                                                        <Link className="poll-details-link" to={`/dashboard/category/${category.categoryToken}`}>{category.categoryName}</Link>
                                                     </td>
                                                     <td>{category.categoryDescription}</td>
                                                 </tr>

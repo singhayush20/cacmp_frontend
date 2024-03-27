@@ -25,7 +25,7 @@
 .polls-filter-column label {
     display: block;
     margin-bottom: 5px;
-    width: 100px; 
+    width: 100px;
 }
 
 .polls-filter-column input,
@@ -35,9 +35,9 @@
     margin-bottom: 10px;
 }
 
-.polls-search-button {
+.department-search-button {
     padding: 10px 20px;
-    background-color: #1a8fb3;
+    background-color: var(--department-button-color-primary);
     color: #fff;
     border: none;
     cursor: pointer;
@@ -49,8 +49,8 @@
 }
 
 
-.polls-search-button:hover {
-    background-color: #156a84;
+.department-search-button:hover {
+    background-color: var(--department-button-color-hover);
 }
 
 .polls {
@@ -62,43 +62,44 @@
     margin-right: 20px;
 }
 
-.poll-new-button{
+.department-new-button {
     padding: 5px 12px;
-    background-color: #1a8fb3;
+    background-color: var(--department-button-color-primary);
     color: #fff;
     border: none;
     cursor: pointer;
     display: block;
     text-decoration: none;
 }
-.poll-new-button:hover{
-    background-color: #156a84;
+
+.department-new-button:hover {
+    background-color: var(--department-button-color-hover);
 }
 
-.poll-delete-button {
-    background-color: #1a8fb3;
+.department-delete-button {
+    background-color: var(--department-button-color-secondary);
     padding: 10px 10px;
     color: white;
     border: none;
-  }
-  
-  .poll-delete-button:hover {
+}
+
+.department-delete-button:hover {
     cursor: pointer;
     text-decoration: none;
-    background-color: #177c9b;
-  }
-  
+    background-color: var(--department-button-color-hover);
+}
 
-  .poll-details-link {
+
+.poll-details-link {
     text-decoration: none;
     color: black;
-  }
-  
-  .poll-details-link:hover {
+}
+
+.poll-details-link:hover {
     color: rgb(36, 36, 36);
     cursor: pointer;
     text-decoration: underline;
-  }
+}
 
 .polls-table-container {
     overflow-x: auto;
@@ -111,7 +112,7 @@
 }
 
 .polls-table-container table thead {
-    background-color: #1a8fb3;
+    background-color: var(--department-table-head-color);
 }
 
 .polls-table-container table thead th,
@@ -122,7 +123,7 @@
 }
 
 .polls-table-container table tbody td {
-    max-width: 300px; 
+    max-width: 300px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: normal;
@@ -133,4 +134,3 @@
     text-align: center;
     font-style: italic;
 }
-

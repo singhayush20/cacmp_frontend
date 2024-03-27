@@ -123,7 +123,7 @@ function DeptComplaintsComponent() {
 
 
     return (
-        <div className="complaints-container">
+        <div className="polls-container">
             <div className="complaints-back-button" onClick={handleBack}>
                 <FaIcons.FaArrowLeft />
             </div>
@@ -189,7 +189,7 @@ function DeptComplaintsComponent() {
                         <option value="createdAt">Added recently</option>
                         <option value="updatedAt">Updated recently</option>
                     </select>
-                    <button className="search-button" onClick={handleSearch}>Search</button>
+                    <button className="department-search-button" onClick={handleSearch}>Search</button>
                 </div>
             </div>
             <div className="complaints">
@@ -199,7 +199,7 @@ function DeptComplaintsComponent() {
                 <div className="loading"><LoadingIndicator2 color="#36d7b7" size={50} /></div>
             ) : (
                 (complaints.length !== 0) ? (
-                    <div className="table-container">
+                    <div className="polls-table-container">
                         <table>
                             <thead>
                                 <tr>

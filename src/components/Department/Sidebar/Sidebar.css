@@ -1,5 +1,5 @@
 .navbar {
-  background-color: #1782a2;
+  background-color: var(--department-button-color-primary);
   height: 80px;
   display: flex;
   justify-content: space-between;
@@ -43,7 +43,7 @@
   padding: 10px 20px;
   border: none;
   background-color: #fff;
-  color: #007bff;
+  color: var(--department-button-color-primary);
   font-size: 16px;
   cursor: pointer;
 }
@@ -53,7 +53,7 @@
 }
 
 .nav-menu {
-  background-color: #1a8fb3;
+  background-color: var(--department-button-color-primary);
   width: 250px;
   height: 100vh; /* Set the initial height to 100vh */
   display: flex;
@@ -103,11 +103,11 @@
 }
 
 .nav-text a:hover {
-  background-color: #1a8fb3;
+  background-color: var(--department-button-color-primary);
 }
 
 .navbar-toggle {
-  background-color: #1a8fb3;
+  background-color: var(--department-button-color-primary);
   width: 100%;
   height: 80px;
   display: flex;
@@ -143,7 +143,7 @@
     padding: 8px 10px;
     border: none;
     background-color: #fff;
-    color: #1a8fb3;
+    color: var(--department-button-color-primary);
     font-size: 12px;
     cursor: pointer;
   }
