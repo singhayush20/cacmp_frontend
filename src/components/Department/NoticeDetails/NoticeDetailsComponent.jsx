@@ -63,7 +63,7 @@ function NoticeDetailsComponent() {
   if (noticeData['alertInputType'] === 'DOCUMENT') {
     return (
       <div className="details-container">
-        <div className="left">
+        <div className="notice-left">
           <div className="back-button" onClick={handleBack}>
             <FaIcons.FaArrowLeft />
           </div>

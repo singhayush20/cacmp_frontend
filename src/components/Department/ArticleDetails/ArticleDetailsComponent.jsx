@@ -70,40 +70,34 @@ function ArticleDetailsComponent() {
                 <FaIcons.FaArrowLeft className='back-arrow' onClick={() => navigate(-1)} />
                 <button className='update-article-button' onClick={() => navigate(`/dashboard/article/update/${articleToken}`)}>Update</button>
             </div>
+
             <div className="article-content">
-                <h1 className='article-heading'>{articleData ? articleData.title : ''}</h1>
-                <div className="article-data">
-                    <div className="article-meta-data">
-                        <div className="department">{articleData ? articleData.departmentName : ''}</div>
-                        <div className="publish-date">Date: {articleData ? formatDate(articleData.publishDate) : ''}</div>
+                <div className="flex-grow mx-auto p-4 max-w-4xl">
+                    <div className="text-center">
+                        <h1 className="text-3xl font-bold my-4">{articleData ? articleData.title : ''}</h1>
+                        <div className="text-gray-600 mb-4">{articleData ? articleData.departmentName : ''} | Date: {articleData ? formatDate(articleData.publishDate) : ''}</div>
                     </div>
-                    <div className="media-container">
+                    <div className="mb-8">
                         {articleData && (
                             <Slider {...sliderSettings}>
                                 {articleData.articleMedia.map(media => (
-                                    media.mediaType === 'VIDEO' ? (
-                                        <div key={media.mediaToken} className="media-item-video">
-                                            <LazyLoad height={300}>
-                                                <video className='media-file-video' controls>
+                                    <div key={media.mediaToken}>
+                                        <LazyLoad height={300}>
+                                            {media.mediaType === 'VIDEO' ? (
+                                                <video className="h-full w-auto mx-auto object-contain" controls>
                                                     <source src={media.url} type={media.format} />
                                                 </video>
-                                            </LazyLoad>
-                                        </div>
-                                    ) : (
-
-                                        <div key={media.mediaToken} className="media-item-image">
-                                            <LazyLoad height={300}>
-                                                <img className='media-file-image' src={media.url} alt={media.fileName} />
-                                            </LazyLoad>
-                                        </div>
-                                    )
+                                            ) : (
+                                                <img className="h-full w-auto mx-auto object-contain" src={media.url} alt={media.fileName} />
+                                            )}
+                                        </LazyLoad>
+                                    </div>
                                 ))}
                             </Slider>
                         )}
                     </div>
-                    <div className="article-body">
-                        {articleData && <div className="article-content" dangerouslySetInnerHTML={{ __html: articleData.content }} />}
-                    </div>
+                    <div className='border-b-2 italic text-justify text-gray-700 border-slate-400'>{articleData?.description}</div>
+                    <div className="article-content" dangerouslySetInnerHTML={{ __html: articleData?.content }} />
                 </div>
             </div>
         </div>

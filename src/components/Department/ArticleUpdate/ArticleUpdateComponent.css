@@ -22,12 +22,16 @@
 .u-article-save-button {
     box-sizing: border-box;
     padding: 10px 20px;
-    background-color: #1a8fb3;
+    background-color: var(--department-button-color-primary);
     color: #fff;
     border: none;
     cursor: pointer;
     display: block;
     border-radius: 5px;
+}
+
+.u-article-save-button:hover {
+    background-color: var(--department-button-color-hover);
 }
 
 .u-media-container {

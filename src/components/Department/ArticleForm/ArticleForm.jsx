@@ -4,11 +4,13 @@ import './ArticleForm.css';
 function ArticleForm({
     title,
     slug,
+    description,
     placeholderType,
     formErrors,
     handlePlaceholderTypeChange,
     handleChangeTitle,
     handleChangeSlug,
+    handleChangeDescription,
     images,
     videos,
     handleImageChange,
@@ -37,6 +39,13 @@ function ArticleForm({
                             />
                             {formErrors.title && (
                                 <span className="error-message">{formErrors.title}</span>
+                            )}
+                        </div>
+                        <div className="article-form-group">
+                            <label className="block text-black font-bold mb-2" htmlFor="message">Message</label>
+                            <textarea className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-blue-500" id="message" name="message" rows="4" value={description} onChange={handleChangeDescription}></textarea>
+                            {formErrors.description && (
+                                <span className="error-message">{formErrors.description}</span>
                             )}
                         </div>
                         <div className="article-form-group">

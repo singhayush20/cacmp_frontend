@@ -1,5 +1,5 @@
 .new-article-container {
-    height: 100vh;
+    height: 150vh;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -26,12 +26,12 @@
 }
 
 .article-save-btn {
-    background-color: #1f8ba1;
-    color: white;
+    background-color: var(--department-button-color-primary);
+    color: var(--department-button-text-color);
     padding: 10px 20px;
     border-radius: 10px;
     cursor: pointer;
-    border: 2px solid #1f8ba1;
+    border: 2px solid var(--department-button-color-primary);
 }
 
 

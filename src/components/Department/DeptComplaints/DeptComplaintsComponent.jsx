@@ -124,9 +124,9 @@ function DeptComplaintsComponent() {
 
     return (
         <div className="polls-container">
-            <div className="complaints-back-button" onClick={handleBack}>
-                <FaIcons.FaArrowLeft />
-            </div>
+
+            <FaIcons.FaArrowLeft onClick={handleBack} className='complaints-back-button' />
+
             <div className="complaints">
                 <div className='heading'>Seach with a filter</div>
             </div>
@@ -231,7 +231,7 @@ function DeptComplaintsComponent() {
             )}
         </div>
     );
-    
+
 }
 
 export default DeptComplaintsComponent;

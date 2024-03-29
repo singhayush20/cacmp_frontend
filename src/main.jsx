@@ -35,6 +35,11 @@ import ArticleListComponent from './components/Department/ArticleList/ArticleLis
 import NewArticleComponent from './components/Department/NewArticle/NewArticleComponent.jsx'
 import ArticleDetailsComponent from './components/Department/ArticleDetails/ArticleDetailsComponent.jsx'
 import ArticleUpdateComponent from './components/Department/ArticleUpdate/ArticleUpdateComponent.jsx'
+import ContactUs from './pages/Home/ContactUs.jsx'
+import NewsArticleContent from './pages/Home/NewsArticleContent.jsx'
+import Articles from './pages/Home/Artcles.jsx'
+import Notices from './pages/Home/Notices.jsx'
+import NoticeContent from './pages/Home/NoticeContent.jsx'
 const router = createBrowserRouter([
   {
     path: '/',
@@ -43,6 +48,26 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home />,
+      },
+      {
+        path: "/contact",
+        element: <ContactUs />
+      },
+      {
+        path: '/news/:slug',
+        element: <NewsArticleContent />
+      },
+      {
+        path: '/news',
+        element: <Articles />
+      },
+      {
+        path: '/notices',
+        element: <Notices />
+      },
+      {
+        path: '/notices/:alertToken',
+        element: <NoticeContent />
       },
       {
         path: "admin",

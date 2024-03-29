@@ -1,6 +1,7 @@
 .admin-login-navbar {
     background-color: var(--admin-nav-bar-color);
     height: 80px;
+    width: 100vw;
     color: var(--admin-nav-bar-text-color);
     display: flex;
     justify-content: space-between;

@@ -74,7 +74,7 @@
 }
 
 .article-file-item button {
-    background-color: #ff3333;
+    background-color:var(--department-button-color-secondary);
     color: #fff;
     border: none;
     border-radius: 4px;
@@ -83,7 +83,7 @@
 }
 
 .article-file-item button:hover {
-    background-color: #cc0000;
+    background-color:   var(--department-button-color-hover);
 }
 
 .article-form-group input {

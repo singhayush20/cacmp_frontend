@@ -24,6 +24,7 @@ function ArticleUpdateComponent() {
     const { articleToken } = useParams();
     const [removedMedia, setRemovedMedia] = useState([]);
     const [articleTitle, setArticleTitle] = useState('');
+    const [description, setDescription] = useState('');
     const [articleContent, setArticleContent] = useState('');
     const [slug, setArticleSlug] = useState('');
     const [formErrors, setFormErrors] = useState({});
@@ -50,6 +51,7 @@ function ArticleUpdateComponent() {
                 setArticleContent(response.data.data.content);
                 setArticleTitle(response.data.data.title);
                 setArticleSlug(response.data.data.slug);
+                setDescription(response.data.data.description)
                 setPlaceholderType(response.data.data.articleMedia[0].mediaType.toLowerCase()) //IMAGE or VIDEO
                 if (response.data.data.articleMedia.length > 0) {
                     setCurrentMediaType((response.data.data.articleMedia[0].mediaType)) //image or video
@@ -144,6 +146,10 @@ function ArticleUpdateComponent() {
         setImages([]);
     };
 
+    const handleChangeDescription = (e) => {
+        setDescription(e.target.value);
+    }
+
 
 
     const handleUpdate = async () => {
@@ -178,6 +184,7 @@ function ArticleUpdateComponent() {
                     title: articleTitle,
                     content: articleContent,
                     slug: slug,
+                    description: description,
                     imageTokens: imageTokens,
                     videoTokens: videoTokens,
                     isMediaTypeChanged: isMediaTypeChanged
@@ -275,6 +282,11 @@ function ArticleUpdateComponent() {
             isValid = false;
         }
 
+        if (!description.trim()) {
+            errors.description = 'Description is required';
+            isValid = false;
+        }
+
         setFormErrors(errors);
         return isValid;
     }
@@ -336,11 +348,13 @@ function ArticleUpdateComponent() {
             {articleContent && <div className="u-article-container">
                 <ArticleForm
                     title={articleTitle}
+                    description={description}
                     slug={slug}
                     placeholderType={placeholderType}
                     formErrors={formErrors}
                     handlePlaceholderTypeChange={handlePlaceholderTypeChange}
                     handleChangeTitle={handleChangeTitle}
+                    handleChangeDescription={handleChangeDescription}
                     handleChangeSlug={handleChangeSlug}
                     handleRemoveFile={handleRemoveFile}
                     handleImageChange={handleImageChange}

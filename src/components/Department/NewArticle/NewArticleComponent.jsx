@@ -25,6 +25,7 @@ function NewArticleComponent() {
   const userData = useSelector(state => state.auth.userData)
   const [images, setImages] = useState([])
   const [videos, setVideos] = useState([])
+  const [description, setDescription] = useState('');
 
 
   const MAX_TOTAL_UPLOAD_SIZE = 100 * 1024 * 1024; // 100MB in bytes
@@ -76,6 +77,7 @@ function NewArticleComponent() {
 
 
 
+
   const handleSubmit = async () => {
     if (validateForm()) {
       try {
@@ -85,6 +87,7 @@ function NewArticleComponent() {
           departmentToken: userData.token,
           title: title,
           slug: slug,
+          description: description,
           content: content
         }, {
           headers: {
@@ -181,6 +184,11 @@ function NewArticleComponent() {
       isValid = false;
     }
 
+    if(!description.trim()) {
+      errors.description='Description is required';
+      isValid = false;
+    }
+
     setFormErrors(errors);
     return isValid;
   }
@@ -188,6 +196,11 @@ function NewArticleComponent() {
   const handleBack = () => {
     navigate(-1);
   }
+
+  const handleChangeDescription = (e) => {
+    setDescription(e.target.value);
+  }
+
 
   const handleChangeTitle = (e) => {
     setTitle(e.target.value);
@@ -215,110 +228,17 @@ function NewArticleComponent() {
           <LoadingIndicator2 color={'#1f8ba1'} size={40} />
         )}
       </div>
-      {/* <div className="row">
-        <div className="left">
-          <div className="fields">
-            <form onSubmit={handleSubmit}>
-              <div className="article-form-group">
-                <label htmlFor="title">Subject:</label>
-                <input
-                  type="text"
-                  id="subject"
-                  value={title}
-                  onChange={handleChangeTitle}
-                />
-                {formErrors.title && (
-                  <span className="error-message">{formErrors.title}</span>
-                )}
-              </div>
-              <div className="article-form-group">
-                <label htmlFor="slug">Slug:</label>
-                <input
-                  type="text"
-                  id="slug"
-                  value={slug}
-                  onChange={handleChangeSlug}
-                />
-                {formErrors.slug && (
-                  <span className="error-message">{formErrors.slug}</span>
-                )}
-              </div>
-              <div className="article-form-group upload-sec">
-                <label>Upload Placeholder:</label>
-                <input type="file" accept={placeholderType === 'image' ? 'image/*' : 'video/*'} onChange={placeholderType === 'image' ? handleImageChange : handleVideoChange} />
-              </div>
-              <div className="new-article-form-group">
-                {placeholderType === 'image' && images.length > 0 && (
-                  <div className="article-uploaded-files">
-                    {images.map((image, index) => (
-                      <div key={index} className="article-file-item">
-                        <span onClick={() => handleFileClick(URL.createObjectURL(image))}>{image.name}</span>
-                        <button type="button" onClick={() => handleRemoveFile('image', index)}>X</button>
-                      </div>
-                    ))}
-                  </div>
-                )}
-                {placeholderType === 'video' && videos.length > 0 && (
-                  <div className="article-uploaded-files">
-                    {videos.map((video, index) => (
-                      <div key={index} className="article-file-item">
-                        <span onClick={() => handleFileClick(URL.createObjectURL(video))}>{video.name}</span>
-                        <button type="button" onClick={() => handleRemoveFile('video', index)}>X</button>
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </div>
-              <div className="article-form-group ">
-                <label>Select Placeholder Type:</label>
-                <div className="image-radio">
-                  <label>
-                    Image
-                  </label>
-                  <input
-                    type="radio"
-                    value="image"
-                    checked={placeholderType === 'image'}
-                    onChange={handlePlaceholderTypeChange}
-                  />
-                </div>
-                <div className="video-radio">
-                  <label>
-                    Video
-                  </label>
-                  <input
-                    type="radio"
-                    value="video"
-                    checked={placeholderType === 'video'}
-                    onChange={handlePlaceholderTypeChange}
-                  />
-                </div>
-              </div>
 
-            </form>
-          </div>
-          <div className="editor">
-            <ReactQuill
-              theme="snow"
-              value={value}
-              onChange={setValue}
-              className="editor-input"
-              modules={modules}
-            />
-          </div>
-        </div>
-        <div className="preview">
-          <div dangerouslySetInnerHTML={{ __html: value }}></div>
-        </div>
-      </div> */}
       <ArticleForm
         title={title}
         slug={slug}
+        description={description}
         placeholderType={placeholderType}
         formErrors={formErrors}
         handlePlaceholderTypeChange={handlePlaceholderTypeChange}
         handleChangeTitle={handleChangeTitle}
         handleChangeSlug={handleChangeSlug}
+        handleChangeDescription={handleChangeDescription}
         handleRemoveFile={handleRemoveFile}
         handleImageChange={handleImageChange}
         handleVideoChange={handleVideoChange}
