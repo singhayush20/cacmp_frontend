@@ -65,7 +65,7 @@ function Navbar() {
           </div>
           <div className="admin-nav-right">
             <h3>{username ? username : ''}</h3>
-              <button className='admin-nav-logout' onClick={handleLogout}>Logout</button>
+            <button className='admin-nav-logout' onClick={handleLogout}>Logout</button>
           </div>
         </div>
         <nav className={sidebar ? 'admin-nav-menu active' : 'admin-nav-menu'}>
@@ -97,6 +97,12 @@ function Navbar() {
               <Link to={'/admin/dashboard/department'}>
                 <HiIcons.HiOfficeBuilding />
                 <span>Department</span>
+              </Link>
+            </li>
+            <li key={4} className='admin-nav-text'>
+              <Link to={'/admin/dashboard/query'}>
+                <MdIcons.MdQueryStats />
+                <span>User Queries</span>
               </Link>
             </li>
           </ul>

@@ -13,16 +13,18 @@ function Articles() {
     const pageSize = 2;
     const sortBy = "createdAt";
     const sortDirection = "desc";
+    const [pageNumber, setPageNumber] = useState(0);
     const [isLoading, setIsLoading] = useState(false);
     const [totalArticles, setTotalArticles] = useState(0);
-    const [pageNumber, setPageNumber] = useState(0);
 
     useEffect(() => {
-        fetchArticles(pageNumber);
+        fetchArticles(pageNumber, false);
     }, [pageNumber]);
 
-    const fetchArticles = async (pageToFetch) => {
-        setIsLoading(true);
+    const fetchArticles = async (pageToFetch, isLoadingMore = true) => {
+        if (isLoadingMore === false) {
+            setIsLoading(true);
+        }
         try {
             const response = await axios.get(
                 `${baseUrl}/${apiPrefixV1}/article/web/feed`,
@@ -50,7 +52,9 @@ function Articles() {
             toast.error('Some error occurred!', { autoClose: true, position: 'top-right', pauseOnHover: false });
             console.log(error.message);
         } finally {
-            setIsLoading(false);
+            if (isLoadingMore === false) {
+                setIsLoading(false);
+            }
         }
     }
 
@@ -85,7 +89,7 @@ function Articles() {
                                     </div>
                                 }
                                 // below props only if you need pull down functionality
-                                refreshFunction={() => fetchArticles(0)}
+                                refreshFunction={() => fetchArticles(0, false)}
                                 pullDownToRefresh={false}
                                 pullDownToRefreshThreshold={50}
                                 pullDownToRefreshContent={

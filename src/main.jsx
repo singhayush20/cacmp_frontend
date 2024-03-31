@@ -40,6 +40,7 @@ import NewsArticleContent from './pages/Home/NewsArticleContent.jsx'
 import Articles from './pages/Home/Artcles.jsx'
 import Notices from './pages/Home/Notices.jsx'
 import NoticeContent from './pages/Home/NoticeContent.jsx'
+import UserQueries from './components/Admin/UserQuery/UserQueries.jsx'
 const router = createBrowserRouter([
   {
     path: '/',
@@ -125,7 +126,10 @@ const router = createBrowserRouter([
             path: 'category/:categoryToken',
             element: <CategoryDetailsComponent />
           },
-
+          {
+            path: "query",
+            element: <UserQueries />
+          }
         ]
       },
       {
@@ -192,7 +196,8 @@ const router = createBrowserRouter([
           {
             path: "article/update/:articleToken",
             element: <ArticleUpdateComponent />
-          }
+          },
+        
         ]
       },
     ]

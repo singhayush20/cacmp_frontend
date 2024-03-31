@@ -51,7 +51,6 @@ const DashboardHome = () => {
 
   return (
     <div className="dashboard">
-      <h1>System Metrics</h1>
       {(analyticsData != null) ?
 
         <div className="metrics">
