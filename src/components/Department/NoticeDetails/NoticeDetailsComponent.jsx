@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import  { useEffect } from 'react';
 import './NoticeDetailsComponent.css';
 import { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
@@ -100,7 +100,7 @@ function NoticeDetailsComponent() {
   } else if (noticeData['alertInputType'] === "TEXT") {
     return (
       <div className="details-container">
-        <div className="left">
+        <div className="notice-left">
           <div className="back-button" onClick={handleBack}>
             <FaIcons.FaArrowLeft />
           </div>

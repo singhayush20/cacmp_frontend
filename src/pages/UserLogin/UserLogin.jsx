@@ -59,7 +59,7 @@ const UserLogin = () => {
     return (
         <>
             <nav className="dept-login-nav-bar">
-                <Link to='/' className='dept-nav-link'><h1>CACMP E-Seva</h1></Link>
+                <Link to='/' className='dept-nav-link'><h1>Municipal E-Connect</h1></Link>
             </nav>
             <div className="login">
                 <div className="login-page-heading">

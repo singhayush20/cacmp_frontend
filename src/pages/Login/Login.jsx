@@ -12,7 +12,6 @@ const Login = () => {
     const dispatch = useDispatch()
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
-    const [error, setError] = useState('')
 
     const handleUsernameChange = (event) => {
         setUsername(event.target.value);
@@ -40,12 +39,10 @@ const Login = () => {
                 navigate('/admin/dashboard/')
             }
             else {
-                setError(response.data['message'])
                 toast.error("Failed to login", { autoClose: true, position: 'top-right', pauseOnHover: false });
             }
         }
         catch (err) {
-            setError(err.message)
             toast.error("Some error occurred!", { autoClose: true, position: 'top-right', pauseOnHover: false });
         }
     }
@@ -53,7 +50,7 @@ const Login = () => {
     return (
         <div className="container">
             <nav className="admin-login-navbar">
-                <Link to='/' className='nav-link'><h1>CACMP E-Seva</h1></Link>
+                <Link to='/' className='nav-link'><h1>Municipal E-Connect</h1></Link>
             </nav>
             <div className="admin-login">
 

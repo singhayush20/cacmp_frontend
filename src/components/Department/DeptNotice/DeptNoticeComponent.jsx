@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import  { useEffect, useState } from 'react';
 import axios from 'axios';
 import { baseUrl, apiPrefixV1 } from '../../../constants/AppConstants';
 import { useDispatch, useSelector } from 'react-redux';
@@ -93,22 +93,18 @@ function DeptNoticeComponent() {
     }
   }
 
-  const handleDelete = async () => {
+  const handleDelete = async (alertToken) => {
     try {
-      const response = await axios.get(`${baseUrl}/${apiPrefixV1}/alert/all`, {
-        params: {
-          token: userData.token,
-          status: filter.status.length === 0 ? null : filter.status,
-          sortBy: filter.sortBy.length === 0 ? null : filter.sortBy
-        },
+      const response = await axios.delete(`${baseUrl}/${apiPrefixV1}/alert/${alertToken}`, {
         headers: {
           Authorization: `Bearer ${userData.accessToken}`,
         },
       });
       const code = response.data.code;
       if (code === 2000) {
-        setNotices(response.data.data);
-        setIsLoading(false);
+        toast.success("Alert deleted successfully", { autoClose: true, position: 'top-right', pauseOnHover: false });
+        const noticeList=notices.filter((notice)=>notice.alertToken!=alertToken)
+        setNotices(noticeList)
       } else if (code === 2003) {
         console.log('token expired!');
         toast.info("Login again!", { autoClose: true, position: 'top-right', pauseOnHover: false });
@@ -180,7 +176,7 @@ function DeptNoticeComponent() {
                     <td>{new Date(notice.createdAt).toLocaleString()}</td>
                     <td>{notice.publishedOn ? new Date(notice.publishedOn).toLocaleString() : '------------------'}</td>
                     <td>{notice.alertInputType}</td>
-                    <td><button className='department-delete-button' onClick={handleDelete}>Delete</button></td> 
+                    <td><button className='department-delete-button' onClick={()=>handleDelete(notice.alertToken)}>Delete</button></td> 
                     <td><button className='department-delete-button' onClick={() => handlePublish(index)}>{notice.publishStatus === 'DRAFT' ? 'Publish' : 'Un-publish'}</button></td>
                   </tr>
                 ))}

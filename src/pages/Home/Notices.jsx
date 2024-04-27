@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import  { useEffect, useState } from 'react';
 import Header from './Header';
 import Footer from './Footer';
 import LoadingIndicator2 from '../../components/LoadingIndicator2/LoadingIndicator2';
@@ -7,7 +7,7 @@ import { toast } from 'react-toastify';
 import axios from 'axios';
 import { baseUrl, apiPrefixV1 } from '../../constants/AppConstants';
 import InfiniteScroll from 'react-infinite-scroll-component';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 function Notices() {
     const [notices, setNotices] = useState([]);
     const pageSize = 20;
@@ -82,7 +82,7 @@ function Notices() {
                         <p className='p-10p font-medium italic text-1xl'>Here, you can find the latest developments and work of Municipal</p>
                     </div>
                     {notices && notices.length > 0 && (
-                        <div className="flex-grow w-[80%] mx-auto my-10px px-10 py-15">
+                        <div className="flex-grow w-[99%] mx-auto my-10px px-1 py-15">
                             <InfiniteScroll
                                 dataLength={notices.length}
                                 next={() => setPageNumber(pageNumber + 1)}
@@ -90,10 +90,9 @@ function Notices() {
                                 loader={<LoadingIndicator1 color='#898989' size={25} />}
                                 endMessage={
                                     <div className='text-center'>
-                                        <p className='text-gray-500 font-bold italic text-1xl'>That's all for now!</p>
+                                        <p className='text-gray-500 font-bold italic text-1xl'>That&apos;s all or now!</p>
                                     </div>
                                 }
-                                // below props only if you need pull down functionality
                                 refreshFunction={() => fetchNotices(0)}
                                 pullDownToRefresh={false}
                                 pullDownToRefreshThreshold={50}
