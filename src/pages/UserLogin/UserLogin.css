@@ -1,19 +1,22 @@
+/* UserLogin.css */
 .dept-login-nav-bar {
-    background-color: var(--department-nav-bar-color);
+    background-color: var(--department-nav-bar-color); 
     height: 80px;
-    color: white;
+    color: var(--department-nav-bar-text-color);
     display: flex;
-    justify-content: space-between;
     align-items: center;
-  
-  }
+    padding: 0 20px;
+}
+
+.left-nav {
+    flex-grow: 1;
+}
 
 .login {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-
     padding: 80px 20px;
 }
 
@@ -28,30 +31,38 @@
     font-size: 25px;
     font-weight: bold;
 }
+
 .login-page-heading {
     text-align: center;
-    margin-bottom: 5px;
-    font-size: 25px;
+    margin-bottom: 20px;
+}
+
+.login-page-heading h1{
+    font-weight: 600;
+    font-size: 35px;
 }
 
 .subheading {
     text-align: center;
-    margin-bottom: 80px;
-    font-size: 20px;
+    margin-bottom: 40px;
+    font-size: 18px;
 }
 
 .login-form-container {
     border-radius: 8px;
-    background-color: #a9c0e1;
-    /* Background color */
-    padding: 20px 50px;
+    background-color: #f2f2f2; /* Light gray */
+    padding: 40px;
     width: 400px;
-    color: rgb(40, 40, 40);
+    color: #333; /* Dark gray */
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* Soft shadow */
 }
 
 .login-heading {
     text-align: center;
     margin-bottom: 20px;
+    font-weight: 500;
+    font-size: 25px;
+    color: #333; /* Dark gray */
 }
 
 .login-form {
@@ -61,92 +72,36 @@
 }
 
 .login-form input {
-    width: 300px;
-    padding: 10px;
-    margin-bottom: 15px;
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
     border: 1px solid #ccc;
     border-radius: 5px;
+    font-size: 16px;
 }
 
 .login-form input:focus {
     outline: none;
-    border-color: #007bff;
+    border-color: #007bff; /* Blue */
 }
 
 .login-form button {
-    width: 250px;
-    padding: 10px;
-    background-color: var(--department-login-button-color);
+    width: 100%;
+    padding: 12px;
+    background-color: var(--department-login-button-color); 
     color: #fff;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    font-size: 16px;
 }
 
 .login-form button:hover {
-    background-color: var(--department-login-button-hover-color);
+    background-color: var(--department-login-button-hover-color); 
 }
-
 
 @media (max-width: 600px) {
     .login-form-container {
-        width: 300px;
-        padding: 10px 20px;
-    }
-
-    .login-heading {
-        font-size: 25px;
-    }
-
-    .login-form input {
-        padding: 5px;
-        width: 250px;
-    }
-
-    .login-form button {
-        width: 200px;
-        padding: 5px;
-    }
-
-    .login-page-heading {
-        font-size: 18px;
-    }
-
-    .subheading {
-        text-align: center;
-        margin-bottom: 100px;
-        font-size: 18px;
-    }
-}
-
-
-@media (max-width: 400px) {
-    .login-form-container {
-        width: 250px;
-        padding: 10px 20px;
-    }
-
-    .login-heading {
-        font-size: 20px;
-    }
-
-    .login-form input {
-        padding: 5px;
-        width: 200px;
-    }
-
-    .login-form button {
-        width: 150px;
-        padding: 5px;
-    }
-
-    .login-page-heading {
-        font-size: 15px;
-    }
-
-    .subheading {
-        text-align: center;
-        margin-bottom: 100px;
-        font-size: 15px;
+        width: 90%;
     }
 }

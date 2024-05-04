@@ -15,7 +15,8 @@ function UserDetails() {
   const [userInfo, setUserInfo] = useState({
     name: '',
     roles: [],
-    username: ''
+    username: '',
+    email: '',
   });
   const [loading, setLoading] = useState(true);
   const [formErrors, setFormErrors] = useState({});
@@ -28,10 +29,11 @@ function UserDetails() {
         }
       };
       const response = await axios.get(`${baseUrl}/${apiPrefixV1}/user/${userId}`, config);
+      console.log(response.data);
       const code = response.data.code;
       if (code === 2000) {
-        const { name, roles, username } = response.data.data;
-        setUserInfo({name: name, roles, username });
+        const { name, roles, username, email } = response.data.data;
+        setUserInfo({ name, roles, username, email });
       } else if (code === 2003) {
         dispatch(logout())
         toast.info("Login again!", { autoClose: true, position: 'top-right', pauseOnHover: false });
@@ -54,8 +56,6 @@ function UserDetails() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
-    console.log(userInfo);
     if (validateForm()) {
       try {
         const data = {
@@ -63,6 +63,7 @@ function UserDetails() {
           username: userInfo.username,
           name: userInfo.name,
           roles: userInfo.roles,
+          email: userInfo.email
         }
         const response = await axios.put(`${baseUrl}/${apiPrefixV1}/user`, data, {
           headers: {
@@ -102,7 +103,10 @@ function UserDetails() {
       errors.name = 'Name is required';
       isValid = false;
     }
-
+    if (!userInfo.email.trim()) {
+      errors.email = 'Email is required';
+      isValid = false;
+    }
     if (!userInfo.username.trim()) {
       errors.username = 'Username is required';
       isValid = false;
@@ -153,7 +157,17 @@ function UserDetails() {
             />
             {formErrors.username && <span className="error-message">{formErrors.username}</span>}
           </div>
-
+          <div className='form-group'>
+            <label htmlFor="email">Email:</label>
+            <input
+              type="text"
+              id="email"
+              value={userInfo.email}
+              className={formErrors.email ? 'invalid' : ''}
+              onChange={(e) => setUserInfo({ ...userInfo, email: e.target.value })}
+            />
+            {formErrors.email && <span className="error-message">{formErrors.email}</span>}
+          </div>
           <div className='form-group'>
             <label htmlFor="roles">Roles:</label>
             <select

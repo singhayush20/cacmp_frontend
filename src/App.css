@@ -1,8 +1,8 @@
 :root {
     /* Admin------------------------------------------------------- */
-    --department-nav-bar-color: #162943;
+    --department-nav-bar-color: #3e3a63;
     --department-nav-bar-button-color: #eceaea;
-    --department-nav-bar-text-color: #eceaea;
+    --department-nav-bar-text-color: white;
     --department-nav-bar-button-color-hover: #dbd9d9;
 
     --department-side-bar-color: #162943;
@@ -18,9 +18,9 @@
 
     --department-field-error-text-color: #ff3333;
 
-    --department-login-button-color: #10223C;
+    --department-login-button-color: #6c5ce7;
     --department-login-button-text-color: white;
-    --department-login-button-hover-color: #1d3c68;
+    --department-login-button-hover-color: #4834d4;
     /* Department------------------------------------------------------- */
 
 

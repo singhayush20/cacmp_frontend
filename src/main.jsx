@@ -41,6 +41,7 @@ import Articles from './pages/Home/Artcles.jsx'
 import Notices from './pages/Home/Notices.jsx'
 import NoticeContent from './pages/Home/NoticeContent.jsx'
 import UserQueries from './components/Admin/UserQuery/UserQueries.jsx'
+import AdminPasswordResetPage from './pages/AdminPasswordReset/AdminPasswordResetPage.jsx'
 const router = createBrowserRouter([
   {
     path: '/',
@@ -75,6 +76,14 @@ const router = createBrowserRouter([
         element: (
           <AuthLayout authentication={false}>
             <Login />
+          </AuthLayout>
+        ),
+      },
+      {
+        path: "admin/password-reset",
+        element: (
+          <AuthLayout authentication={false}>
+            <AdminPasswordResetPage />
           </AuthLayout>
         ),
       },
@@ -197,7 +206,7 @@ const router = createBrowserRouter([
             path: "article/update/:articleToken",
             element: <ArticleUpdateComponent />
           },
-        
+
         ]
       },
     ]

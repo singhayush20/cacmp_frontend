@@ -7,10 +7,11 @@ import './NewUserComponent.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { baseUrl, apiPrefixV1 } from '../../../constants/AppConstants';
 import { logout } from '../../../redux/slices/authSlice';
-import {toast} from "react-toastify";
+import { toast } from "react-toastify";
 function NewUserComponent() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [name, setName] = useState('');
   const [role, setRole] = useState('');
@@ -28,6 +29,7 @@ function NewUserComponent() {
         const response = await axios.post(`${baseUrl}/${apiPrefixV1}/user/register`, {
           username: username,
           password: password,
+          email: email,
           name: name,
           roles: [role]
         }, {
@@ -35,7 +37,6 @@ function NewUserComponent() {
             Authorization: `Bearer ${userData.accessToken}`
           }
         });
-        // Handle successful response
         const code = response.data.code;
         if (code === 2000) {
           toast.success("User created successfully!", { autoClose: true, position: 'top-right', pauseOnHover: false });
@@ -77,6 +78,10 @@ function NewUserComponent() {
 
     if (!username.trim()) {
       errors.username = 'Username is required';
+      isValid = false;
+    }
+    if (!email.trim()) {
+      errors.email = 'Email is required';
       isValid = false;
     }
 
@@ -125,6 +130,17 @@ function NewUserComponent() {
               className={formErrors.username ? 'invalid' : ''}
             />
             {formErrors.username && <span className="error-message">{formErrors.username}</span>}
+          </div>
+          <div className="form-group">
+            <label htmlFor="email">Email:</label>
+            <input
+              type="text"
+              id="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className={formErrors.email ? 'invalid' : ''}
+            />
+            {formErrors.email && <span className="error-message">{formErrors.email}</span>}
           </div>
 
           <div className="form-group">

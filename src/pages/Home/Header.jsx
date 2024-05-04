@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import * as CiIcons from 'react-icons/ci';
@@ -15,7 +15,7 @@ const Header = () => {
     return (
         <header>
             <nav className="w-full h-[80px] flex bg-slate-600 text-white justify-between items-center p-5">
-                <div className="md:text-2xl text-lg font-bold">Municipal E-Connect</div>
+                <div className="md:text-2xl text-lg font-bold">Municipal Hub</div>
 
                 {/* Show the menu on larger screens */}
                 <ul className="hidden md:flex flex-row">

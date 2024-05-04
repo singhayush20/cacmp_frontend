@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import './Login.css'
+import './Login.css';
 import axios from "axios";
 import { apiPrefixV1, baseUrl } from '../../constants/AppConstants';
 import { login as authLogin } from '../../redux/slices/authSlice';
@@ -7,11 +7,12 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
+
 const Login = () => {
-    const navigate = useNavigate()
-    const dispatch = useDispatch()
-    const [username, setUsername] = useState('')
-    const [password, setPassword] = useState('')
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
 
     const handleUsernameChange = (event) => {
         setUsername(event.target.value);
@@ -21,7 +22,6 @@ const Login = () => {
         setPassword(event.target.value);
     };
 
-
     const login = async (event) => {
         event.preventDefault();
         try {
@@ -30,19 +30,17 @@ const Login = () => {
                 "username": username,
                 "password": password
             }
-            )
+            );
 
             if (response.data['code'] === 2000) {
                 const userData = response.data['data'];
                 if (userData) dispatch(authLogin({ userData: userData, loggedInAccountType: 'admin' }));
                 toast.success("Logged in!", { autoClose: true, position: 'top-right', pauseOnHover: false });
                 navigate('/admin/dashboard/')
-            }
-            else {
+            } else {
                 toast.error("Failed to login", { autoClose: true, position: 'top-right', pauseOnHover: false });
             }
-        }
-        catch (err) {
+        } catch (err) {
             toast.error("Some error occurred!", { autoClose: true, position: 'top-right', pauseOnHover: false });
         }
     }
@@ -50,12 +48,14 @@ const Login = () => {
     return (
         <div className="container">
             <nav className="admin-login-navbar">
-                <Link to='/' className='nav-link'><h1>Municipal E-Connect</h1></Link>
+                <div className="left-nav">
+                    <Link to='/' className='nav-link'><h1>Municipal Hub</h1></Link>
+                </div>
             </nav>
             <div className="admin-login">
 
                 <div className="admin-login-page-heading">
-                    <h1>CACMP Admin Login</h1>
+                    <h1>Admin Login</h1>
                 </div>
                 <p className="admin-login-subheading">Login using your admin credentials</p>
                 <div className="admin-login-form-container">
@@ -73,7 +73,10 @@ const Login = () => {
                             value={password}
                             onChange={handlePasswordChange}
                         />
-                        <button type='submit'className='admin-login-button' >Login</button>
+                        <button type='submit' className='admin-login-button'>Login</button>
+                        <div className="password-reset">
+                            <Link to="/admin/password-reset" className="password-reset-link">Forgot Password?</Link>
+                        </div>
                     </form>
                 </div>
             </div>
