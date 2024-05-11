@@ -1,4 +1,4 @@
-import  { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Header from './Header';
 import Footer from './Footer';
 import LoadingIndicator2 from '../../components/LoadingIndicator2/LoadingIndicator2';
@@ -37,11 +37,13 @@ function Notices() {
             );
             const code = response.data.code;
             if (code === 2000) {
-                if (pageToFetch === 0) {
-                    setNotices(response.data.data);
-                    setTotalNotices(response.data.data[0].total);
-                } else {
-                    setNotices([...notices, ...response.data.data]);
+                if (response.data.data.length = 0) {
+                    if (pageToFetch === 0) {
+                        setNotices(response.data.data);
+                        setTotalNotices(response.data.data[0].total);
+                    } else {
+                        setNotices([...notices, ...response.data.data]);
+                    }
                 }
             } else {
                 toast.error('Failed to fetch data!', { autoClose: true, position: 'top-right', pauseOnHover: false });
@@ -81,6 +83,9 @@ function Notices() {
                         <p className='p-10p font-semibold text-2xl'>Catch with the latest news in your city</p>
                         <p className='p-10p font-medium italic text-1xl'>Here, you can find the latest developments and work of Municipal</p>
                     </div>
+                    {
+                        !notices || notices.length === 0 && <p className='text-center font-semibold italic text-1xl'>No notices found!</p>
+                    }
                     {notices && notices.length > 0 && (
                         <div className="flex-grow w-[99%] mx-auto my-10px px-1 py-15">
                             <InfiniteScroll

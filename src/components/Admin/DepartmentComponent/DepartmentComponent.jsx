@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from "react-toastify";
 import { logout } from '../../../redux/slices/authSlice';
 import { useDispatch, useSelector } from 'react-redux';
+import LoadingIndicator1 from '../../LoadingIndicator1/LoadingIndicator1';
 
 function DepartmentComponent() {
     const [departments, setDepartments] = useState([]);
@@ -16,8 +17,9 @@ function DepartmentComponent() {
     const userData = useSelector((state) => state.auth.userData);
     const navigate = useNavigate();
     const dispatch = useDispatch();
-
+    const [isLoading,setIsLoading]=useState(false);
     const loadDeptData = async () => {
+        setIsLoading(true);
         const config = {
             headers: {
                 Authorization: `Bearer ${userData.accessToken}`,
@@ -41,6 +43,8 @@ function DepartmentComponent() {
         } catch (error) {
             toast.error("Some error occurred!", { autoClose: true, position: 'top-right', pauseOnHover: false });
         }
+
+        setIsLoading(false);
     };
 
     useEffect(() => {
@@ -119,6 +123,14 @@ function DepartmentComponent() {
         }
     };
 
+    if(isLoading){
+        return (
+            <div className='w-full h-full flex justify-center items-center'>
+                <LoadingIndicator1 color={'green'} size={50}/>
+            </div>
+        )
+    }
+
     return (
         <div className="user-component">
             <div className="admin-add-btn">
@@ -147,7 +159,7 @@ function DepartmentComponent() {
                                         </td>
                                         <td>{department.departmentObjective}</td>
                                         <td>
-                                            <button className='admin-delete-btn' onClick={() => handleOpenModal(department.deptToken)}>Change Password</button>
+                                            <button className='admin-delete-btn' onClick={() => handleOpenModal(department.deptToken)}>Password</button>
                                         </td>
                                         <td>
                                             <button className='admin-delete-btn' onClick={() => handleDeleteDepartment(department.deptToken)}>Delete</button>

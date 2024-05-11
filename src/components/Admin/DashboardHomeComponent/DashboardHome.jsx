@@ -6,26 +6,27 @@ import './DashboardHome.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { baseUrl, apiPrefixV1 } from '../../../constants/AppConstants';
+import LoadingIndicator1 from '../../LoadingIndicator1/LoadingIndicator1';
 const DashboardHome = () => {
   const [analyticsData, setAnalyticsData] = useState(null);
   const dispatch = useDispatch();
   const userData = useSelector(state => state.auth.userData);
   const navigate = useNavigate();
-
+  const [isLoading, setIsLoading] = useState(false);
 
   const loadAnalyticsData = async () => {
+    setIsLoading(true);
     try {
       const analyticsResponse = await axios.get(`${baseUrl}/${apiPrefixV1}/analytics/admin-dashboard`, {
         headers: {
           Authorization: `Bearer ${userData.accessToken}`,
         },
       });
-
+      console.log(analyticsResponse.data);
       if (analyticsResponse.data.code === 2000) {
         setAnalyticsData(analyticsResponse.data.data);
       }
       else if (analyticsResponse.data.code === 2003) {
-        console.log('Token expired!');
         navigate('/admin');
         dispatch(logout());
         toast.info('Login again!', { autoClose: true, position: 'top-right', pauseOnHover: false });
@@ -38,7 +39,7 @@ const DashboardHome = () => {
       setError('Failed to load data!');
       toast.error('Some error occurred!', { autoClose: true, position: 'top-right', pauseOnHover: false });
     }
-
+    setIsLoading(false);
   }
 
   useEffect(() => {
@@ -46,7 +47,11 @@ const DashboardHome = () => {
   }, []);
 
 
-
+  if (isLoading) {
+    return <div className='w-full h-screen flex justify-center items-center'>
+      <LoadingIndicator1 color={'green'} size={50} />
+    </div>
+  }
 
 
   return (
@@ -255,60 +260,60 @@ const DashboardHome = () => {
             </div>
 
             <div className="row3">
-             <div className="complaint-count-table">
-             <h3>Complaints Count by Department and Priority</h3>
-              <table className='analytics-table'>
-                <thead>
-                  <tr>
-                    <th>Department Name</th>
-                    <th>Priority</th>
-                    <th>Count</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {analyticsData.complaintsCountByDepartmentAndPriority.map((department, index) => (
-                    <React.Fragment key={index}>
-                      {department.value.map((priorityItem, priorityIndex) => (
-                        <tr key={`${index}-${priorityIndex}`}>
-                          {priorityIndex === 0 ? (
-                            <td rowSpan={department.value.length}>{department.departmentName}</td>
-                          ) : null}
-                          <td>{priorityItem.priority}</td>
-                          <td>{priorityItem.count}</td>
-                        </tr>
-                      ))}
-                    </React.Fragment>
-                  ))}
-                </tbody>
-              </table>
-             </div>
-             <div className="complaint-count-table">
-             <h3>Complaints Count by Department and Status</h3>
-              <table className='analytics-table'>
-                <thead>
-                  <tr>
-                    <th>Department Name</th>
-                    <th>Status</th>
-                    <th>Count</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {analyticsData.complaintsCountByDepartmentAndStatus.map((department, index) => (
-                    <React.Fragment key={index}>
-                      {department.value.map((priorityItem, priorityIndex) => (
-                        <tr key={`${index}-${priorityIndex}`}>
-                          {priorityIndex === 0 ? (
-                            <td rowSpan={department.value.length}>{department.departmentName}</td>
-                          ) : null}
-                          <td>{priorityItem.status}</td>
-                          <td>{priorityItem.count}</td>
-                        </tr>
-                      ))}
-                    </React.Fragment>
-                  ))}
-                </tbody>
-              </table>
-             </div>
+              <div className="complaint-count-table">
+                <h3>Complaints Count by Department and Priority</h3>
+                <table className='analytics-table'>
+                  <thead>
+                    <tr>
+                      <th>Department Name</th>
+                      <th>Priority</th>
+                      <th>Count</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {analyticsData.complaintsCountByDepartmentAndPriority.map((department, index) => (
+                      <React.Fragment key={index}>
+                        {department.value.map((priorityItem, priorityIndex) => (
+                          <tr key={`${index}-${priorityIndex}`}>
+                            {priorityIndex === 0 ? (
+                              <td rowSpan={department.value.length}>{department.departmentName}</td>
+                            ) : null}
+                            <td>{priorityItem.priority}</td>
+                            <td>{priorityItem.count}</td>
+                          </tr>
+                        ))}
+                      </React.Fragment>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+              <div className="complaint-count-table">
+                <h3>Complaints Count by Department and Status</h3>
+                <table className='analytics-table'>
+                  <thead>
+                    <tr>
+                      <th>Department Name</th>
+                      <th>Status</th>
+                      <th>Count</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {analyticsData.complaintsCountByDepartmentAndStatus.map((department, index) => (
+                      <React.Fragment key={index}>
+                        {department.value.map((priorityItem, priorityIndex) => (
+                          <tr key={`${index}-${priorityIndex}`}>
+                            {priorityIndex === 0 ? (
+                              <td rowSpan={department.value.length}>{department.departmentName}</td>
+                            ) : null}
+                            <td>{priorityItem.status}</td>
+                            <td>{priorityItem.count}</td>
+                          </tr>
+                        ))}
+                      </React.Fragment>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
         </div>

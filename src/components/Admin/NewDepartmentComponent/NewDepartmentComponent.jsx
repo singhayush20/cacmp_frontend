@@ -7,6 +7,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { baseUrl, apiPrefixV1 } from '../../../constants/AppConstants';
 import { logout } from '../../../redux/slices/authSlice';
 import { toast } from 'react-toastify';
+import LoadingIndicator2 from '../../LoadingIndicator2/LoadingIndicator2';
 function NewDepartmentComponent() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -20,9 +21,9 @@ function NewDepartmentComponent() {
   const navigate = useNavigate();
   const userData = useSelector(state => state.auth.userData);
   const dispatch = useDispatch();
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-
+  const [isLoading, setIsLoading] = useState(false);
+  const handleSubmit = async () => {
+    setIsLoading(true);
     if (validateForm()) {
       try {
         const response = await axios.post(`${baseUrl}/${apiPrefixV1}/department/register`, {
@@ -38,8 +39,10 @@ function NewDepartmentComponent() {
         });
         // Handle successful response
         const code = response.data.code;
+        console.log(response.data);
         if (code === 2000) {
-          navigate('/admin/dashboard/department');
+          setIsLoading(false);
+          navigate(-1);
         }
         else if (code === 2003) {
           dispatch(logout())
@@ -55,6 +58,7 @@ function NewDepartmentComponent() {
       } catch (error) {
         toast.error("Some error occurred!", { autoClose: true, position: 'top-right', pauseOnHover: false });
       }
+
     }
   };
 
@@ -118,7 +122,7 @@ function NewDepartmentComponent() {
       </div>
       <div className="new-user-form">
         <h2>Create New Department Account</h2>
-        <form onSubmit={handleSubmit}>
+        <form >
           <div className="form-group">
             <label htmlFor="username">Username:</label>
             <input
@@ -203,7 +207,10 @@ function NewDepartmentComponent() {
             {formErrors.role && <span className="error-message">{formErrors.role}</span>}
           </div>
 
-          <button type="submit" className="admin-submit-button">Create Department</button>
+          {isLoading ? <LoadingIndicator2 color={'green'} size={25} /> :
+            <button type="submit" className="admin-submit-button" onClick={() => handleSubmit()}>
+              Submit
+            </button>}
         </form>
       </div>
     </div>

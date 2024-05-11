@@ -120,7 +120,7 @@ function NewArticleComponent() {
         }
       } catch (error) {
         console.log(error.message);
-        toast.error("An error occurred while savign the article.", { autoClose: true, position: 'top-right', pauseOnHover: false });
+        toast.error("An error occurred while saving the article.", { autoClose: true, position: 'top-right', pauseOnHover: false });
       }
       finally {
         setIsLoading(false)

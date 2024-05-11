@@ -133,7 +133,8 @@ function ArticleUpdateComponent() {
         }
     };
     const handleChangeTitle = (e) => {
-        setTitle(e.target.value);
+        const newTitle = e.target.value;
+        setArticleTitle(newTitle);
     };
 
     const handleChangeSlug = (e) => {

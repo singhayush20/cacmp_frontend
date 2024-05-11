@@ -24,6 +24,7 @@ function ArticleForm({
         window.open(fileUrl, '_blank');
     };
 
+
     return (
         <div className="row">
             <div className="left">
@@ -126,7 +127,7 @@ function ArticleForm({
                 </div>
             </div>
             <div className="preview">
-                <div dangerouslySetInnerHTML={{ __html: value }}></div>
+                <div dangerouslySetInnerHTML={{ __html: value }} />
             </div>
         </div>
     )

@@ -39,11 +39,13 @@ function Articles() {
             );
             const code = response.data.code;
             if (code === 2000) {
-                if (pageToFetch === 0) {
-                    setArticles(response.data.data);
-                    setTotalArticles(response.data.data[0].total);
-                } else {
-                    setArticles([...articles, ...response.data.data]);
+                if (response.data.data.length > 0) {
+                    if (pageToFetch === 0) {
+                        setArticles(response.data.data);
+                        setTotalArticles(response.data.data[0].total);
+                    } else {
+                        setArticles([...articles, ...response.data.data]);
+                    }
                 }
             } else {
                 toast.error('Failed to fetch data!', { autoClose: true, position: 'top-right', pauseOnHover: false });
@@ -62,6 +64,7 @@ function Articles() {
         const date = new Date(timestamp);
         return date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
     };
+    
 
     return (
         <div className='min-h-screen flex flex-col justify-between'>
@@ -76,6 +79,9 @@ function Articles() {
                         <p className='p-10p font-semibold text-2xl'>Catch with the latest news in your city</p>
                         <p className='p-10p font-medium italic text-1xl'>Here, you can find the latest developments and work of Municipal</p>
                     </div>
+                    {
+                        !articles || articles.length === 0 && <p className='text-center font-semibold italic text-1xl'>No articles found!</p>
+                    }
                     {articles && articles.length > 0 && (
                         <div className="flex-grow bg-slate-100 w-[80%] mx-auto my-10px px-10 py-15">
                             <InfiniteScroll

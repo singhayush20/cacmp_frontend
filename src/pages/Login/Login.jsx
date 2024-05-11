@@ -7,13 +7,13 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
-
+import LoadingIndicator1 from '../../components/LoadingIndicator1/LoadingIndicator1';
 const Login = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-
+    const [isLoading, setIsLoading] = useState(false);
     const handleUsernameChange = (event) => {
         setUsername(event.target.value);
     };
@@ -24,6 +24,7 @@ const Login = () => {
 
     const login = async (event) => {
         event.preventDefault();
+        setIsLoading(true);
         try {
             const response = await axios.post(
                 `${baseUrl}/${apiPrefixV1}/user/login`, {
@@ -43,6 +44,7 @@ const Login = () => {
         } catch (err) {
             toast.error("Some error occurred!", { autoClose: true, position: 'top-right', pauseOnHover: false });
         }
+        setIsLoading(false);
     }
 
     return (
@@ -73,7 +75,7 @@ const Login = () => {
                             value={password}
                             onChange={handlePasswordChange}
                         />
-                        <button type='submit' className='admin-login-button'>Login</button>
+                        {isLoading ? <LoadingIndicator1 color="white" size={40} /> : <button className='admin-login-button' type="submit">Login</button>}
                         <div className="password-reset">
                             <Link to="/admin/password-reset" className="password-reset-link">Forgot Password?</Link>
                         </div>

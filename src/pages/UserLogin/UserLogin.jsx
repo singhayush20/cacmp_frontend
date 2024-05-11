@@ -78,7 +78,7 @@ const UserLogin = () => {
                             value={password}
                             onChange={handlePasswordChange}
                         />
-                        {isLoading ? <LoadingIndicator1 color="#36c2d6" size={40} /> : <button type="submit">Login</button>}
+                        {isLoading ? <LoadingIndicator1 color="white" size={40} /> : <button type="submit">Login</button>}
                     </form>
                 </div>
             </div>
