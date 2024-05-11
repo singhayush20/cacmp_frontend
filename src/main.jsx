@@ -42,6 +42,7 @@ import Notices from './pages/Home/Notices.jsx'
 import NoticeContent from './pages/Home/NoticeContent.jsx'
 import UserQueries from './components/Admin/UserQuery/UserQueries.jsx'
 import AdminPasswordResetPage from './pages/AdminPasswordReset/AdminPasswordResetPage.jsx'
+import NewsArticleContentMobile from './pages/Home/NewsArticleContentMobile.jsx'
 const router = createBrowserRouter([
   {
     path: '/',
@@ -58,6 +59,10 @@ const router = createBrowserRouter([
       {
         path: '/news/:slug',
         element: <NewsArticleContent />
+      },
+      {
+        path: '/mobile/news/:slug',
+        element: <NewsArticleContentMobile />
       },
       {
         path: '/news',

@@ -4,7 +4,7 @@ import './LoadingIndicator2.css'
 function LoadingIndicator2({ color, size }) {
     return (
       
-            <div className="loading-indicator">
+            <div className="loading-container">
                 <BounceLoader
                     color={color}
                     size={size}

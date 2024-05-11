@@ -4,7 +4,7 @@ import './LoadingIndicator1.css'
 function LoadingIndicator1({ color, size }) {
     return (
       
-            <div className="loading-indicator">
+            <div className="loading-container">
                 <ScaleLoader
                     color={color}
                     size={size}
