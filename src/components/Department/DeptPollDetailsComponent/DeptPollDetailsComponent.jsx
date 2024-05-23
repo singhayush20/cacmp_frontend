@@ -33,7 +33,6 @@ function DeptPollDetailsComponent() {
       if (response.data.code === 2000) {
         setPollDetails(response.data.data);
         setIsLoading(false);
-        console.log(response.data.data);
       } else if (response.data.code === 2003) {
         console.log('Token expired!');
         dispatch(logout());
@@ -66,7 +65,6 @@ function DeptPollDetailsComponent() {
           },
         }
       );
-      console.log(response.data);
       const code = response.data.code;
       if (code === 2000) {
         toast.success("Status changed successfully!", { autoClose: true, position: 'top-right', pauseOnHover: false });

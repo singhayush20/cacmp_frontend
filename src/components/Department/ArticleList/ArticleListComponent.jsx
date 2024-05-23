@@ -112,7 +112,7 @@ function ArticleListComponent() {
                 <button className='department-new-button' onClick={() => navigate("/dashboard/article/new")}>Create new</button>
             </div>
             <div className="polls-filter-section">
-                <div className="polls-filter-column">
+                <div className="filter-column">
                     <label>Publish Status:</label>
                     <select
                         name="publishStatus"
@@ -124,7 +124,7 @@ function ArticleListComponent() {
                         <option value="PUBLISHED">Published</option>
                     </select>
                 </div>
-                <div className="polls-filter-column">
+                <div className="filter-column">
                     <label>Sort By:</label>
                     <select
                         name="sortBy"

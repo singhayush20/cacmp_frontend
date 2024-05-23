@@ -8,6 +8,7 @@ import { HiEye, HiEyeOff } from 'react-icons/hi';
 function AdminPasswordResetPage() {
     const [email, setEmail] = useState('');
     const [loading, setLoading] = useState(false);
+    const [resettingPassword,setResettingPassword]=useState(false);
     const [otp, setOtp] = useState('');
     const [newPassword, setNewPassword] = useState('');
     const [newPasswordVerify, setNewPasswordVerify] = useState('');
@@ -17,7 +18,7 @@ function AdminPasswordResetPage() {
         setShowPassword(!showPassword);
     };
 
-    const handleResetPassword = async (e) => {
+    const handleSendOTP = async (e) => {
         e.preventDefault();
         if (email && email.trim().length === 0) {
             return;
@@ -39,13 +40,13 @@ function AdminPasswordResetPage() {
         setLoading(false);
     };
 
-    const handleSendOTP = async (e) => {
+    const handleResetPassword = async (e) => {
         e.preventDefault();
         if (!email || email.trim().length === 0) {
             toast.error('Please enter a valid email address', { autoClose: true, position: 'top-right', pauseOnHover: false });
             return;
         }
-        setLoading(true);
+        setResettingPassword(true);
         try {
             const response = await axios.put(`${baseUrl}/${apiPrefixV1}/user/password/change`, {
                 email,
@@ -63,7 +64,7 @@ function AdminPasswordResetPage() {
         } catch (error) {
             toast.error("Some error occurred", { autoClose: true, position: 'top-right', pauseOnHover: false });
         }
-        setLoading(false);
+        setResettingPassword(false);
     };
 
     return (
@@ -90,7 +91,7 @@ function AdminPasswordResetPage() {
                             type="submit"
                             className="  bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-md focus:outline-none focus:bg-blue-600"
                             disabled={loading}
-                            onClick={handleResetPassword}
+                            onClick={handleSendOTP}
                         >
                             {loading ? 'Sending...' : 'Send OTP'}
                         </button>
@@ -149,11 +150,11 @@ function AdminPasswordResetPage() {
                     <div className="mb-4 flex justify-center">
                         <button
                             type="submit"
-                            onClick={handleSendOTP}
+                            onClick={handleResetPassword}
                             className="w-[1/2] bg-green-500 text-white font-bold py-2 px-4 hover:bg-green-700 rounded-md focus:outline-none focus:bg-blue-600"
-                            disabled={loading}
+                            disabled={resettingPassword}
                         >
-                            {loading ? 'Resetting...' : 'Reset Password'}
+                            {resettingPassword ? 'Resetting...' : 'Reset Password'}
                         </button>
                     </div>
                 </form>

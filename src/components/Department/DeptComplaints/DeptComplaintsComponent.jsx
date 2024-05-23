@@ -189,7 +189,7 @@ function DeptComplaintsComponent() {
                         <option value="createdAt">Added recently</option>
                         <option value="updatedAt">Updated recently</option>
                     </select>
-                    <button className="department-search-button" onClick={handleSearch}>Search</button>
+                    <button className="search-button" onClick={handleSearch}>Search</button>
                 </div>
             </div>
             <div className="complaints">

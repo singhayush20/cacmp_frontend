@@ -85,7 +85,7 @@ function DeptPollComponent() {
             <option value={false}>No</option>
           </select>
         </div>
-        <div className="polls-filter-column">
+        <div className="filter-column">
           <label>Sort By:</label>
           <select
             name="sortBy"
